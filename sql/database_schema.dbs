@@ -346,6 +346,7 @@
 		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout-8ee" show_column_type="y" show_relation="columns" >
+		<comment><![CDATA[Default Layout]]></comment>
 		<entity schema="skj005_vets_and_shelters" name="adoption" color="C1D8EE" x="1056" y="144" />
 		<entity schema="skj005_vets_and_shelters" name="animal" color="C1D8EE" x="480" y="592" />
 		<entity schema="skj005_vets_and_shelters" name="animal_status" color="C1D8EE" x="1008" y="672" />
