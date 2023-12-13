@@ -1,18 +1,18 @@
 package org.vetsandshelters.shared.DomainUtils.Pagination;
 
 public class Pagination {
-    private int page;
+    private int offset;
     private int size;
     private SortCollection sort;
 
-    public Pagination(int page, int size, SortCollection sort) {
-        this.page = page;
+    public Pagination(int offset, int size, SortCollection sort) {
+        this.offset = offset;
         this.size = size;
         this.sort = sort;
     }
 
-    public int getPage() {
-        return page;
+    public int getOffset() {
+        return offset;
     }
 
     public int getSize() {

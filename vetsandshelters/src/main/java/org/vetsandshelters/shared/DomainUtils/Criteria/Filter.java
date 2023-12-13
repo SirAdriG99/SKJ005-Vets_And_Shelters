@@ -1,11 +1,11 @@
 package org.vetsandshelters.shared.DomainUtils.Criteria;
 
-public class Filter {
+public class Filter<T> {
     private String field;
     private FilterOperator operator;
-    private Object value;
+    private T value;
 
-    public Filter(String field, FilterOperator operator, Object value) {
+    public Filter(String field, FilterOperator operator, T value) {
         this.field = field;
         this.operator = operator;
         this.value = value;
@@ -19,7 +19,7 @@ public class Filter {
         return operator;
     }
 
-    public String getValue() {
-        return value.toString();
+    public T getValue() {
+        return value;
     }
 }

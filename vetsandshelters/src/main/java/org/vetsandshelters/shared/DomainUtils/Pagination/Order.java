@@ -1,20 +1,16 @@
 package org.vetsandshelters.shared.DomainUtils.Pagination;
 
-public class Sort {
+public enum Order {
+    ASC("ASC"),
+    DESC("DESC");
 
     private String value;
-    private Order order;
 
-    Sort(String value, Order order) {
+    Order(String value) {
         this.value = value;
-        this.order = order;
     }
 
     public String getValue() {
         return value;
-    }
-
-    public Order getOrder() {
-        return order;
     }
 }
