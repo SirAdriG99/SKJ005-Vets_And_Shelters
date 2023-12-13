@@ -1,7 +1,7 @@
 package org.vetsandshelters.shared.DomainUtils.Criteria;
 
 public enum FilterOperator {
-    // Add constants for each operator available to compare values
+    // Constants for each operator available to compare values
     EQUALS("=="),
     NOT_EQUALS("!="),
     GREATER_THAN(">"),

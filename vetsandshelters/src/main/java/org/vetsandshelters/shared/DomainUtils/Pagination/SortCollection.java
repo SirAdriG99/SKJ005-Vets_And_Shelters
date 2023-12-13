@@ -11,4 +11,8 @@ public class SortCollection {
     public Sort[] getSorts() {
         return sorts;
     }
+
+    public boolean isEmpty() {
+        return sorts == null || sorts.length == 0;
+    }
 }

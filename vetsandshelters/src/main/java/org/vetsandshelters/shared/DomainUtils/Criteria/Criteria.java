@@ -2,7 +2,13 @@ package org.vetsandshelters.shared.DomainUtils.Criteria;
 
 import org.vetsandshelters.shared.DomainUtils.Pagination.Pagination;
 
+/**
+ * Criteria class represents a set of filters and pagination
+ */
 public class Criteria {
+    /**
+     * Filter collection can be empty
+     */
     private FilterCollection filters;
     private Pagination pagination;
 

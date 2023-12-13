@@ -2,8 +2,8 @@ package org.vetsandshelters.shared.DomainUtils.Pagination;
 
 public class Sort {
 
-    private String value;
-    private Order order;
+    private String value; // By what field are we going to sort
+    private Order order; // The order
 
     Sort(String value, Order order) {
         this.value = value;

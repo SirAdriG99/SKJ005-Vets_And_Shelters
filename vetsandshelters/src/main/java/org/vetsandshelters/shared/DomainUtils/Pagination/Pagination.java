@@ -1,6 +1,9 @@
 package org.vetsandshelters.shared.DomainUtils.Pagination;
 
 public class Pagination {
+    /**
+     * SortCollection can be empty
+     */
     private int offset;
     private int size;
     private SortCollection sort;

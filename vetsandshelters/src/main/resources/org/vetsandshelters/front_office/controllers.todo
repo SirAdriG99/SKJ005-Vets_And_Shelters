@@ -1,0 +1,3 @@
+1 Folder for each entity that has operations
+TODO: 1 controller for each use case. The constructor of the controller contains the handler of the use case, generates the query/command, gives it to the handler handle function
+and from the response, generates the necessary json to give it to the front-end
