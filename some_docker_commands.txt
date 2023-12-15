@@ -1,0 +1,56 @@
+# Some Docker's Volume's command :
+sudo docker volume ls
+sudo docker volume inspect [volume]
+sudo docker volume create db-data-vol
+sudo docker create --name db-psql postgres 
+sudo docker ps -a
+
+# The place where the Data Base's volume will be.
+${PWD}/SKJ005-Vets_And_Shelters/sql/db-volume
+
+# To create the container and the volume on the proyect's DB folder.
+sudo docker run \
+--name db-psql \
+-e POSTGRES_USER=user \
+-e POSTGRES_PASSWORD=patata \
+-e PGDATA=/var/lib/postgresql/data/pgdata \
+-v ${PWD}/sql/db-volume:/var/lib/postgresql/data \
+-p 5432:5432 \
+-it postgres &&
+sudo docker cp ./patata my_postgres_container:/docker-entrypoint-initdb.d/
+# Important: Choose a good user and password.
+
+# To connect: 
+psql -h localhost -p 5432 -U user
+psql -h 127.0.0.1 -p 5432 -U user
+
+sudo docker build -t test .
+sudo docker run --name container-db-psql -dp 127.0.0.1:5432:5432 test
+
+sudo docker logs container-db-psql
+
+sudo docker stop container-db-psql
+sudo docker rm container-db-psql
+
+sudo docker volume rm $(sudo docker volume ls -q)
+
+sudo docker exec -it container-db-psql bash
+
+sudo docker-compose build
+sudo docker-compose up -d
+sudo docker-compose down
+sudo docker-compose stop
+
+\c skj005_vets_and_shelters
+
+INSERT INTO skj005_vets_and_shelters.animal_status (name) VALUES ('patata');
+SELECT * FROM skj005_vets_and_shelters.animal_status;
+DELETE FROM skj005_vets_and_shelters.animal_status;
+
+# Sources:
+- Info related to the connection to the PSQL-DB: https://stackoverflow.com/questions/37694987/connecting-to-postgresql-in-a-docker-container-from-outside
+- Some Docker-related commands: https://www.commandprompt.com/education/how-to-create-a-postgresql-database-in-docker/
+- More Docker-related commands: https://earthly.dev/blog/postgres-docker/
+- https://stackoverflow.com/questions/43618517/docker-postgres-clear-all-data
+- https://docs.docker.com/get-started/02_our_app/
+- https://stackoverflow.com/questions/36799718/why-removing-docker-containers-and-images-does-not-free-up-storage-space-on-wind

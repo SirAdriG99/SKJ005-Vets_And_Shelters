@@ -3,3 +3,6 @@
 
 # Ignore Visual Studio Code configurations
 .vscode/
+
+sql/db-volume/
+
