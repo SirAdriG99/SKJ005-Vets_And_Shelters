@@ -3,6 +3,8 @@ package org.vetsandshelters.back_office.animal.application.showAnimal;
 import org.vetsandshelters.back_office.animal.domain.Animal;
 import org.vetsandshelters.back_office.animal.domain.AnimalRepository;
 
+import jakarta.inject.Inject;
+
 public class ShowAnimalQueryHandler {
 
     /**
@@ -11,6 +13,7 @@ public class ShowAnimalQueryHandler {
 
     private AnimalRepository repository;
 
+    @Inject
     public ShowAnimalQueryHandler(AnimalRepository repository) {
         this.repository = repository;
     }
