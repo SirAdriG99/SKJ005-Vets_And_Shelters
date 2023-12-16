@@ -2,6 +2,14 @@ package org.vetsandshelters.animal.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+import jakarta.enterprise.inject.Produces;
+import jakarta.json.Json;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.core.MediaType;
+
 /*
  * In the domain we should only have the data that is relevant for the business logic and the UI.
  * The only methods that should be here are the getters, the constructor and the methods that
@@ -11,48 +19,55 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
  */
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Entity
 public class Animal {
+    @Id
     private Integer id;
     private String name;
-    private String description;
-    private Race race;
+    private String color;
+    @OneToOne
+    private Sex sex;
+    @OneToOne
+    private Breed breed;
+    @OneToOne
+    private ProcedenceType procedenceType;
 
-    public Animal(final Integer id, final String name, final String description, final Race race) {
+    public Animal(Integer id, String name, String color, Sex sex, Breed breed, ProcedenceType procedenceType) {
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.race = race;
+        this.color = color;
+        this.sex = sex;
+        this.breed = breed;
+        this.procedenceType = procedenceType;
+    }
+
+    public Animal() {
+        super();
     }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public String getColor() {
+        return color;
     }
 
-    public String getDescription() {
-        return description;
+    public Sex getSex() {
+        return sex;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public Breed getBreed() {
+        return breed;
     }
 
-    public Race getRace() {
-        return race;
+    public ProcedenceType getProcedenceType() {
+        return procedenceType;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
-    }
+    public Json tJson
 }

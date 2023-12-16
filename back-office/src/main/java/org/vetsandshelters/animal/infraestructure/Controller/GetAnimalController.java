@@ -29,6 +29,6 @@ public class GetAnimalController {
 
         GetAnimalResponse response = this.getAnimalQueryHandler.handle(query);
 
-        return response.getAnimal();
+        return response.getAnimal().tJson();
     }
 }

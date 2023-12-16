@@ -4,7 +4,9 @@ import org.vetsandshelters.animal.domain.Animal;
 import org.vetsandshelters.animal.domain.AnimalCollection;
 import org.vetsandshelters.animal.domain.AnimalCriteria;
 import org.vetsandshelters.animal.domain.AnimalRepository;
-import org.vetsandshelters.animal.domain.Race;
+import org.vetsandshelters.animal.domain.Breed;
+import org.vetsandshelters.animal.domain.ProcedenceType;
+import org.vetsandshelters.animal.domain.Sex;
 
 import jakarta.annotation.Priority;
 // import jakarta.annotation.Priority;
@@ -20,16 +22,40 @@ public class AnimalRepositoryFake implements AnimalRepository {
 
     @Override
     public Animal getById(Integer id) {
-        return new Animal(1, "Pepito", "Pepito es un perro muy bueno", null);
+        return new Animal(
+                1,
+                "Pepito",
+                "Black",
+                new Sex(0, "Male"),
+                new Breed(0, "Pomerania"),
+                new ProcedenceType(0, "Stray"));
     }
 
     @Override
     public AnimalCollection getBy(AnimalCriteria criteria) {
         // TODO Auto-generated method stub
         AnimalCollection toReturn = new AnimalCollection(new Animal[] {
-                new Animal(1, "Pepito", "Algo", new Race()),
-                new Animal(2, "Menguito", "Algo 2", new Race()),
-                new Animal(3, "Juanito", "Algo 3", new Race()),
+                new Animal(
+                        1,
+                        "Pepito",
+                        "Black",
+                        new Sex(0, "Male"),
+                        new Breed(0, "Pomerania"),
+                        new ProcedenceType(0, "Stray")),
+                new Animal(
+                        2,
+                        "Menito",
+                        "Black",
+                        new Sex(0, "Male"),
+                        new Breed(0, "Pomerania"),
+                        new ProcedenceType(0, "Stray")),
+                new Animal(
+                        3,
+                        "Juanito",
+                        "Black",
+                        new Sex(0, "Male"),
+                        new Breed(0, "Pomerania"),
+                        new ProcedenceType(0, "Stray")),
         });
 
         return toReturn;
