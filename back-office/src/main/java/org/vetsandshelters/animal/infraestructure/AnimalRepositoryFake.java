@@ -1,19 +1,21 @@
-package org.vetsandshelters.back_office.animal.infraestructurre;
+package org.vetsandshelters.animal.infraestructure;
 
-import org.vetsandshelters.back_office.animal.domain.Animal;
-import org.vetsandshelters.back_office.animal.domain.AnimalCollection;
-import org.vetsandshelters.back_office.animal.domain.AnimalCriteria;
-import org.vetsandshelters.back_office.animal.domain.AnimalRepository;
-import org.vetsandshelters.back_office.animal.domain.Race;
+import org.vetsandshelters.animal.domain.Animal;
+import org.vetsandshelters.animal.domain.AnimalCollection;
+import org.vetsandshelters.animal.domain.AnimalCriteria;
+import org.vetsandshelters.animal.domain.AnimalRepository;
+import org.vetsandshelters.animal.domain.Race;
 
 import jakarta.annotation.Priority;
+// import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
+// import jakarta.enterprise.inject.Alternative;
 
 /**
  * Fake Repository to start testing things without a database
  */
+@Priority(2)
 @ApplicationScoped
-@Priority(100)
 public class AnimalRepositoryFake implements AnimalRepository {
 
     @Override
