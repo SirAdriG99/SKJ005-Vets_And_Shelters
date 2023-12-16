@@ -12,12 +12,12 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Animal {
-    public Integer id;
-    public String name;
-    public String description;
-    public Race race;
+    private Integer id;
+    private String name;
+    private String description;
+    private Race race;
 
-    public Animal(Integer id, String name, String description, Race race) {
+    public Animal(final Integer id, final String name, final String description, final Race race) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -25,15 +25,34 @@ public class Animal {
     }
 
     public Integer getId() {
-        return this.id;
+        return id;
+    }
+
+    public void setId(final Integer id) {
+        this.id = id;
     }
 
     public String getName() {
-        return this.name;
+        return name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
 }
