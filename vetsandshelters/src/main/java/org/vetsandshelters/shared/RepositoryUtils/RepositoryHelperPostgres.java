@@ -6,6 +6,6 @@ package org.vetsandshelters.shared.RepositoryUtils;
  * Operations like generating the petitions or parsing the response
  */
 
-public class RepositoryHelper {
+public class RepositoryHelperPostgres {
 
 }
