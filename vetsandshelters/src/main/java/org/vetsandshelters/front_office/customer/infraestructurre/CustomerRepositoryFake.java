@@ -1,6 +1,8 @@
 package org.vetsandshelters.front_office.customer.infraestructurre;
 
 import org.vetsandshelters.front_office.customer.domain.Customer;
+import org.vetsandshelters.front_office.customer.domain.CustomerCollection;
+import org.vetsandshelters.front_office.customer.domain.CustomerCriteria;
 import org.vetsandshelters.front_office.customer.domain.CustomerRepository;
 
 import java.time.LocalDate;
@@ -19,6 +21,11 @@ public class CustomerRepositoryFake implements CustomerRepository {
         );
     }
 
+    @Override
+    public CustomerCollection getBy(CustomerCriteria criteria) {
+        return null;
+    }
+
     // @Override
     // public AnimalCollection getBy(Criteria criteria) {
     // // TODO Auto-generated method stub
@@ -35,6 +42,19 @@ public class CustomerRepositoryFake implements CustomerRepository {
     public int update(Customer customer) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
+    // TODO: The function.
+    private String getPasswordBy(final int customerId) {
+        return null;
+    }
+
+    // TODO: Check if it's correct.
+    private boolean checkPassword(final int customerId,  final String writtenPassword){
+        String dbPassword = getPasswordBy(customerId);
+        // TODO: if it's necessary to do something to the password received of the DB, do it here.
+        //  if not, change dbPassword to "final".
+        return (dbPassword != null) && (dbPassword.equals(writtenPassword));
     }
 
 }

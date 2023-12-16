@@ -1,6 +1,7 @@
 package org.vetsandshelters.front_office.customer.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import org.vetsandshelters.front_office.customer.infraestructurre.Session;
 
 import java.time.LocalDate;
 
@@ -25,7 +26,9 @@ public class Customer {
     private String phone1;
     private String phone2;
     private String address;
-    private String password;
+    // private String password; // It make no sense to save it after the check.
+
+    private Session session;
 
     public Customer(final int id, final String doc_number, final String name,
                     final String surname, final String user_alias, final LocalDate date_birth, final boolean banned,
@@ -42,6 +45,7 @@ public class Customer {
         this.phone1 = phone1;
         this.phone2 = phone2;
         this.address = address;
+        this.session = new Session();
     }
 
     public int getId() {
@@ -131,4 +135,21 @@ public class Customer {
     public void setAddress(final String address) {
         this.address = address;
     }
+
+    public boolean isBanned() {
+        return banned;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void updateSessionLastAction(){
+        this.session.setDateTimeLastAction();
+    }
+
+    public boolean isSessionActive(){
+        return this.session.isSessionActive();
+    }
 }
+
