@@ -1,0 +1,666 @@
+id,sex_id,breed_id,procedence_type_id,name,color
+1,0,1,3,Big Maggie, Grey
+2,0,2,3,Brave Scout, Dark gray
+3,0,1,1,Brave Sadie, Red
+4,1,3,3,Loyal Shadow, Bicolor
+5,0,3,1,Playful Zoe, Grey
+6,0,4,3,Loyal Ruby, Black
+7,0,4,2,Sweet Ziggy, Bicolor
+8,0,3,2,Playful Milo, Black
+9,0,3,3,Sweet Lucy, Tricolor
+10,0,3,1,Little Zoe, White
+11,0,3,1,Gentle Gracie, Tricolor
+12,1,3,1,Big Buddy, Beige
+13,1,3,3,Gentle Buddy, Black
+14,0,3,3,Big Shadow, Black
+15,1,3,3,Brave Ginger, Blue
+16,0,3,2,Playful Lola, Chocolate
+17,1,3,3,Playful Luna, Cream
+18,0,3,2,Loyal Lucy, Cream
+19,0,3,2,Little Coco, Dark gray
+20,1,3,2,Brave Bailey, Grey
+21,0,3,2,Happy Cooper, Grey
+22,0,3,3,Dapper Winston, Light brown
+23,0,3,2,Little Rosie, Lilac
+24,1,3,1,Sweet Buster, MERLE
+25,1,3,2,Gentle Winston, White
+26,0,3,2,Dapper Chloe, White
+27,1,3,1,Loyal Jax, Grey
+28,0,2,2,Sweet Zoey, White
+29,0,5,1,Dapper Bear, Black
+30,0,5,1,Loyal Gracie, Cream
+31,0,5,2,Happy Shadow, Lined
+32,0,5,2,Brave Riley, coffee
+33,1,3,2,Happy Chloe, Blue Steel
+34,0,6,3,Dapper Milo, White
+35,1,6,3,Big Rocky, black with coffee
+36,0,6,2,Playful Bear, Chocolate
+37,1,7,2,Clever Bailey, White
+38,0,7,3,Dapper Bear, White
+39,0,7,1,Brave Charlie, blue merle
+40,0,8,2,Sweet Oscar, White and grey
+41,0,8,2,Gentle Sadie, Blue blackbird
+42,0,8,2,Playful Luna, Blu Merle
+43,1,9,3,Clever Stella, Black
+44,1,10,1,Little Rocky, White
+45,1,10,3,Gentle Winston, Black
+46,0,10,1,Dapper Gus, Black
+47,0,10,3,Loyal Maggie, Cream
+48,0,10,3,Big Molly, Light brown
+49,1,10,3,Clever Zoe, Tricolor
+50,0,10,3,Sweet Riley, Tricolor
+51,1,10,2,Happy Gus, White
+52,0,10,3,Clever Oscar, White
+53,0,10,2,Sweet Jasper, tricolor and lemon
+54,1,10,2,Happy Shadow, tricolor bicolor
+55,0,10,1,Gentle Buddy, tricolors
+56,0,10,3,Gentle Bella, Beige
+57,1,3,1,Loyal Milo, Brown
+58,1,11,1,Loyal Ruby, White
+59,0,12,3,Gentle Charlie, White
+60,0,13,1,Loyal Buster, white salt and pepper black
+61,0,12,2,Loyal Scout, chocolates
+62,0,13,2,Gentle Sadie, Chocolate
+63,1,11,3,Sweet Daisy, white or beige
+64,0,13,1,Brave Rosie, White
+65,0,3,3,Loyal Shadow, Bicolor
+66,1,14,2,Loyal Blue, Black/Tank
+67,0,15,1,Little Milo, Golden
+68,0,15,2,Playful Lucy, White
+69,0,15,2,Dapper Chloe, yellow with brown
+70,0,15,1,Brave Stella, honey color
+71,1,15,1,Gentle Luna, Light brown
+72,0,15,3,Playful Harley," black, brown and white"
+73,1,15,1,Dapper Bailey, Red
+74,1,15,1,Big Riley, Dark gray
+75,1,15,3,Little Winston, brown with black
+76,0,15,3,Sweet Luna, dark gold
+77,0,16,2,Playful Maggie, Black
+78,1,16,2,Sweet Bear, White
+79,0,16,2,Gentle Scout, White
+80,0,16,1,Big Coco, White
+81,1,16,2,Big Riley, White
+82,1,16,3,Loyal Lucy, White
+83,1,15,3,Playful Ziggy, White
+84,0,13,1,Clever Harley, Black
+85,1,17,2,Playful Jax, Black
+86,1,17,2,Brave Cooper, Light brown
+87,0,17,2,Happy Chloe, black and white
+88,0,17,2,Big Gracie, black with white
+89,1,17,1,Brave Buddy, Nude
+90,0,18,2,Sweet Ruby, BLACK AND WHITE
+91,0,18,1,Big Daisy, Black
+92,0,18,1,Little Tucker, black and white
+93,1,18,2,Clever Rosie, little cow
+94,1,18,1,Big Coco, white with black
+95,1,19,1,Loyal Riley, Coffee
+96,0,19,1,Little Charlie, White
+97,0,19,1,Big Lola, tawny
+98,0,19,2,Sweet Buster, Black
+99,0,19,1,Happy Scout," White, black and tan"
+100,0,19,3,Little Coco, dark gold
+101,1,20,2,Big Bailey, Beige
+102,0,20,1,Little Gracie, Grey
+103,0,20,1,Brave Bailey, Beige
+104,1,20,1,Playful Gus, Black
+105,0,20,2,Big Buddy, Black
+106,0,20,3,Big Gus, Brown
+107,1,20,1,Loyal Molly, Chocolate
+108,0,20,1,Happy Ruby, Dark brown
+109,0,20,2,Little Buster, Dark gray
+110,1,20,2,Loyal Riley, Grey
+111,0,20,3,Dapper Bailey, Indigo
+112,1,20,2,Dapper Molly, Light brown
+113,0,20,2,Happy Ruby, Light brown
+114,1,20,2,Playful Riley, Lilac
+115,1,20,2,Little Duke, Ocher
+116,0,20,3,Loyal Molly, Tricolor
+117,1,20,3,Playful Coco, White
+118,0,20,3,Gentle Bella, White
+119,0,20,3,Sweet Rocky, coffee
+120,0,20,2,Little Jax, white with coffee
+121,1,6,3,Big Luna, Cream
+122,0,6,1,Gentle Penny, Chocolate
+123,0,6,3,Loyal Ginger, White
+124,1,6,3,Sweet Rocky, Beige
+125,0,6,2,Brave Shadow, Beige
+126,1,6,3,Dapper Lucy, Beige with White
+127,1,6,3,Happy Bailey, Bicolor
+128,1,6,3,Little Charlie, Black
+129,0,6,3,Sweet Charlie, Black
+130,1,6,3,Little Rosie, Black/Tank
+131,0,6,3,Little Riley, Chocolate
+132,1,6,2,Dapper Chloe, Cream
+133,0,6,2,Little Rosie, Cream
+134,0,6,2,Happy Shadow, Honey
+135,1,6,2,Sweet Zoe, Light brown
+136,0,6,3,Brave Oscar, Light brown
+137,1,6,2,Sweet Maggie, WHITE AND CREAM
+138,0,6,2,Playful Chloe, WHITE AND CREAM
+139,1,6,2,Clever Shadow, White
+140,0,6,3,Loyal Charlie, White
+141,0,6,1,Gentle Daisy, White and Beige
+142,1,6,1,Playful Coco, White and beige
+143,0,6,1,Big Luna, black and yellow
+144,0,6,2,Loyal Bear, coffee
+145,0,6,2,Clever Buster, light brown
+146,1,6,2,Dapper Zoey, several
+147,0,6,3,Brave Ziggy, Black
+148,1,6,2,Little Oscar, Grey
+149,0,6,3,Gentle Scout, White
+150,1,21,3,Dapper Stella, Chocolate
+151,0,21,3,Dapper Rocky, Chocolate
+152,1,21,1,Clever Sadie, Chocolate
+153,0,22,3,Little Rocky, Coffee
+154,1,22,1,Loyal Scout, White
+155,0,22,2,Little Winston, White
+156,0,22,3,Loyal Buddy, coffee with white
+157,0,22,1,Sweet Ginger, gold white with gold
+158,0,22,3,Sweet Lucy, gold with white
+159,0,22,3,Sweet Charlie, white with coffee
+160,1,22,1,Brave Bailey, Brown and white
+161,1,22,3,Playful Rosie, Chocolate
+162,1,22,1,Happy Max, Coffee
+163,0,22,3,Brave Buddy, Cream
+164,1,22,2,Playful Harley, White
+165,0,22,2,Gentle Jax, White
+166,1,22,1,Loyal Zoey, White with coffee
+167,1,22,1,Little Charlie, gold and white
+168,1,22,1,Brave Harley, Beige
+169,1,22,3,Playful Bear, Golden
+170,1,22,2,Brave Bear, White
+171,1,22,2,Clever Bailey, Beige
+172,0,22,3,Little Ziggy, Golden
+173,1,22,2,Big Buddy, Nude
+174,0,22,3,Brave Harley, Khaki
+175,1,22,3,Clever Duke, white with coffee
+176,0,23,3,Gentle Jax, Black
+177,1,23,2,Loyal Ziggy, White
+178,1,24,2,Loyal Charlie, Black
+179,0,24,2,Brave Luna, Black
+180,0,24,3,Gentle Gus, Brown
+181,0,24,2,Happy Tucker,Black with coffee
+182,0,24,3,Happy Zoe, Black/Tank
+183,0,7,2,Brave Tucker, dark gold
+184,0,25,1,Dapper Lola, Bicolor
+185,1,25,1,Big Buster, GOLD AND WHITE
+186,1,25,3,Loyal Ruby, white and brown
+187,1,26,2,Sweet Ruby, Black
+188,0,26,3,Gentle Cooper, Chocolate
+189,1,24,2,Clever Rosie, Black
+190,0,24,3,Dapper Stella, Black
+191,0,11,3,Dapper Buster, Light brown
+192,1,11,3,Gentle Buster, White
+193,0,11,1,Clever Milo, White
+194,0,11,3,Happy Shadow, White
+195,1,11,2,Little Ruby, Chocolate
+196,0,11,1,Big Penny, White
+197,1,11,1,Little Milo, Black
+198,0,11,2,Loyal Rosie, Black
+199,1,11,1,Brave Buddy, Brown
+200,0,11,3,Clever Lucy, Chocolate
+201,1,11,3,Big Sadie, White
+202,0,11,3,Sweet Gracie, White
+203,1,11,3,Dapper Jasper, white and beagel
+204,0,11,1,Gentle Gus,Beige and White
+205,1,2,1,Sweet Bear, Black
+206,0,2,3,Brave Oscar, Black
+207,1,2,3,Playful Riley, Chocolate
+208,1,2,1,Happy Shadow, Cream
+209,1,2,2,Dapper Daisy, Dark brown
+210,0,2,1,Playful Chloe, Dark gray
+211,1,2,1,Happy Bear, Grey
+212,0,2,2,Dapper Zoe, Grey
+213,0,2,2,Little Charlie, Indigo
+214,1,2,1,Sweet Chloe, Light brown
+215,0,2,2,Loyal Penny, Light brown
+216,1,2,1,Little Rosie, Lilac
+217,1,2,1,Brave Max, Red
+218,1,2,2,Happy Ginger, White
+219,0,2,2,Loyal Max, White
+220,0,2,1,Clever Lucy, black and white
+221,0,2,2,Little Rosie, dark gold
+222,1,2,1,Loyal Chloe, gray and black
+223,0,2,2,Brave Maggie, light coral
+224,1,11,1,Playful Ruby, Beige
+225,1,11,1,Clever Blue, White
+226,0,11,1,Happy Milo, White
+227,1,11,3,Sweet Buddy, White and Beige
+228,1,11,3,Brave Max, Chocolate
+229,1,11,1,Loyal Charlie, Chocolate
+230,1,11,3,Brave Buster, White
+231,0,11,2,Happy Bailey, White
+232,1,11,1,Loyal Max, Chocolate
+233,1,11,2,Loyal Buddy, White
+234,1,11,1,Brave Milo, White
+235,1,11,3,Brave Max, Brown
+236,1,11,1,Clever Zoey, Chocolate
+237,1,11,2,Little Jasper, White
+238,1,11,2,Little Ziggy, White
+239,0,11,3,Dapper Rosie, Brown
+240,1,11,1,Little Charlie, Chocolate
+241,1,11,3,Brave Penny, Dark brown
+242,1,11,1,Playful Maggie, Reddish
+243,1,11,2,Sweet Scout, White
+244,1,11,3,Playful Chloe, coffee
+245,0,11,1,Playful Stella, Beige
+246,1,11,1,Playful Stella, White
+247,1,11,2,Gentle Stella, White
+248,0,11,3,Sweet Rocky, White
+249,1,11,3,Little Lucy, Black
+250,0,11,3,Playful Max, White
+251,0,27,2,Dapper Coco, Reddish
+252,1,27,3,Playful Ginger, Black
+253,0,27,3,Playful Coco, Black
+254,0,27,1,Playful Charlie, Black/Tank
+255,0,27,2,Loyal Shadow, Yellow
+256,1,27,1,Happy Gus, Black
+257,0,27,3,Little Daisy, Black
+258,0,27,2,Loyal Jax, White
+259,1,27,1,Big Riley, Black/Tank
+260,1,27,1,Brave Maggie, Black
+261,0,27,1,Gentle Max, Black
+262,1,27,1,Little Ruby, Black/Coffee
+263,1,27,1,Big Jasper, Black/Tank
+264,0,27,3,Gentle Milo, Black/Tank
+265,0,27,2,Happy Shadow, White
+266,1,27,2,Gentle Bella, Black
+267,0,27,2,Clever Oscar, Black
+268,0,27,1,Little Buddy, Black/Coffee
+269,0,28,2,Brave Scout, Beige
+270,1,28,3,Happy Gus, Golden
+271,0,28,2,Happy Harley, Golden
+272,0,28,1,Gentle Stella, Cream
+273,1,28,3,Sweet Max, White
+274,1,28,2,Clever Sadie, Light brown
+275,1,28,3,Little Riley, Beige
+276,0,28,1,Little Jax, Beige
+277,0,28,1,Playful Buster, Cream
+278,1,28,1,Brave Riley, Golden
+279,0,28,2,Dapper Blue, Golden
+280,0,28,3,Gentle Harley, Light brown
+281,1,28,1,Clever Charlie, dark gold
+282,0,28,2,Brave Gracie, dark gold
+283,0,28,1,Sweet Winston, light gold
+284,0,28,3,Dapper Harley, Beige
+285,1,28,3,Brave Scout, Golden
+286,0,28,3,Little Milo, Golden
+287,1,28,3,Loyal Jasper, Golden
+288,0,28,3,Playful Sadie, dark gold
+289,0,28,2,Loyal Riley, golden beige
+290,0,28,3,Gentle Bella, dark gold
+291,1,28,1,Brave Chloe, Beige
+292,1,28,2,Brave Winston, dark gold
+293,1,28,1,Gentle Shadow, Beige
+294,1,28,3,Happy Bella, Beige
+295,0,29,1,Little Luna, Black
+296,0,29,2,Gentle Charlie, Golden
+297,0,29,1,Dapper Molly, Merle
+298,1,12,1,Playful Charlie, Black
+299,0,12,2,Happy Cooper, Black
+300,0,12,2,Brave Bailey, black cloak
+301,0,12,2,Brave Riley, Black
+302,0,12,1,Gentle Molly, Dark gray
+303,1,12,1,Gentle Jax, Red
+304,0,12,3,Big Molly, White
+305,1,12,3,Brave Lucy, White
+306,0,12,1,Clever Luna, black with white and brown
+307,1,30,3,Big Daisy, Black
+308,0,30,1,Gentle Stella, White
+309,1,30,2,Loyal Gus, Bicolor
+310,1,30,1,Dapper Harley, Tricolor
+311,0,30,3,Playful Tucker, White
+312,1,30,1,Little Ruby, white with coffee
+313,1,21,1,Playful Maggie, Beige
+314,0,21,2,Happy Penny, Beige
+315,0,21,1,Clever Winston, Black
+316,0,21,2,Dapper Milo, Chocolate
+317,0,21,2,Big Bailey, Cream
+318,0,21,1,Little Penny, Beige
+319,1,21,2,Big Buddy, Chocolate
+320,1,21,2,Gentle Cooper, Golden
+321,0,21,3,Happy Rocky, Golden
+322,1,21,1,Happy Duke, White
+323,0,21,1,Gentle Lola,light cream and black labrador
+324,0,21,1,Sweet Tucker, Golden
+325,1,31,1,Dapper Cooper, Light brown
+326,1,11,3,Sweet Daisy, white or beige
+327,1,32,1,Dapper Zoey, White
+328,0,32,2,Dapper Oscar, White
+329,0,32,1,Clever Penny, White
+330,1,32,1,Clever Charlie, White
+331,0,32,3,Happy Coco, White
+332,0,32,3,Brave Riley, White
+333,1,32,2,Big Jax, White
+334,0,32,1,Brave Shadow, White
+335,0,32,1,Loyal Max, White
+336,1,32,1,Clever Harley, White
+337,1,32,3,Big Oscar, Beige
+338,1,13,3,Big Riley, White
+339,0,24,2,Clever Molly, Black
+340,1,11,1,Dapper Shadow, Chocolate
+341,0,24,3,Loyal Charlie, Black/Tank
+342,1,11,3,Clever Charlie, White
+343,1,24,1,Sweet Zoey, Black
+344,0,24,3,Gentle Lucy, Chocolate
+345,1,33,1,Dapper Maggie, salt pepper
+346,1,33,3,Happy Gus, White
+347,0,33,2,Gentle Shadow, White
+348,1,33,1,Gentle Bear, salt pepper
+349,0,33,1,Sweet Penny, salt pepper
+350,0,33,1,Brave Maggie, salt pepper
+351,1,34,2,Sweet Daisy, Bicolor
+352,0,34,1,Happy Bear, Bicolor
+353,1,34,2,Gentle Cooper, Tricolor
+354,0,34,2,Clever Riley, Tricolor
+355,1,34,1,Big Molly, White
+356,1,33,2,Sweet Harley, Salt pepper
+357,0,33,2,Little Luna, Salt pepper
+358,1,33,3,Big Ginger, White
+359,0,33,2,Loyal Jasper, White
+360,1,33,2,Dapper Duke, salt and pepper
+361,1,33,2,Little Sadie, salt pepper
+362,0,33,3,Little Sadie, salt pepper
+363,1,33,3,Sweet Tucker, white and salt and pepper
+364,0,23,2,Sweet Cooper, Black/Tank
+365,0,11,1,Sweet Daisy, white or beige
+366,0,11,2,Sweet Luna, white and beige
+367,1,13,3,Clever Chloe, White
+368,1,13,3,Loyal Buster, White
+369,0,35,3,Sweet Rocky, Beige
+370,0,35,1,Brave Zoe, Lead
+371,0,36,3,Big Zoe, Black
+372,0,37,1,Brave Buddy, Grey
+373,0,37,1,Loyal Molly, black with white
+374,0,38,1,Big Jax, Beige
+375,0,24,1,Clever Bailey, COW TYPE
+376,0,39,2,Sweet Luna, Apricot beige
+377,0,39,1,Loyal Harley, Beige
+378,0,40,2,Big Jax, White
+379,1,31,1,Brave Milo, Beige- Brown
+380,1,31,2,Little Duke, Light brown
+381,0,31,3,Big Jasper, Three colors
+382,1,31,2,Loyal Oscar, Tricolor
+383,1,31,3,Playful Cooper, White
+384,0,31,2,Big Jasper, White
+385,0,31,2,Dapper Luna, Brown
+386,0,31,2,Little Rocky, White
+387,1,41,2,Loyal Molly, Black
+388,0,41,3,Sweet Molly, Black
+389,0,41,3,Happy Zoey, Brown
+390,0,41,1,Big Buddy, coffee
+391,1,41,2,Happy Buster, coffee
+392,1,38,2,Big Jax, Beige
+393,1,38,1,Clever Jax, Black
+394,1,38,2,Big Duke," Black, White, Coffee, Gray"
+395,0,38,1,Sweet Ruby, Blue
+396,1,38,2,Brave Oscar, Chocolate
+397,1,38,1,Happy Coco, Dark gray
+398,0,38,1,Big Bailey, Dark gray
+399,0,38,1,Little Harley, Grey
+400,1,38,3,Loyal Ruby, Light brown
+401,0,38,3,Brave Cooper, Light brown
+402,0,38,3,Sweet Tucker, Silver
+403,1,38,2,Dapper Lola, White
+404,0,38,1,Dapper Max, White
+405,0,38,1,Happy Zoe, black and white with black
+406,1,38,3,Little Winston, coffee
+407,0,38,3,Happy Rosie, light brown with white
+408,0,38,3,Dapper Sadie, Blue Steel
+409,0,38,3,Sweet Riley, dark gold
+410,1,42,3,Loyal Ruby, Black
+411,0,42,2,Loyal Buster, Orange
+412,1,42,2,Dapper Bear, White
+413,0,42,3,Dapper Blue, White
+414,0,42,1,Dapper Bear, dark gold
+415,1,42,1,Loyal Bear, Black
+416,1,42,3,Loyal Harley, White
+417,0,42,2,Little Lola, White
+418,0,42,1,Sweet Stella, White
+419,1,42,2,Little Duke, Sand
+420,0,42,3,Loyal Coco, White
+421,1,11,1,Little Ziggy, White
+422,1,39,2,Happy Oscar, Beige
+423,0,39,2,Little Tucker, Beige
+424,1,39,2,Big Daisy, Black
+425,1,39,3,Dapper Gracie, Brown
+426,1,39,1,Gentle Jax, Cream
+427,0,39,3,Sweet Lola, Cream
+428,1,39,3,Dapper Blue, Grey
+429,0,39,3,Dapper Zoe, Grey
+430,0,39,2,Big Oscar, Cream
+431,0,39,1,Big Ziggy, Beige
+432,0,39,3,Gentle Buddy, Light brown
+433,1,39,2,Brave Bailey, White
+434,1,11,3,Sweet Daisy, white or beige
+435,1,14,3,Sweet Rocky, Black/Tank
+436,1,10,1,Big Coco, Black
+437,0,10,2,Happy Buddy, Beige
+438,0,27,3,Dapper Coco, Reddish
+439,0,31,1,Big Molly, Dark brown
+440,1,12,1,Little Chloe, Coffee
+441,0,43,3,Clever Bear, Black
+442,0,43,2,Clever Bear, Black
+443,1,43,3,Big Chloe, Black
+444,0,43,3,Big Shadow, Black
+445,0,43,3,Playful Lola, Black and Tan
+446,0,43,1,Brave Riley, Black
+447,0,43,1,Playful Gus, Black
+448,0,43,1,Loyal Winston, Black/Tank
+449,0,44,2,Brave Tucker, Red and white
+450,0,34,1,Little Ruby, Beige
+451,0,34,2,Playful Coco, COMBINED
+452,0,45,3,Loyal Shadow, White
+453,1,45,3,Clever Zoey, White
+454,1,23,3,Little Riley, Black
+455,1,23,1,Little Lola, coffee
+456,0,23,2,Little Riley, Black
+457,0,23,3,Clever Oscar, Black/Tank
+458,1,23,2,Clever Gracie, coffee and black
+459,1,23,2,Brave Shadow, I deny fire
+460,0,13,1,Loyal Max, Black
+461,0,13,1,Loyal Bella, Grey
+462,1,13,1,Big Ginger, Silver
+463,0,13,3,Clever Daisy, WHITE BLACK SALT AND PEPPER
+464,1,13,2,Loyal Blue, White
+465,0,13,2,Brave Ruby, White
+466,1,13,3,Happy Duke, salt and pepper
+467,1,13,3,Loyal Chloe, salt pepper
+468,0,13,3,Loyal Gus, salt pepper
+469,1,13,2,Brave Maggie, Black
+470,1,13,3,Sweet Chloe, Dark gray
+471,1,13,3,Sweet Shadow, Grey
+472,0,13,1,Little Rocky, Silver
+473,0,13,3,Dapper Luna, White
+474,1,13,3,Playful Ginger, salt pepper
+475,0,13,2,Playful Milo, salt pepper
+476,1,13,2,Loyal Blue, white and salt and pepper
+477,0,33,3,Brave Maggie, Salt pepper
+478,0,33,1,Brave Oscar, White
+479,1,33,3,Big Buddy, black and white
+480,0,33,2,Happy Zoey, salt and pepper
+481,1,33,3,Happy Riley, white and black silver
+482,0,33,1,Little Gracie, Salt and pepper and white
+483,1,33,2,Loyal Chloe, Salt pepper
+484,0,33,3,Loyal Rosie, Salt pepper
+485,0,33,2,Sweet Chloe, White
+486,1,13,3,Brave Jax, White
+487,1,13,1,Brave Gracie, Black
+488,1,13,1,Dapper Ginger, White
+489,0,46,2,Gentle Duke, Black
+490,0,47,2,Playful Jasper, Beige
+491,0,47,3,Loyal Chloe, Black
+492,1,47,1,Dapper Scout, tag
+493,1,27,3,Dapper Coco, Reddish
+494,1,34,1,Clever Sadie, tricolors and whites
+495,1,34,1,Little Chloe, Bicolor
+496,0,34,1,Playful Harley, Caramel with White
+497,1,34,3,Playful Molly, Tricolor
+498,0,34,1,Brave Molly, Tricolor
+499,1,34,3,Happy Coco, WHITE AND BEIGE
+500,1,34,3,Playful Ruby, WHITE WITH COFFEE
+501,1,34,2,Loyal Gracie, White
+502,0,34,3,Playful Chloe, White
+503,0,34,2,Dapper Rocky, White and Caramel
+504,0,34,3,Little Riley, White with coffee
+505,0,34,3,Playful Bella, white with black
+506,1,34,2,Sweet Bear,white and tricolor
+507,1,34,1,Loyal Ginger, Black and White
+508,1,34,3,Playful Maggie, Candy
+509,1,34,3,Happy Coco, Tricolor
+510,1,34,3,Dapper Milo, White
+511,0,34,2,Loyal Lucy," light brown, white, black, tricolor"
+512,1,34,3,Dapper Molly, Light brown
+513,0,34,3,Brave Charlie, Light brown
+514,1,34,2,Little Buddy, Tricolor
+515,0,34,2,Playful Coco, Tricolor
+516,1,34,2,Happy Sadie, Tricolors and Whites with long fur..
+517,1,34,3,Sweet Penny, White
+518,0,34,2,Brave Oscar, White
+519,1,34,1,Sweet Ruby, black and white
+520,1,34,3,Playful Shadow, White
+521,1,34,3,Playful Bear, Tricolor
+522,1,34,1,Big Rocky, Tricolor
+523,1,34,2,Sweet Buddy, Tricolor
+524,0,34,1,Clever Riley, tricolors
+525,0,34,2,Dapper Tucker, White
+526,0,12,1,Playful Ruby, Black
+527,0,12,1,Happy Shadow, Siberian Husky
+528,1,12,3,Big Zoe, White
+529,1,12,1,Playful Jasper, black cloak
+530,1,12,3,Happy Blue, Black
+531,0,12,2,Dapper Buddy, Black
+532,0,12,2,Sweet Blue, Dark brown
+533,0,12,3,Brave Cooper, Dark gray
+534,0,12,1,Clever Lucy, Golden
+535,1,12,2,Dapper Duke, Grey
+536,0,12,2,Clever Ginger, Grey
+537,1,12,2,Brave Oscar, Red
+538,0,12,1,Clever Buster, Red
+539,1,12,1,Little Zoey, White
+540,0,12,1,Loyal Oscar, Yellow
+541,0,12,2,Clever Buster, black or gray coat
+542,0,12,2,Playful Molly, black with white
+543,1,12,3,Playful Chloe, coffee
+544,0,12,1,Loyal Shadow, lead or black mantle
+545,0,12,1,Loyal Charlie, white with black
+546,0,12,1,Dapper Charlie, White
+547,0,12,2,Happy Zoe, White/Lead
+548,0,12,2,Loyal Milo, White
+549,0,12,2,Happy Bella, White gray
+550,1,22,1,Loyal Winston, coffee
+551,1,48,2,Brave Jax, Tricolor
+552,0,48,3,Sweet Zoey, Tricolor
+553,0,48,2,Happy Bailey, White and red
+554,1,48,2,Loyal Duke, coffee with white
+555,0,48,1,Big Lola, Light brown
+556,1,13,2,Little Bailey, Coffee
+557,1,49,2,Gentle Charlie, White
+558,0,49,2,Gentle Scout, White
+559,1,49,2,Gentle Scout, White
+560,0,13,3,Gentle Scout, White
+561,0,31,1,Dapper Luna, White
+562,1,6,2,Happy Zoe, White
+563,0,13,1,Playful Gracie, White
+564,1,14,3,Dapper Bailey, Black/Tank
+565,1,14,1,Clever Tucker, Black
+566,1,14,1,Playful Coco, Black
+567,1,14,3,Loyal Ginger, Blue Steel
+568,0,14,2,Clever Gus, Silver
+569,1,14,1,Brave Bella, Black
+570,1,14,2,Clever Max, Bicolor
+571,1,14,3,Little Chloe, Black
+572,0,14,1,Dapper Shadow, Black
+573,0,14,1,Little Rocky, Black and tan
+574,0,14,3,Loyal Tucker, Black/Tank
+575,0,14,1,Sweet Cooper, Brown
+576,1,14,3,Playful Luna, Fire Black with Gold and Silver
+577,0,14,2,Gentle Bear, Golden
+578,0,14,3,Little Lucy, Ocher
+579,0,14,3,Little Ruby, Silver
+580,0,14,1,Happy Blue, Water
+581,0,14,1,Gentle Jasper, dark gold
+582,1,14,1,Dapper Lola," steel blue on the body and tail,"
+583,1,14,2,Dapper Lola," steel blue on the body and tail,"
+584,1,14,2,Dapper Lola," steel blue on the body and tail,"
+585,1,14,2,Dapper Lola," steel blue on the body and tail,"
+586,0,14,2,Dapper Lola," steel blue on the body and tail,"
+587,1,14,2,Dapper Lola," steel blue on the body and tail,"
+588,0,13,1,Big Oscar, Dark gray
+589,1,3,2,Playful Ruby, Blue
+590,1,3,1,Happy Sadie, Black
+591,1,50,2,Little Jax, White
+592,0,50,1,Brave Bella, White
+593,0,51,2,Playful Stella, dark gold
+594,0,51,1,Dapper Max, White
+595,0,52,2,Clever Coco, Black
+596,1,52,2,Loyal Maggie, Grey
+597,0,52,3,Big Oscar, Grey
+598,1,21,1,Gentle Buddy, Chocolate
+599,0,53,1,Gentle Penny, Brown
+600,0,53,3,Brave Duke, Cream
+601,0,23,1,Clever Penny, Black
+602,0,23,1,Dapper Rocky, coffee
+603,1,23,3,Happy Oscar, Black
+604,0,25,1,Loyal Lola, Bicolor
+605,1,11,1,Gentle Sadie, White
+606,1,11,1,Gentle Gus, White
+607,0,11,3,Gentle Bear, White
+608,0,11,2,Sweet Daisy, white or beige
+609,1,11,3,Clever Duke, whites and beagel
+610,1,11,3,Brave Oscar, White
+611,1,11,1,Happy Ruby, white and beagel
+612,0,11,1,Gentle Bella, white and beagel
+613,0,11,1,Little Ginger, white and salt and pepper
+614,0,11,1,Playful Harley, white beagel
+615,1,11,3,Playful Shadow, white beagel and brown
+616,0,11,3,Happy Buddy, White
+617,0,11,1,Happy Scout, White
+618,0,28,1,Happy Oscar, Black
+619,0,28,1,Dapper Penny, Golden
+620,1,28,1,Clever Buster, Golden
+621,1,12,1,Loyal Ziggy, Cream
+622,0,31,3,Playful Molly, White
+623,0,34,2,Little Ginger, Tricolor
+624,0,14,3,Brave Jax, Black
+625,0,14,1,Playful Ziggy, Black/Tank
+626,1,14,3,Loyal Coco, dark gold
+627,0,27,2,Dapper Winston, Light brown
+628,1,33,3,Sweet Cooper, Black
+629,1,33,1,Dapper Duke, Black/Tank
+630,1,33,2,Clever Riley, White
+631,0,33,2,Big Gracie, White
+632,1,33,2,Dapper Duke, salt pepper
+633,0,33,2,Dapper Duke, salt pepper
+634,0,33,3,Loyal Blue, white salt pepper
+635,1,33,2,Brave Gus, salt pepper
+636,0,33,1,Sweet Luna, salt pepper
+637,0,34,3,Sweet Blue, Tricolor
+638,1,11,2,Sweet Daisy, white or beige
+639,1,11,1,Sweet Daisy, white or beige
+640,1,39,1,Dapper Harley, Beige
+641,0,39,1,Little Riley, Beige
+642,1,39,2,Loyal Max, Light brown
+643,0,39,3,Playful Coco, Light brown
+644,1,10,1,Little Winston, bicolor
+645,1,13,3,Sweet Rocky, black and white salt and pepper
+646,1,46,1,Gentle Duke, Black
+647,1,34,2,Little Bailey, Board
+648,0,13,1,Clever Zoey, Black
+649,0,13,3,Little Charlie, White
+650,0,13,1,Big Ruby, Jet black
+651,1,13,2,Clever Sadie, Salt pepper
+652,1,13,3,Brave Buddy, salt pepper
+653,1,13,3,Sweet Rocky, white and salt and pepper
+654,0,34,1,Gentle Ruby, Tricolor
+655,1,49,3,Brave Ziggy, White
+656,0,13,3,Happy Ginger, White
+657,0,14,2,Dapper Lola," steel blue on the body and tail,"
+658,1,12,2,Big Winston, Cream with white
+659,1,54,1,Loyal Winston, Black
+660,0,11,1,Sweet Daisy, white or beige
+661,1,55,3,Happy Riley, Black White
+662,0,55,1,Loyal Ginger, Tricolor
+663,1,55,3,Loyal Ginger, White
+664,1,11,2,Big Coco, White
+665,0,13,3,Playful Zoey, White
