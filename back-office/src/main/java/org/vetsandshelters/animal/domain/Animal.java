@@ -2,13 +2,10 @@ package org.vetsandshelters.animal.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-import jakarta.enterprise.inject.Produces;
-import jakarta.json.Json;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.core.MediaType;
+import jakarta.persistence.Transient;
 
 /*
  * In the domain we should only have the data that is relevant for the business logic and the UI.
@@ -32,7 +29,17 @@ public class Animal {
     @OneToOne
     private ProcedenceType procedenceType;
 
-    public Animal(Integer id, String name, String color, Sex sex, Breed breed, ProcedenceType procedenceType) {
+    @Transient
+    public static final Animal NOT_FOUND = new Animal(-1, "Not found", "", Sex.NOT_FOUND, Breed.NOT_FOUND,
+            ProcedenceType.NOT_FOUND);
+
+    public Animal(
+            Integer id,
+            String name,
+            String color,
+            Sex sex,
+            Breed breed,
+            ProcedenceType procedenceType) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -69,5 +76,16 @@ public class Animal {
         return procedenceType;
     }
 
-    public Json tJson
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "id=" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", color='" + color + '\'' +
+                ", " + sex.toString() + '\'' +
+                ", " + breed.toString() + '\'' +
+                ", " + procedenceType.toString() +
+                '}';
+    }
+
 }
