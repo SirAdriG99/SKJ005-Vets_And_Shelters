@@ -21,6 +21,10 @@ public class Sex {
         this.name = name;
     }
 
+    public Sex(int id) {
+        this.id = id;
+    }
+
     public Sex() {
         super();
     }

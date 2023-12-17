@@ -5,7 +5,7 @@ public interface AnimalRepository {
 
     public AnimalCollection getBy(AnimalCriteria criteria);
 
-    public int add(Animal animal);
+    public int store(Animal animal);
 
     public int update(Animal animal);
 }

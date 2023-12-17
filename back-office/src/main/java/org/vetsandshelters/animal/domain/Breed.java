@@ -21,6 +21,10 @@ public class Breed {
         this.name = name;
     }
 
+    public Breed(int id) {
+        this.id = id;
+    }
+
     public Breed() {
         super();
     }

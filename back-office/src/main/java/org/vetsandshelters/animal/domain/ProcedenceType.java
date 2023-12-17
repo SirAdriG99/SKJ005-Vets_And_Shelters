@@ -18,6 +18,10 @@ public class ProcedenceType {
         this.name = name;
     }
 
+    public ProcedenceType(int id) {
+        this.id = id;
+    }
+
     public ProcedenceType() {
         super();
     }

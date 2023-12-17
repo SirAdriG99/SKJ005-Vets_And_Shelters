@@ -62,7 +62,7 @@ public class AnimalRepositoryFake implements AnimalRepository {
     }
 
     @Override
-    public int add(Animal animal) {
+    public int store(Animal animal) {
         return 1;
     }
 
