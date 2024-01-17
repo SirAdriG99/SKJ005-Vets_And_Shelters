@@ -26,8 +26,10 @@ public class StoreAnimalController {
             @QueryParam("color") String color,
             @QueryParam("sexId") int sexId,
             @QueryParam("breedId") int breedId,
-            @QueryParam("procedenceTypeId") int procedenceTypeId) {
-        StoreAnimalCommand command = new StoreAnimalCommand(name, color, sexId, breedId, procedenceTypeId);
+            @QueryParam("procedenceTypeId") int procedenceTypeId,
+            @QueryParam("animalStatusId") int animalStatusId) {
+        StoreAnimalCommand command = new StoreAnimalCommand(name, color, sexId, breedId, procedenceTypeId,
+                animalStatusId);
         // System.out.println("Generated command: " + command.getName());
         StoreAnimalResponse response = this.handler.handle(command);
 

@@ -20,9 +20,10 @@ public class AnimalCriteria extends Criteria {
                 "id",
                 "name",
                 "color",
-                "sexId",
-                "breedId",
-                "procedenceTypeId",
+                "sex_id",
+                "breed_id",
+                "procedence_type_id",
+                "animal_status_id"
         };
     }
 

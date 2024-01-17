@@ -26,4 +26,24 @@ public class Filter {
     public Object getValue() {
         return value;
     }
+
+    public String toQueryOperation() {
+        String queryOperation = "";
+        switch (this.operator) {
+            case EQUALS, NOT_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN, LESS_THAN_OR_EQUAL_TO:
+                queryOperation += this.field + " " + this.getOperator().getOperator() + " " + this.value;
+                break;
+            case CONTAINS, LIKE:
+                queryOperation += "UPPER(" + this.field + ") " + this.getOperator().getOperator() + " UPPER('%"
+                        + this.value + "%')";
+                break;
+            case IN:
+                queryOperation += this.field + " " + this.getOperator().getOperator() + " (" + this.value + ")";
+                break;
+            case NOT_IN:
+                queryOperation += this.field + " " + this.getOperator().getOperator() + " (" + this.value + ")";
+                break;
+        }
+        return queryOperation;
+    }
 }

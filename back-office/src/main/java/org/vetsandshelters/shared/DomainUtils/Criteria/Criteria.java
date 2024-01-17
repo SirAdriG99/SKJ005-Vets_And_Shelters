@@ -17,7 +17,7 @@ public class Criteria {
         this.pagination = pagination;
     }
 
-    public FilterCollection getFilters() {
+    public FilterCollection getFilterCollection() {
         return filters;
     }
 

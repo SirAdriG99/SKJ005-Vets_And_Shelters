@@ -27,4 +27,22 @@ public class FilterCollection {
     public boolean isEmpty() {
         return this.filters == null || this.filters.length == 0;
     }
+
+    public int size() {
+        return this.filters.length;
+    }
+
+    public String toQueryWhere() {
+        String queryWhere = "";
+        if (!this.isEmpty()) {
+            queryWhere += "WHERE ";
+            for (int i = 0; i < this.filters.length; i++) {
+                queryWhere += this.filters[i].toQueryOperation();
+                if (i < this.filters.length - 1) {
+                    queryWhere += " AND ";
+                }
+            }
+        }
+        return queryWhere;
+    }
 }

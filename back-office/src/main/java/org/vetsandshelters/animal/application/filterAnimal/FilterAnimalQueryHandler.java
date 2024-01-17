@@ -47,11 +47,11 @@ public class FilterAnimalQueryHandler {
             filters.add(colorFilter);
         }
         if (query.getSexId() != null) {
-            Filter sexFilter = new Filter("sexId", FilterOperator.EQUALS, query.getSexId());
+            Filter sexFilter = new Filter("sex_id", FilterOperator.EQUALS, query.getSexId());
             filters.add(sexFilter);
         }
         if (query.getBreedId() != null) {
-            Filter breedFilter = new Filter("breedId", FilterOperator.EQUALS, query.getBreedId());
+            Filter breedFilter = new Filter("breed_id", FilterOperator.EQUALS, query.getBreedId());
             filters.add(breedFilter);
         }
         if (query.getProcedenceTypeId() != null) {

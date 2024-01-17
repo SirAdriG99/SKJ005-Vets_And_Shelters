@@ -57,9 +57,9 @@ CREATE  TABLE sex (
  );
 
 CREATE  TABLE animal ( 
-	id                   bigserial  NOT NULL  ,
+	id                   serial  NOT NULL  ,
 	sex_id               integer  NOT NULL  ,
-	breed_id             bigint  NOT NULL  ,
+	breed_id             integer  NOT NULL  ,
 	procedence_type_id   integer  NOT NULL  ,
 	name                 varchar(100)    ,
 	color                varchar(100)  NOT NULL  ,

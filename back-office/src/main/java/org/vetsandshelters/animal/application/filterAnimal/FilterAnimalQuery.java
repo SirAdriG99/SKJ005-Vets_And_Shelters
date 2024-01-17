@@ -10,9 +10,10 @@ public class FilterAnimalQuery {
     private Integer sexId;
     private Integer breedId;
     private Integer procedenceTypeId;
+    private Integer animalStatusId;
 
     public FilterAnimalQuery(Integer offset, Integer size, String order, String sort, String name, String color,
-            Integer sexId, Integer breedId, Integer procedenceTypeId) {
+            Integer sexId, Integer breedId, Integer procedenceTypeId, Integer animalStatusId) {
         this.offset = offset;
         this.size = size;
         this.order = order;
@@ -22,6 +23,7 @@ public class FilterAnimalQuery {
         this.sexId = sexId;
         this.breedId = breedId;
         this.procedenceTypeId = procedenceTypeId;
+        this.animalStatusId = animalStatusId;
     }
 
     public Integer getOffset() {
@@ -58,5 +60,9 @@ public class FilterAnimalQuery {
 
     public Integer getProcedenceTypeId() {
         return procedenceTypeId;
+    }
+
+    public Integer getAnimalStatusId() {
+        return animalStatusId;
     }
 }

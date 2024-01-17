@@ -2,15 +2,16 @@ package org.vetsandshelters.shared.DomainUtils.Criteria;
 
 public enum FilterOperator {
     // Constants for each operator available to compare values
-    EQUALS("=="),
+    EQUALS("="),
     NOT_EQUALS("!="),
     GREATER_THAN(">"),
     GREATER_THAN_OR_EQUAL_TO(">="),
     LESS_THAN("<"),
     LESS_THAN_OR_EQUAL_TO("<="),
-    IN("IN"),
-    NOT_IN("NOT IN"),
-    CONTAINS("CONTAINS");
+    IN("IN"), // TODO: No mvp
+    NOT_IN("NOT IN"), // TODO: No mvp
+    CONTAINS("CONTAINS"), // TODO: No mvp
+    LIKE("LIKE");
 
     private String operator;
 

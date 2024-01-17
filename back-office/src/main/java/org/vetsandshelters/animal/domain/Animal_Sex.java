@@ -4,28 +4,30 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Entity
-public class Breed {
+@Table(name = "sex")
+public class Animal_Sex {
     @Id
     private int id;
     private String name;
 
     @Transient
-    public static final Breed NOT_FOUND = new Breed(-1, "NO_FOUND");
+    public static final Animal_Sex NOT_FOUND = new Animal_Sex(-1, "");
 
-    public Breed(int id, String name) {
+    public Animal_Sex(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Breed(int id) {
+    public Animal_Sex(int id) {
         this.id = id;
     }
 
-    public Breed() {
+    public Animal_Sex() {
         super();
     }
 
@@ -39,10 +41,9 @@ public class Breed {
 
     @Override
     public String toString() {
-        return "Breed{" +
+        return "Sex{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }
-
 }

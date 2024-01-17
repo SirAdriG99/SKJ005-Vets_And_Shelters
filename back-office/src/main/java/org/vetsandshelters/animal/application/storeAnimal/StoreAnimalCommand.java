@@ -6,13 +6,16 @@ public class StoreAnimalCommand {
     private int sexId;
     private int breedId;
     private int procedenceTypeId;
+    private int animalStatusId;
 
-    public StoreAnimalCommand(String name, String color, int sexId, int breedId, int procedenceTypeId) {
+    public StoreAnimalCommand(String name, String color, int sexId, int breedId, int procedenceTypeId,
+            int animalStatusId) {
         this.name = name;
         this.color = color;
         this.sexId = sexId;
         this.breedId = breedId;
         this.procedenceTypeId = procedenceTypeId;
+        this.animalStatusId = animalStatusId;
     }
 
     public String getName() {
@@ -33,6 +36,10 @@ public class StoreAnimalCommand {
 
     public int getProcedenceTypeId() {
         return procedenceTypeId;
+    }
+
+    public int getAnimalStatusId() {
+        return animalStatusId;
     }
 
 }

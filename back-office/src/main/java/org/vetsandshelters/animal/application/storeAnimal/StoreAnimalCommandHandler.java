@@ -2,9 +2,10 @@ package org.vetsandshelters.animal.application.storeAnimal;
 
 import org.vetsandshelters.animal.domain.Animal;
 import org.vetsandshelters.animal.domain.AnimalRepository;
-import org.vetsandshelters.animal.domain.Breed;
-import org.vetsandshelters.animal.domain.ProcedenceType;
-import org.vetsandshelters.animal.domain.Sex;
+import org.vetsandshelters.animal.domain.Animal_AnimalStatus;
+import org.vetsandshelters.animal.domain.Animal_Breed;
+import org.vetsandshelters.animal.domain.Animal_ProcedenceType;
+import org.vetsandshelters.animal.domain.Animal_Sex;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -23,9 +24,10 @@ public class StoreAnimalCommandHandler {
                 null,
                 query.getName(),
                 query.getColor(),
-                new Sex(query.getSexId()),
-                new Breed(query.getBreedId()),
-                new ProcedenceType(query.getProcedenceTypeId()));
+                new Animal_Sex(query.getSexId()),
+                new Animal_Breed(query.getBreedId()),
+                new Animal_ProcedenceType(query.getProcedenceTypeId()),
+                new Animal_AnimalStatus(query.getAnimalStatusId()));
 
         int result = this.repository.store(animal);
 

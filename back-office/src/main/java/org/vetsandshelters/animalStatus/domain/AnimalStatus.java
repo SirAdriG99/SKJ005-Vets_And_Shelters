@@ -1,31 +1,29 @@
-package org.vetsandshelters.animal.domain;
+package org.vetsandshelters.animalStatus.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Entity
-public class Sex {
+@Table(name = "animal_status")
+public class AnimalStatus {
     @Id
     private int id;
     private String name;
 
     @Transient
-    public static final Sex NOT_FOUND = new Sex(-1, "");
+    public static final AnimalStatus NOT_FOUND = new AnimalStatus(-1, "");
 
-    public Sex(int id, String name) {
+    public AnimalStatus(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Sex(int id) {
-        this.id = id;
-    }
-
-    public Sex() {
+    public AnimalStatus() {
         super();
     }
 
@@ -39,7 +37,7 @@ public class Sex {
 
     @Override
     public String toString() {
-        return "Sex{" +
+        return "AnimalStatus{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';

@@ -26,10 +26,12 @@ public class UpdateAnimalController {
             @PathParam("id") Integer id,
             @QueryParam("name") String name,
             @QueryParam("color") String color,
-            @QueryParam("sexId") int sexId,
-            @QueryParam("breedId") int breedId,
-            @QueryParam("procedenceTypeId") int procedenceTypeId) {
-        UpdateAnimalCommand command = new UpdateAnimalCommand(id, name, color, sexId, breedId, procedenceTypeId);
+            @QueryParam("sexId") Integer sexId,
+            @QueryParam("breedId") Integer breedId,
+            @QueryParam("procedenceTypeId") Integer procedenceTypeId,
+            @QueryParam("animalStatusId") Integer animalStatusId) {
+        UpdateAnimalCommand command = new UpdateAnimalCommand(id, name, color, sexId, breedId, procedenceTypeId,
+                animalStatusId);
 
         UpdateAnimalResponse response = this.handler.handle(command);
 

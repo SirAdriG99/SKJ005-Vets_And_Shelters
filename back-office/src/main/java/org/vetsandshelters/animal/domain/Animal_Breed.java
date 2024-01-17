@@ -1,30 +1,33 @@
 package org.vetsandshelters.animal.domain;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Entity
-@Table(name = "procedence_type")
-public class ProcedenceType {
+@Table(name = "breed")
+public class Animal_Breed {
     @Id
     private int id;
     private String name;
 
     @Transient
-    public static final ProcedenceType NOT_FOUND = new ProcedenceType(-1, "NO_FOUND");
+    public static final Animal_Breed NOT_FOUND = new Animal_Breed(-1, "NO_FOUND");
 
-    public ProcedenceType(int id, String name) {
+    public Animal_Breed(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public ProcedenceType(int id) {
+    public Animal_Breed(int id) {
         this.id = id;
     }
 
-    public ProcedenceType() {
+    public Animal_Breed() {
         super();
     }
 
@@ -38,9 +41,10 @@ public class ProcedenceType {
 
     @Override
     public String toString() {
-        return "ProcedenceType{" +
+        return "Breed{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }

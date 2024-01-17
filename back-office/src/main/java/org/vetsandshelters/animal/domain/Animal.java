@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
 
 /*
@@ -29,31 +28,36 @@ public class Animal {
     private String color;
     @ManyToOne
     @JoinColumn(name = "sex_id")
-    private Sex sex;
+    private Animal_Sex sex;
     @ManyToOne
     @JoinColumn(name = "breed_id")
-    private Breed breed;
+    private Animal_Breed breed;
     @ManyToOne
     @JoinColumn(name = "procedence_type_id")
-    private ProcedenceType procedenceType;
+    private Animal_ProcedenceType procedenceType;
+    @ManyToOne
+    @JoinColumn(name = "animal_status_id")
+    private Animal_AnimalStatus animalStatus;
 
     @Transient
-    public static final Animal NOT_FOUND = new Animal(-1, "Not found", "", Sex.NOT_FOUND, Breed.NOT_FOUND,
-            ProcedenceType.NOT_FOUND);
+    public static final Animal NOT_FOUND = new Animal(-1, "Not found", "", Animal_Sex.NOT_FOUND, Animal_Breed.NOT_FOUND,
+            Animal_ProcedenceType.NOT_FOUND, Animal_AnimalStatus.NOT_FOUND);
 
     public Animal(
             Integer id,
             String name,
             String color,
-            Sex sex,
-            Breed breed,
-            ProcedenceType procedenceType) {
+            Animal_Sex sex,
+            Animal_Breed breed,
+            Animal_ProcedenceType procedenceType,
+            Animal_AnimalStatus animalStatus) {
         this.id = id;
         this.name = name;
         this.color = color;
         this.sex = sex;
         this.breed = breed;
         this.procedenceType = procedenceType;
+        this.animalStatus = animalStatus;
     }
 
     public Animal() {
@@ -72,16 +76,20 @@ public class Animal {
         return color;
     }
 
-    public Sex getSex() {
+    public Animal_Sex getSex() {
         return sex;
     }
 
-    public Breed getBreed() {
+    public Animal_Breed getBreed() {
         return breed;
     }
 
-    public ProcedenceType getProcedenceType() {
+    public Animal_ProcedenceType getProcedenceType() {
         return procedenceType;
+    }
+
+    public Animal_AnimalStatus getAnimalStatus() {
+        return animalStatus;
     }
 
     @Override
@@ -92,7 +100,8 @@ public class Animal {
                 ", color='" + color + '\'' +
                 ", " + sex.toString() + '\'' +
                 ", " + breed.toString() + '\'' +
-                ", " + procedenceType.toString() +
+                ", " + procedenceType.toString() + '\'' +
+                ", " + animalStatus.toString() +
                 '}';
     }
 

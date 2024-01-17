@@ -30,7 +30,8 @@ public class FilterAnimalController {
             @QueryParam("color") String color,
             @QueryParam("sexId") Integer sexId,
             @QueryParam("breedId") Integer breedId,
-            @QueryParam("procedenceTypeId") Integer procedenceTypeId) {
+            @QueryParam("procedenceTypeId") Integer procedenceTypeId,
+            @QueryParam("animalStatusId") Integer animalStatusId) {
         FilterAnimalQuery query = new FilterAnimalQuery(
                 offset,
                 size,
@@ -40,7 +41,8 @@ public class FilterAnimalController {
                 color,
                 sexId,
                 breedId,
-                procedenceTypeId);
+                procedenceTypeId,
+                animalStatusId);
         FilterAnimalResponse response = this.handler.handle(query);
 
         return Response.ok(response.getAnimals()).build();

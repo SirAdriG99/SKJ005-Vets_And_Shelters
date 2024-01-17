@@ -8,9 +8,9 @@ public enum FilterOperator {
     GREATER_THAN_OR_EQUAL_TO(">="),
     LESS_THAN("<"),
     LESS_THAN_OR_EQUAL_TO("<="),
-    IN("IN"),
-    NOT_IN("NOT IN"),
-    CONTAINS("CONTAINS"),
+    IN("IN"), // TODO: No mvp
+    NOT_IN("NOT IN"), // TODO: No mvp
+    CONTAINS("CONTAINS"), // TODO: No mvp
     LIKE("LIKE");
 
     private String operator;

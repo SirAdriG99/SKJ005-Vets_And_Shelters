@@ -2,11 +2,10 @@ package org.vetsandshelters.animal.application.updateAnimal;
 
 import org.vetsandshelters.animal.domain.Animal;
 import org.vetsandshelters.animal.domain.AnimalRepository;
-import org.vetsandshelters.animal.domain.Breed;
-import org.vetsandshelters.animal.domain.ProcedenceType;
-import org.vetsandshelters.animal.domain.Sex;
-
-import com.oracle.graal.compiler.enterprise.phases.strings.q;
+import org.vetsandshelters.animal.domain.Animal_AnimalStatus;
+import org.vetsandshelters.animal.domain.Animal_Breed;
+import org.vetsandshelters.animal.domain.Animal_ProcedenceType;
+import org.vetsandshelters.animal.domain.Animal_Sex;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -31,12 +30,14 @@ public class UpdateAnimalCommandHandler {
                 query.getId(),
                 query.getName() != null ? query.getName() : oldAnimal.getName(),
                 query.getColor() != null ? query.getColor() : oldAnimal.getColor(),
-                query.getSexId() != null ? new Sex(query.getSexId()) : oldAnimal.getSex(),
-                query.getBreedId() != null ? new Breed(query.getBreedId()) : oldAnimal.getBreed(),
-                query.getProcedenceTypeId() != null ? new ProcedenceType(query.getProcedenceTypeId())
-                        : oldAnimal.getProcedenceType());
+                query.getSexId() != null ? new Animal_Sex(query.getSexId()) : oldAnimal.getSex(),
+                query.getBreedId() != null ? new Animal_Breed(query.getBreedId()) : oldAnimal.getBreed(),
+                query.getProcedenceTypeId() != null ? new Animal_ProcedenceType(query.getProcedenceTypeId())
+                        : oldAnimal.getProcedenceType(),
+                query.getAnimalStatusId() != null ? new Animal_AnimalStatus(query.getAnimalStatusId())
+                        : oldAnimal.getAnimalStatus());
 
-        int result = this.repository.store(animal);
+        int result = this.repository.update(animal);
 
         return new UpdateAnimalResponse(result);
     }

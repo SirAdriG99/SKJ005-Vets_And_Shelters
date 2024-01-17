@@ -7,15 +7,17 @@ public class UpdateAnimalCommand {
     private Integer sexId;
     private Integer breedId;
     private Integer procedenceTypeId;
+    private Integer animalStatusId;
 
     public UpdateAnimalCommand(int id, String name, String color, Integer sexId, Integer breedId,
-            Integer procedenceTypeId) {
+            Integer procedenceTypeId, Integer animalStatusId) {
         this.id = id;
         this.name = name;
         this.color = color;
         this.sexId = sexId;
         this.breedId = breedId;
         this.procedenceTypeId = procedenceTypeId;
+        this.animalStatusId = animalStatusId;
     }
 
     public int getId() {
@@ -40,6 +42,10 @@ public class UpdateAnimalCommand {
 
     public Integer getProcedenceTypeId() {
         return procedenceTypeId;
+    }
+
+    public Integer getAnimalStatusId() {
+        return animalStatusId;
     }
 
 }
