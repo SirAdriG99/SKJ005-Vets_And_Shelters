@@ -21,6 +21,8 @@ MSG_TRAIN = "TRAIN"
 
 # OTHER CONSTANTS
 QUERY_GET_TRAINING_DATA = ""
+QUERY_GET_VALIDATION_DATA = ""
+
 DB_PARAMETERS = {
     "host": DB_IP,
     "port": DB_PORT,
@@ -29,6 +31,7 @@ DB_PARAMETERS = {
     "database": NAME_DB
 }
 MODEL_NAME = ""
+MODEL_PATH = "model"
 NUM_LABELS = 2
 BATCH_SIZE = 10
 
@@ -62,42 +65,56 @@ def create_sockets_connections():
     return core_socket, db_cursor
 
 
+def do_query(db_cursor, query):
+    db_cursor.execute(query)
+    result = db_cursor.fetchall()
+    return result
+
+
 def query_action(params):
     core_socket = params["core_socket"]
     db_cursor = params["db_cursor"]
     query = params["query"]
 
     try:
-        db_cursor.execute(query)
-        result = db_cursor.fetchall()
+        result = do_query(db_cursor, query)
         write_socket(core_socket, result)
     except Exception as e:
         write_socket(core_socket, e)
 
 
 def load_model():
-    # TODO
-    return None
+    model = tf.keras.models.load_model(MODEL_PATH)
+    return model 
 
 
 def save_model(model):
-    model.save_pretrained('./model')
+    model.save_pretrained(MODEL_PATH)
 
 
 def prediction_action(params):
     model = params["model"]
     core_socket = params["core_socket"]
-    # TODO
+    
+    input_prediction = read_socket(core_socket)    
+    if input_prediction is None:
+        result = "Error: No data received"
+    else:
+        input_prediction = np.array(input_prediction)
+        result = str(model.predict(input_prediction))
+        
+    message = f"Input received: ->'{input_prediction}'<-.\nResult: {result}"
+    write_socket(core_socket, message)
+
+    
+def get_train_data(db_cursor):     
+    train_data = do_query(db_cursor, QUERY_GET_TRAINING_DATA)
+    return train_data
 
 
-def get_train_data():
-    # TODO
-    return list()
-
-
-def get_valid_data():
-    # TODO
-    return list()
+def get_validation_data(db_cursor):
+    validation_data = do_query(db_cursor, QUERY_GET_VALIDATION_DATA)
+    return validation_data
 
 
 def train_model_action(params):
@@ -108,25 +125,29 @@ def train_model_action(params):
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = (model.to(device))
-    train = get_train_data()
-    valid = get_valid_data()
+    train = get_train_data(db_cursor)
+    validation = get_validation_data(db_cursor)
     
-    logging_steps = len(train) // BATCH_SIZE
-    training_args = TrainingArguments(output_dir="results",
-                                      num_train_epochs=3,
-                                      learning_rate=2e-5,
-                                      per_device_train_batch_size=BATCH_SIZE,
-                                      per_device_eval_batch_size=BATCH_SIZE,
-                                      load_best_model_at_end=True,
-                                      metric_for_best_model="f1",
-                                      weight_decay=0.01,
-                                      evaluation_strategy="epoch",
-                                      logging_steps=logging_steps,
-                                      fp16=True,
-                                      save_strategy="epoch",
-                                      disable_tqdm=False)
+    # logging_steps = len(train) // BATCH_SIZE
+    # training_args = TrainingArguments(output_dir="results",
+    #                                   num_train_epochs=3,
+    #                                   learning_rate=2e-5,
+    #                                   per_device_train_batch_size=BATCH_SIZE,
+    #                                   per_device_eval_batch_size=BATCH_SIZE,
+    #                                   load_best_model_at_end=True,
+    #                                   metric_for_best_model="f1",
+    #                                   weight_decay=0.01,
+    #                                   evaluation_strategy="epoch",
+    #                                   logging_steps=logging_steps,
+    #                                   fp16=True,
+    #                                   save_strategy="epoch",
+    #                                   disable_tqdm=False)
 
-    trainer = Trainer(model=model, args=training_args)
+    trainer = Trainer(model=model,
+                      # args=training_args,
+                      train_dataset=train,
+                      eval_dataset=validation
+                      )
     trainer.train()
 
     results = trainer.evaluate()
