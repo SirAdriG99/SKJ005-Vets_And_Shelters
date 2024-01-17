@@ -1,10 +1,10 @@
 import socket
 import psycopg2
 import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
+# from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
 import tensorflow as tf
-from tensorflow.keras import layers, models
-import os.path
+# import os.path
+import numpy as np
 
 # CONSTANTS
 CORE_PORT = 9876        # TODO: Set the correct one
@@ -35,8 +35,9 @@ DB_PARAMETERS = {
 }
 MODEL_NAME = ""         # TODO: Pick the correct one.
 MODEL_PATH = "model"
-NUM_LABELS = 2
-BATCH_SIZE = 10
+# NUM_LABELS = 2
+# BATCH_SIZE = 10
+NUM_EPOCHS = 2
 
 
 # Function to encapsulate the reception of messages over a socket.
@@ -91,13 +92,15 @@ def query_action(params):
 
 # Function to encapsulate the model loading process
 def load_model():
-    model = tf.keras.models.load_model(MODEL_PATH)
+    # model = tf.keras.models.load_model(MODEL_PATH)
+    model = tf.saved_model.load(MODEL_PATH)
     return model 
 
 
 # Function to encapsulate the model saving process
 def save_model(model):
-    model.save_pretrained(MODEL_PATH)
+    # model.save_pretrained(MODEL_PATH)
+    tf.saved_model.save(model, MODEL_PATH)
 
 
 # Function where the prediction is done
@@ -139,32 +142,38 @@ def train_model_action(params):
     model = (model.to(device))
     train = get_train_data(db_cursor)
     validation = get_validation_data(db_cursor)
-    
-    # logging_steps = len(train) // BATCH_SIZE
-    # training_args = TrainingArguments(output_dir="results",
-    #                                   num_train_epochs=3,
-    #                                   learning_rate=2e-5,
-    #                                   per_device_train_batch_size=BATCH_SIZE,
-    #                                   per_device_eval_batch_size=BATCH_SIZE,
-    #                                   load_best_model_at_end=True,
-    #                                   metric_for_best_model="f1",
-    #                                   weight_decay=0.01,
-    #                                   evaluation_strategy="epoch",
-    #                                   logging_steps=logging_steps,
-    #                                   fp16=True,
-    #                                   save_strategy="epoch",
-    #                                   disable_tqdm=False)
 
-    trainer = Trainer(model=model,
-                      # args=training_args,
-                      train_dataset=train,
-                      eval_dataset=validation
-                      )
-    trainer.train()
+    if len(train) != 0 and len(validation) != 0:
+        # logging_steps = len(train) // BATCH_SIZE
+        # training_args = TrainingArguments(output_dir="results",
+        #                                   num_train_epochs=3,
+        #                                   learning_rate=2e-5,
+        #                                   per_device_train_batch_size=BATCH_SIZE,
+        #                                   per_device_eval_batch_size=BATCH_SIZE,
+        #                                   load_best_model_at_end=True,
+        #                                   metric_for_best_model="f1",
+        #                                   weight_decay=0.01,
+        #                                   evaluation_strategy="epoch",
+        #                                   logging_steps=logging_steps,
+        #                                   fp16=True,
+        #                                   save_strategy="epoch",
+        #                                   disable_tqdm=False)
+        # trainer = Trainer(model=model,
+        #                   # args=training_args,
+        #                   train_dataset=train,
+        #                   eval_dataset=validation
+        #                   )
+        # trainer.train()
+        # results = trainer.evaluate()
 
-    results = trainer.evaluate()
+        model.fit(train, epochs=NUM_EPOCHS, validation_data=validation)
 
-    message = f"Training complete: {results}"
+        results = model.evaluate()
+        message = f"Training complete: {results}"
+    else:
+        message = "There is no: "
+        message += "\n\t-> training data" if len(train) == 0 else ""
+        message += "\n\t-> validation data" if len(validation) == 0 else ""
     write_socket(core_socket, message)
 
 
