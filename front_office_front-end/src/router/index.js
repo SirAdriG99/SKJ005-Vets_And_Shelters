@@ -149,6 +149,16 @@ const router = createRouter({
             component: () => import('@/views/pages/Landing.vue')
         },
         {
+            path: '/aboutus',
+            name: 'aboutus',
+            component: () => import('@/views/pages/AboutUs.vue')
+        },
+        {
+            path: '/getstarted',
+            name: 'getstarted',
+            component: () => import('@/views/pages/GetStarted.vue')
+        },
+        {
             path: '/pages/notfound',
             name: 'notfound',
             component: () => import('@/views/pages/NotFound.vue')
@@ -168,6 +178,11 @@ const router = createRouter({
             path: '/auth/error',
             name: 'error',
             component: () => import('@/views/pages/auth/Error.vue')
+        },
+        {
+            path: '/auth/newaccount',
+            name: 'newaccount',
+            component: () => import('@/views/pages/auth/NewAccount.vue')
         }
     ]
 });

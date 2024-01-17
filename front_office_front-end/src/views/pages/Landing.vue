@@ -20,10 +20,11 @@ const logoUrl = computed(() => {
     <div class="surface-0 flex justify-content-center">
         <div id="home" class="landing-wrapper overflow-hidden">
             <div class="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static mb-3">
-                <a class="flex align-items-center" href="#"> <img :src="logoUrl" alt="Sakai Logo" height="50" class="mr-0 lg:mr-2" /><span class="text-900 font-medium text-2xl line-height-3 mr-8">SAKAI</span> </a>
+                <a class="flex align-items-center"> <img :src="logoUrl" alt="V&S Logo" height="50" class="mr-0 lg:mr-2" /><span class="text-900 font-medium text-2xl line-height-3 mr-8">Vets&Shelters</span> </a>
                 <a class="cursor-pointer block lg:hidden text-700 p-ripple" v-ripple v-styleclass="{ selector: '@next', enterClass: 'hidden', leaveToClass: 'hidden', hideOnOutsideClick: true }">
                     <i class="pi pi-bars text-4xl"></i>
                 </a>
+ <!--
                 <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top: 120px">
                     <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
                         <li>
@@ -52,6 +53,7 @@ const logoUrl = computed(() => {
                         <Button label="Register" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button>
                     </div>
                 </div>
+-->
             </div>
 
             <div
@@ -60,15 +62,18 @@ const logoUrl = computed(() => {
                 style="background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(238, 239, 175) 0%, rgb(195, 227, 250) 100%); clip-path: ellipse(150% 87% at 93% 13%)"
             >
                 <div class="mx-4 md:mx-8 mt-0 md:mt-4">
-                    <h1 class="text-6xl font-bold text-gray-900 line-height-2"><span class="font-light block">Eu sem integer</span>eget magna fermentum</h1>
-                    <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">Sed blandit libero volutpat sed cras. Fames ac turpis egestas integer. Placerat in egestas erat...</p>
-                    <Button label="Get Started" class="p-button-rounded text-xl border-none mt-5 bg-blue-500 font-normal text-white line-height-3 px-3"></Button>
+                    <h1 class="text-6xl font-bold text-gray-900 line-height-2"><span class="font-light block">Welcome to</span>Vets&Shelters</h1>
+                    <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">An app developed with love for dog lovers</p>
+                    <Button label="Join the family" class="p-button-rounded text-xl border-none mt-5 bg-blue-500 font-normal text-white line-height-3 px-3"><router-link to="/auth/newaccount" class="p-button-rounded text-xl border-none bg-blue-500 font-normal text-white">Sign up</router-link></Button>
+                    &nbsp;
+                    <Button label="Log in" class="p-button-rounded text-xl border-none mt-5 bg-blue-500 font-normal text-white line-height-3 px-3"><router-link to="/auth/login" class="p-button-rounded text-xl border-none bg-blue-500 font-normal text-white">Log in</router-link></Button>
                 </div>
+                <p></p>
                 <div class="flex justify-content-center md:justify-content-end">
-                    <img src="/demo/images/landing/screen-1.png" alt="Hero Image" class="w-9 md:w-auto" />
+                    <img src="/demo/images/landing/loving-dog-1.jpg" alt="Hero Image" class="w-9 md:w-auto" />
                 </div>
             </div>
-
+<!--
             <div id="features" class="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
                 <div class="grid justify-content-center">
                     <div class="col-12 text-center mt-8 mb-4">
@@ -358,13 +363,13 @@ const logoUrl = computed(() => {
                     </div>
                 </div>
             </div>
-
+-->
             <div class="py-4 px-4 mx-0 mt-8 lg:mx-8">
                 <div class="grid justify-content-between">
                     <div class="col-12 md:col-2" style="margin-top: -1.5rem">
                         <a @click="smoothScroll('#home')" class="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
                             <img :src="logoUrl" alt="footer sections" width="50" height="50" class="mr-2" />
-                            <h4 class="font-medium text-3xl text-900">SAKAI</h4>
+                            <h4 class="font-medium text-3xl text-900">Vets&Shelters</h4>
                         </a>
                     </div>
 
@@ -372,33 +377,35 @@ const logoUrl = computed(() => {
                         <div class="grid text-center md:text-left">
                             <div class="col-12 md:col-3">
                                 <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Company</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">About Us</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>
+                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700"><router-link to="/aboutus" class="text-xl block cursor-pointer text-700">About us</router-link></a>
+                                <!-- <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Investor Relations</a>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Careers</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Media Kit</a>
+                                <a class="line-height-3 text-xl block cursor-pointer text-700">Media Kit</a> -->
                             </div>
+
+                            <div class="col-12 md:col-3 mt-4 md:mt-0"></div>
 
                             <div class="col-12 md:col-3 mt-4 md:mt-0">
                                 <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Resources</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Get Started</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Case Studies</a>
+                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700"><router-link to="/getstarted" class="text-xl block cursor-pointer text-700">Get started</router-link></a>
+                                <!-- <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>
+                                <a class="line-height-3 text-xl block cursor-pointer text-700">Case Studies</a> -->
                             </div>
 
                             <div class="col-12 md:col-3 mt-4 md:mt-0">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
+                                <!-- <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Discord</a>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img src="/demo/images/landing/new-badge.svg" class="ml-2" /></a>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
+                                <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a> -->
                             </div>
 
                             <div class="col-12 md:col-3 mt-4 md:mt-0">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
+                                <!-- <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Brand Policy</a>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Privacy Policy</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a>
+                                <a class="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a> -->
                             </div>
                         </div>
                     </div>
