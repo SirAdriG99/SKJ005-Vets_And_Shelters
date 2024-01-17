@@ -8,7 +8,7 @@ import numpy as np
 
 # CONSTANTS
 CORE_PORT = 9876        # TODO: Set the correct one
-DB_PORT = 1234          # TODO: Set the correct one
+DB_PORT = 5432          # TODO: Set the correct one
 CORE_IP = "0.0.0.0"     # TODO: Pick the correct one.
 DB_IP = "0.0.0.0"       # TODO: Pick the correct one.
 SOCKET_DATA_SIZE = 1024

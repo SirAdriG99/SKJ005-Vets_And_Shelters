@@ -33,3 +33,14 @@ services:
       #   container_name: "container-frontoffice"
       #   ports:
       #     - "8080:8081"
+  model:
+		build:
+			context: .
+			dockerfile: Dockerfile-model
+		container_name: "container-model-python"
+		environment:
+		ports: 
+			- "4321:4321"
+		volumes:
+			- ./model/model-volume:/./app
+		
