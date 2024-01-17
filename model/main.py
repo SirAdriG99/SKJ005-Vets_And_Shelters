@@ -78,11 +78,7 @@ def do_query(db_cursor, query):
 
 
 # Function to receiving a query from a socket, making the query to the database and sending the result to that socket.
-def query_action(params):
-    core_socket = params["core_socket"]
-    db_cursor = params["db_cursor"]
-    query = params["query"]
-
+def query_action(core_socket, db_cursor, query):
     try:
         result = do_query(db_cursor, query)
         write_socket(core_socket, result)
@@ -104,9 +100,7 @@ def save_model(model):
 
 
 # Function where the prediction is done
-def prediction_action(params):
-    model = params["model"]
-    core_socket = params["core_socket"]
+def prediction_action(core_socket, model):
     
     input_prediction = read_socket(core_socket)    
     if input_prediction is None:
@@ -132,14 +126,11 @@ def get_validation_data(db_cursor):
 
 
 # Function where the training is done
-def train_model_action(params):
+def train_model_action(core_socket, db_cursor, model):
     # TODO: Check if this is correct.
-    model = params["model"]
-    core_socket = params["core_socket"]
-    db_cursor = params["db_cursor"]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = (model.to(device))
+    model = model.to(device)
     train = get_train_data(db_cursor)
     validation = get_validation_data(db_cursor)
 
@@ -183,15 +174,14 @@ def hidden_switch(data_rec, params):
     db_cursor = params["db_cursor"]
     model = params["model"]
 
-    if data_rec == MSG_STOP:
-        return None, None
-    elif data_rec == MSG_QUERY_DB:
-        return query_action, {"core_socket": core_socket, "db_cursor": db_cursor, "query": read_socket(core_socket)}
-    elif data_rec == MSG_PREDICTION:
-        return prediction_action, {"core_socket": core_socket, "model": model}
-    elif data_rec == MSG_TRAIN:
-        return train_model_action, {"core_socket": core_socket, "db_cursor": db_cursor, "model": model, }
-    return None, None
+    pseudo_switch = {
+        MSG_STOP:           True,
+        MSG_QUERY_DB:       query_action(core_socket, db_cursor, read_socket(core_socket)),
+        MSG_PREDICTION:     prediction_action(core_socket, model),
+        MSG_TRAIN:          train_model_action(core_socket, db_cursor, model)
+    }
+    # not True = not None = False
+    return not pseudo_switch.get(data_rec)
 
 
 # The main function
@@ -204,14 +194,10 @@ def main():
         "model": model
     }
 
-    while True:
+    not_stop = True
+    while not_stop:
         data_rec = read_socket(core_socket)
-        action, params = hidden_switch(data_rec, params)
-
-        if action is None:
-            break
-        else:
-            action(params)
+        not_stop = hidden_switch(data_rec, params)
 
     if core_socket:
         core_socket.close()
