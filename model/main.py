@@ -5,11 +5,14 @@ from transformers import BertTokenizer, BertForSequenceClassification, Trainer, 
 from datasets import Dataset
 
 # CONSTANTS
-CORE_PORT = 9876        # TODO: Set the correct one
-DB_PORT = 5432          # TODO: Set the correct one
-CORE_IP = "0.0.0.0"
+BACK_PORT = 9876        # TODO: Set the correct one
+FRONT_PORT = 1425
+DB_PORT = 5432
+BACK_IP = "0.0.0.0"
+FRONT_IP = "0.0.0.0"
 DB_IP = "0.0.0.0"
 SOCKET_DATA_SIZE = 1024
+
 USER_DB = "user"
 PASSWORD_DB = "patata"
 NAME_DB = "skj005_vets_and_shelters"
@@ -17,7 +20,7 @@ NAME_DB = "skj005_vets_and_shelters"
 # CONSTANTS: Codes messages.
 MSG_STOP = "STOP"
 MSG_QUERY_DB = "QUERY_DB"
-MSG_PREDICTION = "PREDICTION"
+MSG_SUGGESTION = "SUGGESTION"
 MSG_TRAIN = "TRAIN"
 
 # CONSTANTS: Model-related.
@@ -38,6 +41,7 @@ BATCH_SIZE = 10
 NUM_EPOCHS = 2
 OUTPUT_DIR = "."
 
+
 # Function to encapsulate the reception of messages over a socket.
 def read_socket(socket_recv, data_size=SOCKET_DATA_SIZE):
     data = socket_recv.recv(data_size).decode('utf-8')
@@ -52,11 +56,17 @@ def write_socket(socket_send, message):
 # Function to create the socket and the database connection
 def create_socket_and_db_connections():
 
-    core_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    core_socket.bind((CORE_IP, CORE_PORT))
-    core_socket.listen()
-    core_socket, addr = core_socket.accept()
-    print(f"Connection from {addr} (core)")
+    back_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    back_socket.bind((BACK_IP, BACK_PORT))
+    back_socket.listen()
+    back_socket, addr = back_socket.accept()
+    print(f"Connection from {addr} (back)")
+
+    front_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    front_socket.bind((FRONT_IP, FRONT_PORT))
+    front_socket.listen()
+    front_socket, addr = front_socket.accept()
+    print(f"Connection from {addr} (front)")
 
     # db_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # db_socket.bind((DB_IP, DB_PORT))
@@ -65,7 +75,7 @@ def create_socket_and_db_connections():
     db = psycopg2.connect(**DB_PARAMETERS)
     db_cursor = db.cursor()
 
-    return core_socket, db_cursor
+    return back_socket, db_cursor
 
 
 # Function to encapsulate the sending of a query and getting the result to the database.
@@ -76,12 +86,12 @@ def do_query(db_cursor, query):
 
 
 # Function to receiving a query from a socket, making the query to the database and sending the result to that socket.
-def query_action(core_socket, db_cursor, query):
+def query_action(back_socket, db_cursor, query):
     try:
         result = do_query(db_cursor, query)
-        write_socket(core_socket, result)
+        write_socket(back_socket, result)
     except Exception as e:
-        write_socket(core_socket, e)
+        write_socket(back_socket, e)
 
 
 # Function to encapsulate the model loading process
@@ -105,9 +115,9 @@ def save_the_model(model, tokenizer):
 
 
 # Function where the classification is done
-def classification_action(core_socket, model, tokenizer):
+def classification_action(back_socket, model, tokenizer):
     
-    input_classification = read_socket(core_socket)    
+    input_classification = read_socket(back_socket)    
     if input_classification is None:
         result = "Error: No data received"
     else:
@@ -120,7 +130,7 @@ def classification_action(core_socket, model, tokenizer):
         result = str(torch.argmax(logits, dim=1).item())
         
     message = f"Input received: ->'{input_classification}'<-.\nResult: {result}"
-    write_socket(core_socket, message)
+    write_socket(back_socket, message)
 
 
 # Function to encapsulate the query to get the training data
@@ -137,7 +147,7 @@ def get_validation_data(db_cursor):
 
 
 # Function where the training is done
-def train_model_action(core_socket, db_cursor, model, tokenizer):
+def train_model_action(back_socket, db_cursor, model, tokenizer):
     def tokenize(batch):
         return tokenizer(batch["text"], padding=True, truncation=True, max_length=512)
 
@@ -184,21 +194,21 @@ def train_model_action(core_socket, db_cursor, model, tokenizer):
         message = "There is no: "
         message += "\n\t-> training data" if len(train) == 0 else ""
         message += "\n\t-> validation data" if len(validation) == 0 else ""
-    write_socket(core_socket, message)
+    write_socket(back_socket, message)
 
 
 # Function to hide the if-else statements. The parameters for the action are prepared here.
 def hidden_switch(data_rec, params):
-    core_socket = params["core_socket"]
+    back_socket = params["back_socket"]
     db_cursor = params["db_cursor"]
     model = params["model"]
     tokenizer = params["tokenizer"]
 
     pseudo_switch = {
         MSG_STOP:           True,
-        MSG_QUERY_DB:       query_action(core_socket, db_cursor, read_socket(core_socket)),
-        MSG_PREDICTION:     classification_action(core_socket, model, tokenizer),
-        MSG_TRAIN:          train_model_action(core_socket, db_cursor, model, tokenizer)
+        MSG_QUERY_DB:       query_action(back_socket, db_cursor, read_socket(back_socket)),
+        MSG_SUGGESTION:     classification_action(back_socket, model, tokenizer),
+        MSG_TRAIN:          train_model_action(back_socket, db_cursor, model, tokenizer)
     }
     # not True = not None = False
     return not pseudo_switch.get(data_rec)
@@ -206,10 +216,10 @@ def hidden_switch(data_rec, params):
 
 # The main function
 def main():
-    core_socket, db_cursor = create_socket_and_db_connections()
+    back_socket, db_cursor = create_socket_and_db_connections()
     model, tokenizer = load_the_model()
     params = {
-        "core_socket": core_socket,
+        "back_socket": back_socket,
         "db_cursor": db_cursor,
         "model": model,
         "tokenizer": tokenizer
@@ -217,11 +227,11 @@ def main():
 
     not_stop = True
     while not_stop:
-        data_rec = read_socket(core_socket)
+        data_rec = read_socket(back_socket)
         not_stop = hidden_switch(data_rec, params)
 
-    if core_socket:
-        core_socket.close()
+    if back_socket:
+        back_socket.close()
     if db_cursor:
         db_cursor.close()
 
