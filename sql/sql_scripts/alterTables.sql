@@ -4,6 +4,8 @@ ALTER TABLE animal ADD CONSTRAINT fk_animal_breed FOREIGN KEY ( breed_id ) REFER
 
 ALTER TABLE animal ADD CONSTRAINT fk_animal_procedence_type FOREIGN KEY ( procedence_type_id ) REFERENCES procedence_type( id );
 
+ALTER TABLE animal ADD CONSTRAINT fk_animal_animal_status FOREIGN KEY ( animal_status_id ) REFERENCES animal_status( id );
+
 ALTER TABLE animal_photos ADD CONSTRAINT fk_animal_photis_animal FOREIGN KEY ( animal_id ) REFERENCES animal( id );
 
 ALTER TABLE animal_status_hist ADD CONSTRAINT fk_animal_status_hist_animal FOREIGN KEY ( animal_id ) REFERENCES animal( id );

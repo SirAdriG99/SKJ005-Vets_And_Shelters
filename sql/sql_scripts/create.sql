@@ -57,12 +57,13 @@ CREATE  TABLE sex (
  );
 
 CREATE  TABLE animal ( 
-	id                   serial  NOT NULL  ,
+	id                   bigserial  NOT NULL  ,
 	sex_id               integer  NOT NULL  ,
-	breed_id             integer  NOT NULL  ,
+	breed_id             bigint  NOT NULL  ,
 	procedence_type_id   integer  NOT NULL  ,
 	name                 varchar(100)    ,
 	color                varchar(100)  NOT NULL  ,
+	animal_status_id     integer    NOT NULL,
 	CONSTRAINT pk_animal PRIMARY KEY ( id )
  );
 
