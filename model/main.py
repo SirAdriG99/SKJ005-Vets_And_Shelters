@@ -4,10 +4,10 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
 
 # CONSTANTS
-CORE_PORT = 9876
-DB_PORT = 1234
-CORE_IP = "0.0.0.0"
-DB_IP = "0.0.0.0"
+CORE_PORT = 9876  # TODO: Set the correct one
+DB_PORT = 1234  # TODO: Set the correct one
+CORE_IP = "0.0.0.0"  # TODO: Pick the correct one.
+DB_IP = "0.0.0.0"  # TODO: Pick the correct one.
 SOCKET_DATA_SIZE = 1024
 USER_DB = "user"
 PASSWORD_DB = "patata"
@@ -31,6 +31,7 @@ DB_PARAMETERS = {
 MODEL_NAME = ""
 NUM_LABELS = 2
 BATCH_SIZE = 10
+
 
 def read_socket(socket_recv, data_size=SOCKET_DATA_SIZE):
     data = socket_recv.recv(data_size).decode('utf-8')
@@ -75,6 +76,7 @@ def query_action(params):
 
 
 def load_model():
+    # TODO
     return None
 
 
@@ -85,17 +87,21 @@ def save_model(model):
 def prediction_action(params):
     model = params["model"]
     core_socket = params["core_socket"]
+    # TODO
 
 
 def get_train_data():
+    # TODO
     return list()
 
 
 def get_valid_data():
+    # TODO
     return list()
 
 
 def train_model_action(params):
+    # TODO: Check if this is correct.
     model = params["model"]
     core_socket = params["core_socket"]
     db_cursor = params["db_cursor"]
