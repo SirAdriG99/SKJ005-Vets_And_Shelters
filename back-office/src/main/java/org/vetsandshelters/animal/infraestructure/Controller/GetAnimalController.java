@@ -1,21 +1,18 @@
-package org.vetsandshelters.animal.infraestructure;
+package org.vetsandshelters.animal.infraestructure.Controller;
 
 import org.vetsandshelters.animal.application.getAnimal.GetAnimalQuery;
 import org.vetsandshelters.animal.application.getAnimal.GetAnimalQueryHandler;
 import org.vetsandshelters.animal.application.getAnimal.GetAnimalResponse;
-import org.vetsandshelters.animal.domain.Animal;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @Path("/animal")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes({ MediaType.APPLICATION_JSON })
 public class GetAnimalController {
 
     @Inject
@@ -23,12 +20,13 @@ public class GetAnimalController {
 
     @GET
     @Path("/{id}")
-    public Animal getAnimal(@PathParam("id") Integer id) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAnimal(@PathParam("id") Integer id) {
 
         GetAnimalQuery query = new GetAnimalQuery(id);
 
         GetAnimalResponse response = this.getAnimalQueryHandler.handle(query);
 
-        return response.getAnimal().tJson();
+        return Response.ok(response.getAnimal()).build();
     }
 }

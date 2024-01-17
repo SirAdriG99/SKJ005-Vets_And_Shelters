@@ -19,6 +19,10 @@ public class AnimalCriteria extends Criteria {
         return new String[] {
                 "id",
                 "name",
+                "color",
+                "sexId",
+                "breedId",
+                "procedenceTypeId",
         };
     }
 
