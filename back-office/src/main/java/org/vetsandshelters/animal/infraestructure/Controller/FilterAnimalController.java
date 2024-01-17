@@ -43,6 +43,6 @@ public class FilterAnimalController {
                 procedenceTypeId);
         FilterAnimalResponse response = this.handler.handle(query);
 
-        return Response.ok(response.getAnimal()).build();
+        return Response.ok(response.getAnimals()).build();
     }
 }

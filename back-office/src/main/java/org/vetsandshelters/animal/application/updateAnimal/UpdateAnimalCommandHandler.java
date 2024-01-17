@@ -6,6 +6,8 @@ import org.vetsandshelters.animal.domain.Breed;
 import org.vetsandshelters.animal.domain.ProcedenceType;
 import org.vetsandshelters.animal.domain.Sex;
 
+import com.oracle.graal.compiler.enterprise.phases.strings.q;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -18,14 +20,21 @@ public class UpdateAnimalCommandHandler {
     public UpdateAnimalResponse handle(UpdateAnimalCommand query) {
 
         // Here we could do some validations
+        Animal oldAnimal = null;
+        try {
+            oldAnimal = this.repository.getById(query.getId());
+        } catch (IllegalStateException e) {
+            return new UpdateAnimalResponse(-1);
+        }
 
         Animal animal = new Animal(
                 query.getId(),
-                query.getName(),
-                query.getColor(),
-                new Sex(query.getSexId()),
-                new Breed(query.getBreedId()),
-                new ProcedenceType(query.getProcedenceTypeId()));
+                query.getName() != null ? query.getName() : oldAnimal.getName(),
+                query.getColor() != null ? query.getColor() : oldAnimal.getColor(),
+                query.getSexId() != null ? new Sex(query.getSexId()) : oldAnimal.getSex(),
+                query.getBreedId() != null ? new Breed(query.getBreedId()) : oldAnimal.getBreed(),
+                query.getProcedenceTypeId() != null ? new ProcedenceType(query.getProcedenceTypeId())
+                        : oldAnimal.getProcedenceType());
 
         int result = this.repository.store(animal);
 

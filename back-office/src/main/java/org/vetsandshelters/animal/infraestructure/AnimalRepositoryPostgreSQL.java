@@ -35,6 +35,7 @@ public class AnimalRepositoryPostgreSQL implements AnimalRepository {
     @Override
     public AnimalCollection getBy(AnimalCriteria criteria) {
 
+        // TODO: See how can we create dynamic queries)
         List<Animal> animalList = em.createQuery("FROM Animal", Animal.class).getResultList();
 
         return new AnimalCollection(animalList.toArray(new Animal[animalList.size()]));
@@ -73,6 +74,10 @@ public class AnimalRepositoryPostgreSQL implements AnimalRepository {
 
     @Override
     public int update(Animal animal) {
+        /**
+         * TODO: Is throwing the following exception:
+         * 
+         */
         em.merge(animal);
         return animal.getId();
     }
