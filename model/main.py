@@ -3,10 +3,12 @@ import psycopg2
 import torch
 from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments
 from datasets import Dataset
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import json
 
 # CONSTANTS
 BACK_PORT = 9876        # TODO: Set the correct one
-FRONT_PORT = 1425
+FRONT_PORT = 1425       # TODO: Set the correct one
 DB_PORT = 5432
 BACK_IP = "0.0.0.0"
 FRONT_IP = "0.0.0.0"
@@ -24,8 +26,12 @@ MSG_SUGGESTION = "SUGGESTION"
 MSG_TRAIN = "TRAIN"
 
 # CONSTANTS: Model-related.
-QUERY_GET_TRAINING_DATA = ""    # TODO: Pick the correct one.
-QUERY_GET_VALIDATION_DATA = ""  # TODO: Pick the correct one.
+QUERY_GET_TRAINING_DATA = """
+                          SELECT a.id, a.color, b.space_need, b.activity_need, b.dangerous_race, b.time_dedication_need
+                          FROM animal AS a
+                          INNER JOIN breed AS b ON a.breed_id = b.id                           
+                          """
+QUERY_GET_VALIDATION_DATA = ""
 
 DB_PARAMETERS = {
     "host": DB_IP,
@@ -34,12 +40,13 @@ DB_PARAMETERS = {
     "password": PASSWORD_DB,
     "database": NAME_DB
 }
-MODEL_NAME = "nlptown/bert-base-multilingual-uncased-sentiment"
+MODEL_NAME = "distilbert-base-uncased"
 MODEL_PATH = "./model"
 NUM_LABELS = 2
 BATCH_SIZE = 10
 NUM_EPOCHS = 2
 OUTPUT_DIR = "."
+SUGGESTION_JSON_KEY = ["color", "space_need", "activity_need", "dangerous_race", "time_dedication_need"]
 
 
 # Function to encapsulate the reception of messages over a socket.
@@ -61,16 +68,6 @@ def create_socket_and_db_connections():
     back_socket.listen()
     back_socket, addr = back_socket.accept()
     print(f"Connection from {addr} (back)")
-
-    front_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    front_socket.bind((FRONT_IP, FRONT_PORT))
-    front_socket.listen()
-    front_socket, addr = front_socket.accept()
-    print(f"Connection from {addr} (front)")
-
-    # db_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # db_socket.bind((DB_IP, DB_PORT))
-    # db_socket.listen()
 
     db = psycopg2.connect(**DB_PARAMETERS)
     db_cursor = db.cursor()
@@ -97,7 +94,7 @@ def query_action(back_socket, db_cursor, query):
 # Function to encapsulate the model loading process
 def load_the_model():
 
-    # If there is no model saved, it load the original one.
+    # If there is no model saved, it loads the original one.
     try:
         model = BertForSequenceClassification.from_pretrained(MODEL_PATH)
         tokenizer = BertTokenizer.from_pretrained(MODEL_PATH)
@@ -114,23 +111,25 @@ def save_the_model(model, tokenizer):
     tokenizer.save_pretrained(MODEL_PATH)
 
 
-# Function where the classification is done
-def classification_action(back_socket, model, tokenizer):
-    
-    input_classification = read_socket(back_socket)    
-    if input_classification is None:
+def get_suggestion(model, tokenizer, input_suggestion):
+    # input_suggestion = read_socket(back_socket)
+    if input_suggestion is None:
         result = "Error: No data received"
     else:
-        tokens = tokenizer(input_classification)
-        result = str(model.predict(input_classification))
-
+        tokens = tokenizer(input_suggestion)
         with torch.no_grad():
             logits = model(**tokens).logits
-        # Get the predicted class (assuming binary classification)
         result = str(torch.argmax(logits, dim=1).item())
-        
-    message = f"Input received: ->'{input_classification}'<-.\nResult: {result}"
-    write_socket(back_socket, message)
+
+    message = f"Input received: ->'{input_suggestion}'<-.\nResult: {result}"
+    return message
+
+
+# Function where the suggestion is done
+def suggestion_action(socket_rw, model, tokenizer):
+    input_suggestion = read_socket(socket_rw)
+    message = get_suggestion(model, tokenizer, input_suggestion)
+    write_socket(socket_rw, message)
 
 
 # Function to encapsulate the query to get the training data
@@ -154,15 +153,15 @@ def train_model_action(back_socket, db_cursor, model, tokenizer):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
     train = get_train_data(db_cursor)
-    validation = get_validation_data(db_cursor)
+    # validation = get_validation_data(db_cursor)
 
     train_encoded = Dataset.from_pandas(train).map(tokenize, batched=True, batch_size=None)
-    valid_encoded = Dataset.from_pandas(validation).map(tokenize, batched=True, batch_size=None)
+    # valid_encoded = Dataset.from_pandas(validation).map(tokenize, batched=True, batch_size=None)
 
     train_encoded.set_format("torch", columns=["input_ids", "attention_mask", "label"])
-    valid_encoded.set_format("torch", columns=["input_ids", "attention_mask", "label"])
+    # valid_encoded.set_format("torch", columns=["input_ids", "attention_mask", "label"])
 
-    if len(train) != 0 and len(validation) != 0:
+    if len(train) != 0:  # and len(validation) != 0:
         logging_steps = len(train) // BATCH_SIZE
         training_args = TrainingArguments(
             output_dir="OUTPUT_DIR",
@@ -182,7 +181,7 @@ def train_model_action(back_socket, db_cursor, model, tokenizer):
             model=model,
             args=training_args,
             train_dataset=train,
-            eval_dataset=validation,
+            # eval_dataset=validation,
         )
         trainer.train()
 
@@ -193,8 +192,15 @@ def train_model_action(back_socket, db_cursor, model, tokenizer):
     else:
         message = "There is no: "
         message += "\n\t-> training data" if len(train) == 0 else ""
-        message += "\n\t-> validation data" if len(validation) == 0 else ""
+        # message += "\n\t-> validation data" if len(validation) == 0 else ""
     write_socket(back_socket, message)
+
+
+def prepare_data_to_model(json_received):
+    json_dict = json.loads(json_received)
+    data_prepared = [str(json_dict[key]) for key in SUGGESTION_JSON_KEY]
+
+    return data_prepared
 
 
 # Function to hide the if-else statements. The parameters for the action are prepared here.
@@ -207,11 +213,73 @@ def hidden_switch(data_rec, params):
     pseudo_switch = {
         MSG_STOP:           True,
         MSG_QUERY_DB:       query_action(back_socket, db_cursor, read_socket(back_socket)),
-        MSG_SUGGESTION:     classification_action(back_socket, model, tokenizer),
+        MSG_SUGGESTION:     suggestion_action(back_socket, model, tokenizer),
         MSG_TRAIN:          train_model_action(back_socket, db_cursor, model, tokenizer)
     }
     # not True = not None = False
     return not pseudo_switch.get(data_rec)
+
+def backed_thread(params):
+    back_socket = params["back_socket"]
+
+    not_stop = True
+    while not_stop:
+        data_rec = read_socket(back_socket)
+        not_stop = hidden_switch(data_rec, params)
+
+
+def makeHandlerClass(model, tokenizer):
+    class RequestHandler(BaseHTTPRequestHandler):
+
+        model = None
+        tokenizer = None
+
+        def __init__(self, *args, **kwargs):
+            self.model = model
+            self.tokenizer = tokenizer
+
+            super(RequestHandler, self).__init__(*args, **kwargs)
+
+        def _send_response(self, status, message):
+            self.send_response(status)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps(message).encode('utf-8'))
+
+        def do_POST(self):
+            try:
+                # Get the length of the incoming data
+                content_length = int(self.headers['Content-Length'])
+                # Read and decode the JSON data
+                raw_data = self.rfile.read(content_length)
+                json_data = json.loads(raw_data.decode('utf-8'))
+
+                data_prepared = prepare_data_to_model(json_data)
+                result = get_suggestion(self.model, self.tokenizer, data_prepared)
+
+                # Send a JSON response
+                self._send_response(200, result)
+            except Exception as e:
+                # Handle exceptions, if any
+                error = {'error': str(e)}
+                self._send_response(500, error)
+    return RequestHandler
+
+
+def frontend_thread(params):
+    model = params["model"]
+    tokenizer = params["tokenizer"]
+
+    front_end_address = (FRONT_IP, FRONT_PORT)
+    handler = makeHandlerClass(model, tokenizer)
+    httpd = HTTPServer(front_end_address, handler)
+
+    httpd.serve_forever()
+
+
+# Por temas de tiempo, solo hacemos un hilo.
+def start_threads(params):
+    frontend_thread(params)
 
 
 # The main function
@@ -225,10 +293,7 @@ def main():
         "tokenizer": tokenizer
     }
 
-    not_stop = True
-    while not_stop:
-        data_rec = read_socket(back_socket)
-        not_stop = hidden_switch(data_rec, params)
+    start_threads(params)
 
     if back_socket:
         back_socket.close()
