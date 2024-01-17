@@ -41,5 +41,5 @@ services:
    ports: 
      - "4321:4321"
    volumes:
-     - ./model/model-volume:/./app
+     - ./model/model-volume:/var/model
 

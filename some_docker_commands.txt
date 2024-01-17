@@ -36,7 +36,11 @@ sudo docker rm container-db-psql
 sudo docker volume rm $(sudo docker volume ls -q)
 
 sudo docker exec -it container-db-psql bash
-sudo docker exec -it container-model-python bash
+sudo docker exec -dit container-model-python /bin/bash
+docker run -it container-model-python /bin/bash
+docker run -dit container-model-python /bin/bash
+
+sudo docker exec -dit 285abd8c6434 bash
 
 
 sudo docker-compose build
