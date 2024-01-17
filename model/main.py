@@ -8,7 +8,7 @@ import json
 
 # CONSTANTS
 BACK_PORT = 9876        # TODO: Set the correct one
-FRONT_PORT = 1425       # TODO: Set the correct one
+FRONT_PORT = 1425
 DB_PORT = 5432
 BACK_IP = "0.0.0.0"
 FRONT_IP = "0.0.0.0"
@@ -144,16 +144,12 @@ def get_validation_data(db_cursor):
     validation_data = do_query(db_cursor, QUERY_GET_VALIDATION_DATA)
     return validation_data
 
-
-# Function where the training is done
-def train_model_action(back_socket, db_cursor, model, tokenizer):
+def train_model(model, tokenizer, train, validation):
     def tokenize(batch):
         return tokenizer(batch["text"], padding=True, truncation=True, max_length=512)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
-    train = get_train_data(db_cursor)
-    # validation = get_validation_data(db_cursor)
 
     train_encoded = Dataset.from_pandas(train).map(tokenize, batched=True, batch_size=None)
     # valid_encoded = Dataset.from_pandas(validation).map(tokenize, batched=True, batch_size=None)
@@ -193,7 +189,15 @@ def train_model_action(back_socket, db_cursor, model, tokenizer):
         message = "There is no: "
         message += "\n\t-> training data" if len(train) == 0 else ""
         # message += "\n\t-> validation data" if len(validation) == 0 else ""
-    write_socket(back_socket, message)
+    return message
+
+# Function where the training is done
+def train_model_action(back_socket, db_cursor, model, tokenizer):
+    train = get_train_data(db_cursor)
+    # validation = get_validation_data(db_cursor)
+    validation = list()
+    training_result = train_model(model, tokenizer, train, validation)
+    write_socket(back_socket, training_result)
 
 
 def prepare_data_to_model(json_received):
