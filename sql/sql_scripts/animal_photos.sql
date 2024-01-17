@@ -1,42 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 
--- https://www.phpmyadmin.net/
---
--- Хост: localhost:3306
--- Время создания: Дек 17 2023 г., 18:36
--- Версия сервера: 5.7.44-48-log
--- Версия PHP: 7.1.33
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- База данных: `host1400746_uji`
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `TABLE 6`
---
-
-CREATE TABLE `TABLE 6` (
-  `id` int(6) DEFAULT NULL,
-  `animal_id` int(3) DEFAULT NULL,
-  `url` varchar(70) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `TABLE 6`
---
-
-INSERT INTO `TABLE 6` (`id`, `animal_id`, `url`) VALUES
+INSERT INTO animal_photos (id, animal_id, url) VALUES
 (1001, 1, 'https://http2.mlstatic.com/D_NQ_NP_665634-MEC50220733329_062022-O.webp'),
 (2001, 2, 'https://http2.mlstatic.com/D_NQ_NP_944063-MEC49858719603_052022-O.webp'),
 (3001, 3, 'https://http2.mlstatic.com/D_NQ_NP_722283-MEC49058985207_022022-O.webp'),
@@ -619,8 +581,7 @@ INSERT INTO `TABLE 6` (`id`, `animal_id`, `url`) VALUES
 (388002, 388, 'https://http2.mlstatic.com/D_NQ_NP_877039-MEC46105882053_052021-O.jpg'),
 (389001, 389, 'https://http2.mlstatic.com/D_NQ_NP_877808-MEC50214477580_062022-O.jpg'),
 (390001, 390, 'https://http2.mlstatic.com/D_NQ_NP_932407-MEC50035306059_052022-O.jpg'),
-(391001, 391, 'https://http2.mlstatic.com/D_NQ_NP_968158-MEC50265554880_062022-O.jpg');
-INSERT INTO `TABLE 6` (`id`, `animal_id`, `url`) VALUES
+(391001, 391, 'https://http2.mlstatic.com/D_NQ_NP_968158-MEC50265554880_062022-O.jpg'),
 (392001, 392, 'https://http2.mlstatic.com/D_NQ_NP_740733-MEC49569858458_042022-O.jpg'),
 (393001, 393, 'https://http2.mlstatic.com/D_NQ_NP_933985-MEC49794869742_042022-O.jpg'),
 (394001, 394, 'https://http2.mlstatic.com/D_NQ_NP_833504-MEC50215257305_062022-O.jpg'),
@@ -1056,7 +1017,3 @@ INSERT INTO `TABLE 6` (`id`, `animal_id`, `url`) VALUES
 (664001, 664, 'https://http2.mlstatic.com/D_NQ_NP_731944-MEC47876279550_102021-O.jpg'),
 (665001, 665, 'https://http2.mlstatic.com/D_NQ_NP_814057-MEC47876221175_102021-O.jpg'),
 (665002, 665, 'https://http2.mlstatic.com/D_NQ_NP_919070-MEC47682001085_092021-O.jpg');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

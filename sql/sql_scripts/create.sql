@@ -1,4 +1,7 @@
-CREATE SCHEMA IF NOT EXISTS skj005_vets_and_shelters;
+CREATE DATABASE skj005_vets_and_shelters;
+\connect skj005_vets_and_shelters
+-- CREATE SCHEMA skj005_vets_and_shelters;
+
 
 CREATE  TABLE animal_status ( 
 	id                   integer  NOT NULL  ,
@@ -7,7 +10,7 @@ CREATE  TABLE animal_status (
  );
 
 CREATE  TABLE breed ( 
-	id                   bigserial  NOT NULL  ,
+	id                   serial  NOT NULL  ,
 	is_exotic            boolean  NOT NULL  ,
 	name                 varchar(100)  NOT NULL  ,
 	space_need           varchar(100)  NOT NULL  ,
@@ -19,7 +22,7 @@ CREATE  TABLE breed (
  );
 
 CREATE  TABLE customer ( 
-	id                   bigserial  NOT NULL  ,
+	id                   serial  NOT NULL  ,
 	doc_number           varchar(100)  NOT NULL  ,
 	name                 varchar(100)  NOT NULL  ,
 	surname              varchar(100)  NOT NULL  ,
@@ -35,8 +38,8 @@ CREATE  TABLE customer (
  );
 
 CREATE  TABLE customer_pwd ( 
-	id                   bigserial  NOT NULL  ,
-	customer_id          bigint  NOT NULL  ,
+	id                   serial  NOT NULL  ,
+	customer_id          integer  NOT NULL  ,
 	pwd                  varchar(255)  NOT NULL  ,
 	CONSTRAINT pk_customer_pwd PRIMARY KEY ( id )
  );
@@ -54,9 +57,9 @@ CREATE  TABLE sex (
  );
 
 CREATE  TABLE animal ( 
-	id                   bigserial  NOT NULL  ,
+	id                   serial  NOT NULL  ,
 	sex_id               integer  NOT NULL  ,
-	breed_id             bigint  NOT NULL  ,
+	breed_id             integer  NOT NULL  ,
 	procedence_type_id   integer  NOT NULL  ,
 	name                 varchar(100)    ,
 	color                varchar(100)  NOT NULL  ,
@@ -64,14 +67,14 @@ CREATE  TABLE animal (
  );
 
 CREATE  TABLE animal_photos ( 
-	id                   bigserial  NOT NULL  ,
-	animal_id            bigint  NOT NULL  ,
+	id                   serial  NOT NULL  ,
+	animal_id            integer  NOT NULL  ,
 	url                  varchar(255)  NOT NULL  ,
 	CONSTRAINT pk_animal_photis PRIMARY KEY ( id )
  );
 
 CREATE  TABLE animal_status_hist ( 
-	animal_id            bigint  NOT NULL  ,
+	animal_id            serial  NOT NULL  ,
 	status_id            integer  NOT NULL  ,
 	date_from            date  NOT NULL  ,
 	date_to              date    ,
@@ -79,37 +82,8 @@ CREATE  TABLE animal_status_hist (
  );
 
 CREATE  TABLE appointment ( 
-	customer_id          bigint  NOT NULL  ,
+	customer_id          integer  NOT NULL  ,
 	appointment_date     timestamp  NOT NULL  ,
-	animal_id            bigint    ,
+	animal_id            integer    ,
 	CONSTRAINT pk_appointment PRIMARY KEY ( customer_id, appointment_date )
  );
-
-ALTER TABLE animal ADD CONSTRAINT fk_animal_sex FOREIGN KEY ( sex_id ) REFERENCES sex( id );
-
-ALTER TABLE animal ADD CONSTRAINT fk_animal_breed FOREIGN KEY ( breed_id ) REFERENCES breed( id );
-
-ALTER TABLE animal ADD CONSTRAINT fk_animal_procedence_type FOREIGN KEY ( procedence_type_id ) REFERENCES procedence_type( id );
-
-ALTER TABLE animal_photos ADD CONSTRAINT fk_animal_photis_animal FOREIGN KEY ( animal_id ) REFERENCES animal( id );
-
-ALTER TABLE animal_status_hist ADD CONSTRAINT fk_animal_status_hist_animal FOREIGN KEY ( animal_id ) REFERENCES animal( id );
-
-ALTER TABLE animal_status_hist ADD CONSTRAINT fk_animal_status_hist FOREIGN KEY ( status_id ) REFERENCES animal_status( id );
-
-ALTER TABLE appointment ADD CONSTRAINT fk_appointment_customer FOREIGN KEY ( customer_id ) REFERENCES customer( id );
-
-ALTER TABLE appointment ADD CONSTRAINT fk_appointment_animal FOREIGN KEY ( animal_id ) REFERENCES animal( id );
-
-ALTER TABLE customer_pwd ADD CONSTRAINT fk_customer_pwd_customer FOREIGN KEY ( customer_id ) REFERENCES customer( id );
-
-COMMENT ON COLUMN breed.space_need IS 'define data type after seeing more data';
-
-COMMENT ON COLUMN breed.activity_need IS 'define data type after seeing more data';
-
-COMMENT ON COLUMN breed.alimentation_need IS 'define data type after seeing more data';
-
-COMMENT ON COLUMN breed.dangerous_race IS 'defines if this race is catalogued as a dangerous race or not';
-
-COMMENT ON COLUMN breed.time_dedication_need IS 'define data type when seeing more data';
-

@@ -1,8 +1,9 @@
-package org.vetsandshelters.front_office.customer.application.showCustomer;
+package org.vetsandshelters.customer_pwd.application.showCustomerPwd;
 
 import jakarta.inject.Inject;
-import org.vetsandshelters.front_office.customer.domain.Customer;
-import org.vetsandshelters.front_office.customer.domain.CustomerRepository;
+import org.vetsandshelters.customer.domain.Customer;
+import org.vetsandshelters.customer.domain.CustomerRepository;
+import org.vetsandshelters.customer.infraestructurre.CustomerPwdRepositoryFake;
 
 public class ShowCustomerPwdQueryHandler {
 
@@ -10,7 +11,7 @@ public class ShowCustomerPwdQueryHandler {
      * It exists the posibility of using more than 1 repository in the same handler
      */
 
-    private CustomerPwdRepository repository;
+    private CustomerPwdRepositoryFake repository;
 
     @Inject
     public ShowCustomerPwdQueryHandler(CustomerPwdRepository repository) {

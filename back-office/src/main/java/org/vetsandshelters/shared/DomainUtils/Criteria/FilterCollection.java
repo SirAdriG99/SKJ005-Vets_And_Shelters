@@ -2,17 +2,29 @@ package org.vetsandshelters.shared.DomainUtils.Criteria;
 
 // TODO: Change implementation so it uses Collection
 public class FilterCollection {
-    private Filter<?>[] filters;
+    private Filter[] filters;
 
-    public FilterCollection(Filter<?>[] filters) {
+    public FilterCollection(Filter[] filters) {
         this.filters = filters;
     }
 
-    public Filter<?>[] getFilters() {
-        return filters;
+    public FilterCollection() {
+        Filter[] filters = {};
+        this.filters = filters;
+    }
+
+    public void add(Filter filter) {
+        Filter[] newFilters = new Filter[this.filters.length + 1];
+        System.arraycopy(this.filters, 0, newFilters, 0, this.filters.length);
+        newFilters[this.filters.length] = filter;
+        this.filters = newFilters;
+    }
+
+    public Filter[] getFilters() {
+        return this.filters;
     }
 
     public boolean isEmpty() {
-        return filters == null || filters.length == 0;
+        return this.filters == null || this.filters.length == 0;
     }
 }

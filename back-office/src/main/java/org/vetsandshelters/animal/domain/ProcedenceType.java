@@ -2,9 +2,11 @@ package org.vetsandshelters.animal.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
+@Table(name = "procedence_type")
 public class ProcedenceType {
     @Id
     private int id;
