@@ -1,43 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 
--- https://www.phpmyadmin.net/
---
--- Хост: localhost:3306
--- Время создания: Дек 17 2023 г., 18:35
--- Версия сервера: 5.7.44-48-log
--- Версия PHP: 7.1.33
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- База данных: `host1400746_uji`
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `TABLE 4`
---
-
-CREATE TABLE `TABLE 4` (
-  `animal_id` int(3) DEFAULT NULL,
-  `status_id` int(1) DEFAULT NULL,
-  `date_from` varchar(19) DEFAULT NULL,
-  `date_to` varchar(19) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `TABLE 4`
---
-
-INSERT INTO `TABLE 4` (`animal_id`, `status_id`, `date_from`, `date_to`) VALUES
+INSERT INTO animal_status_hist (animal_id, status_id, date_from, date_to) VALUES
 (1, 5, '2023-04-03 00:00:00', '2023-05-12 00:00:00'),
 (2, 3, '2023-03-24 00:00:00', '2023-08-21 00:00:00'),
 (3, 5, '2023-05-19 00:00:00', '2023-10-16 00:00:00'),

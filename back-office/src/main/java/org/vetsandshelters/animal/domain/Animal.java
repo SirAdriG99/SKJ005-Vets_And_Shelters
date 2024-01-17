@@ -3,7 +3,11 @@ package org.vetsandshelters.animal.domain;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
 
@@ -19,14 +23,18 @@ import jakarta.persistence.Transient;
 @Entity
 public class Animal {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_id_seq")
     private Integer id;
     private String name;
     private String color;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "sex_id")
     private Sex sex;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "breed_id")
     private Breed breed;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "procedence_type_id")
     private ProcedenceType procedenceType;
 
     @Transient

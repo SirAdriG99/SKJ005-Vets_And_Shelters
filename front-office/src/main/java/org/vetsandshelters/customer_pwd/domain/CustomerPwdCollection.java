@@ -1,4 +1,4 @@
-package org.vetsandshelters.front_office.customer.domain;
+package org.vetsandshelters.customer_pwd.domain;
 
 import org.vetsandshelters.shared.DomainUtils.Collection;
 

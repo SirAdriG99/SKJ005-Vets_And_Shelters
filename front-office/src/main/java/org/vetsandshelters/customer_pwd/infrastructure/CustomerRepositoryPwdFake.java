@@ -1,21 +1,21 @@
-package org.vetsandshelters.front_office.customer.infraestructurre;
+package org.vetsandshelters.customer_pwd.infrastructure;
 
-import org.vetsandshelters.front_office.customer.domain.Customer;
-import org.vetsandshelters.front_office.customer.domain.CustomerCollection;
-import org.vetsandshelters.front_office.customer.domain.CustomerCriteria;
-import org.vetsandshelters.front_office.customer.domain.CustomerRepository;
+import org.vetsandshelters.customer.domain.Customer;
+import org.vetsandshelters.customer.domain.CustomerCollection;
+import org.vetsandshelters.customer.domain.CustomerCriteria;
+import org.vetsandshelters.customer.domain.CustomerRepository;
+import org.vetsandshelters.customer.domain.CustomerPwdRepository;
 
 import java.time.LocalDate;
 // import org.vetsandshelters.back_office.animal.domain.AnimalCollection;
 // import org.vetsandshelters.back_office.animal.domain.Criteria;
 
-public class CustomerPwdRepositoryFake implements CustomerRepository {
+public class CustomerPwdRepositoryFake implements CustomerPwdRepository {
 
     @Override
     public CustomerPwd getById(Integer id) {
         return new CustomerPwd(
-                0, 0, "CONTRASEÑA_INSEGURA"
-        );
+                0, 0, "CONTRASEÑA_INSEGURA");
     }
 
     @Override
@@ -40,6 +40,5 @@ public class CustomerPwdRepositoryFake implements CustomerRepository {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
-
 
 }

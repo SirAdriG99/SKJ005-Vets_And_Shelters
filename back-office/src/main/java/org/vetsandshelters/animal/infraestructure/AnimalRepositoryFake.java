@@ -16,8 +16,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 /**
  * Fake Repository to start testing things without a database
  */
-@Priority(2)
-@ApplicationScoped
+// @Priority(10)
+// @ApplicationScoped
 public class AnimalRepositoryFake implements AnimalRepository {
 
     @Override

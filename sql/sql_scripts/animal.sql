@@ -1,45 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 
--- https://www.phpmyadmin.net/
---
--- Хост: localhost:3306
--- Время создания: Дек 17 2023 г., 18:33
--- Версия сервера: 5.7.44-48-log
--- Версия PHP: 7.1.33
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- База данных: `host1400746_uji`
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `TABLE 1`
---
-
-CREATE TABLE `TABLE 1` (
-  `id` int(3) DEFAULT NULL,
-  `sex_id` int(1) DEFAULT NULL,
-  `breed_id` int(2) DEFAULT NULL,
-  `procedence_type_id` int(1) DEFAULT NULL,
-  `name` varchar(15) DEFAULT NULL,
-  `color` varchar(37) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `TABLE 1`
---
-
-INSERT INTO `TABLE 1` (`id`, `sex_id`, `breed_id`, `procedence_type_id`, `name`, `color`) VALUES
+INSERT INTO animal (id, sex_id, breed_id, procedence_type_id, name, color) VALUES
 (1, 0, 1, 3, 'Big Maggie', ' Grey'),
 (2, 0, 2, 3, 'Brave Scout', ' Dark gray'),
 (3, 0, 1, 1, 'Brave Sadie', ' Red'),
@@ -705,7 +664,3 @@ INSERT INTO `TABLE 1` (`id`, `sex_id`, `breed_id`, `procedence_type_id`, `name`,
 (663, 1, 55, 3, 'Loyal Ginger', ' White'),
 (664, 1, 11, 2, 'Big Coco', ' White'),
 (665, 0, 13, 3, 'Playful Zoey', ' White');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -2,7 +2,7 @@ package org.vetsandshelters.shared.DomainUtils.Criteria;
 
 public enum FilterOperator {
     // Constants for each operator available to compare values
-    EQUALS("="),
+    EQUALS("=="),
     NOT_EQUALS("!="),
     GREATER_THAN(">"),
     GREATER_THAN_OR_EQUAL_TO(">="),
@@ -10,8 +10,7 @@ public enum FilterOperator {
     LESS_THAN_OR_EQUAL_TO("<="),
     IN("IN"),
     NOT_IN("NOT IN"),
-    CONTAINS("CONTAINS"),
-    LIKE("LIKE");
+    CONTAINS("CONTAINS");
 
     private String operator;
 
