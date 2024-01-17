@@ -2,26 +2,29 @@ import socket
 import psycopg2
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
+import tensorflow as tf
+from tensorflow.keras import layers, models
+import os.path
 
 # CONSTANTS
-CORE_PORT = 9876  # TODO: Set the correct one
-DB_PORT = 1234  # TODO: Set the correct one
-CORE_IP = "0.0.0.0"  # TODO: Pick the correct one.
-DB_IP = "0.0.0.0"  # TODO: Pick the correct one.
+CORE_PORT = 9876        # TODO: Set the correct one
+DB_PORT = 1234          # TODO: Set the correct one
+CORE_IP = "0.0.0.0"     # TODO: Pick the correct one.
+DB_IP = "0.0.0.0"       # TODO: Pick the correct one.
 SOCKET_DATA_SIZE = 1024
 USER_DB = "user"
 PASSWORD_DB = "patata"
 NAME_DB = "skj005_vets_and_shelters"
 
-# CONSTANTS Codes
+# CONSTANTS: Codes messages.
 MSG_STOP = "STOP"
 MSG_QUERY_DB = "QUERY_DB"
 MSG_PREDICTION = "PREDICTION"
 MSG_TRAIN = "TRAIN"
 
-# OTHER CONSTANTS
-QUERY_GET_TRAINING_DATA = ""
-QUERY_GET_VALIDATION_DATA = ""
+# CONSTANTS: Model-related.
+QUERY_GET_TRAINING_DATA = ""    # TODO: Pick the correct one.
+QUERY_GET_VALIDATION_DATA = ""  # TODO: Pick the correct one.
 
 DB_PARAMETERS = {
     "host": DB_IP,
@@ -30,34 +33,35 @@ DB_PARAMETERS = {
     "password": PASSWORD_DB,
     "database": NAME_DB
 }
-MODEL_NAME = ""
+MODEL_NAME = ""         # TODO: Pick the correct one.
 MODEL_PATH = "model"
 NUM_LABELS = 2
 BATCH_SIZE = 10
 
 
+# Function to encapsulate the reception of messages over a socket.
 def read_socket(socket_recv, data_size=SOCKET_DATA_SIZE):
     data = socket_recv.recv(data_size).decode('utf-8')
-    print(f"Message received: {data}")
     return data
 
 
+# Function to encapsulate the sending of messages over a socket.
 def write_socket(socket_send, message):
     socket_send.send(str(message).encode('utf-8'))
 
 
-def create_sockets_connections():
+# Function to create the socket and the database connection
+def create_socket_and_db_connections():
 
     core_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     core_socket.bind((CORE_IP, CORE_PORT))
     core_socket.listen()
-
-    db_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    db_socket.bind((DB_IP, DB_PORT))
-    db_socket.listen()
-
     core_socket, addr = core_socket.accept()
     print(f"Connection from {addr} (core)")
+
+    # db_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # db_socket.bind((DB_IP, DB_PORT))
+    # db_socket.listen()
 
     db = psycopg2.connect(**DB_PARAMETERS)
     db_cursor = db.cursor()
@@ -65,12 +69,14 @@ def create_sockets_connections():
     return core_socket, db_cursor
 
 
+# Function to encapsulate the sending of a query and getting the result to the database.
 def do_query(db_cursor, query):
     db_cursor.execute(query)
     result = db_cursor.fetchall()
     return result
 
 
+# Function to receiving a query from a socket, making the query to the database and sending the result to that socket.
 def query_action(params):
     core_socket = params["core_socket"]
     db_cursor = params["db_cursor"]
@@ -83,15 +89,18 @@ def query_action(params):
         write_socket(core_socket, e)
 
 
+# Function to encapsulate the model loading process
 def load_model():
     model = tf.keras.models.load_model(MODEL_PATH)
     return model 
 
 
+# Function to encapsulate the model saving process
 def save_model(model):
     model.save_pretrained(MODEL_PATH)
 
 
+# Function where the prediction is done
 def prediction_action(params):
     model = params["model"]
     core_socket = params["core_socket"]
@@ -106,17 +115,20 @@ def prediction_action(params):
     message = f"Input received: ->'{input_prediction}'<-.\nResult: {result}"
     write_socket(core_socket, message)
 
-    
+
+# Function to encapsulate the query to get the training data
 def get_train_data(db_cursor):     
     train_data = do_query(db_cursor, QUERY_GET_TRAINING_DATA)
     return train_data
 
 
+# Function to encapsulate the query to get the validation data
 def get_validation_data(db_cursor):
     validation_data = do_query(db_cursor, QUERY_GET_VALIDATION_DATA)
     return validation_data
 
 
+# Function where the training is done
 def train_model_action(params):
     # TODO: Check if this is correct.
     model = params["model"]
@@ -156,6 +168,7 @@ def train_model_action(params):
     write_socket(core_socket, message)
 
 
+# Function to hide the if-else statements. The parameters for the action are prepared here.
 def hidden_switch(data_rec, params):
     core_socket = params["core_socket"]
     db_cursor = params["db_cursor"]
@@ -172,8 +185,9 @@ def hidden_switch(data_rec, params):
     return None, None
 
 
+# The main function
 def main():
-    core_socket, db_cursor = create_sockets_connections()
+    core_socket, db_cursor = create_socket_and_db_connections()
     model = load_model()
     params = {
         "core_socket": core_socket,
@@ -196,6 +210,6 @@ def main():
         db_cursor.close()
 
 
+# The place where the program starts.
 if __name__ == '__main__':
     main()
-
