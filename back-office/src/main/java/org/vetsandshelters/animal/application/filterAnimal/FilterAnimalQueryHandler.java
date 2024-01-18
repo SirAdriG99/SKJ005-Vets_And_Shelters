@@ -21,7 +21,7 @@ public class FilterAnimalQueryHandler {
 
         AnimalCollection animals = this.repository.getBy(criteria);
 
-        return new FilterAnimalResponse(animals.getCollection());
+        return new FilterAnimalResponse(animals.getCollection(), animals.getTotalElements());
     }
 
     private AnimalCriteria setCriteria(FilterAnimalQuery query) {
@@ -34,7 +34,7 @@ public class FilterAnimalQueryHandler {
          */
         Pagination pagination = query.getSize() != null ? new Pagination(
                 query.getSize(),
-                query.getOffset() != null ? query.getOffset() : 0, null // Ignore sort by now
+                query.getPageNumber() != null ? query.getPageNumber() : 0, null // Ignore sort by now
         ) : null;
 
         FilterCollection filters = new FilterCollection();
@@ -47,17 +47,22 @@ public class FilterAnimalQueryHandler {
             filters.add(colorFilter);
         }
         if (query.getSexId() != null) {
-            Filter sexFilter = new Filter("sex_id", FilterOperator.EQUALS, query.getSexId());
+            Filter sexFilter = new Filter("sexId", FilterOperator.EQUALS, query.getSexId());
             filters.add(sexFilter);
         }
         if (query.getBreedId() != null) {
-            Filter breedFilter = new Filter("breed_id", FilterOperator.EQUALS, query.getBreedId());
+            Filter breedFilter = new Filter("breedId", FilterOperator.EQUALS, query.getBreedId());
             filters.add(breedFilter);
         }
         if (query.getProcedenceTypeId() != null) {
             Filter procedenceTypeFilter = new Filter("procedenceTypeId", FilterOperator.EQUALS,
                     query.getProcedenceTypeId());
             filters.add(procedenceTypeFilter);
+        }
+        if (query.getAnimalStatusId() != null) {
+            Filter animalStatusFilter = new Filter("animalStatusId", FilterOperator.EQUALS,
+                    query.getAnimalStatusId());
+            filters.add(animalStatusFilter);
         }
 
         return new AnimalCriteria(filters, pagination);

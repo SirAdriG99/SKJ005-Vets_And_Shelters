@@ -11,4 +11,7 @@ public class AnimalCollection extends Collection<Animal> {
     public AnimalCollection(Animal[] animals) {
         super(animals);
     }
+    public AnimalCollection(Animal[] animals, int totalElements) {
+        super(animals, totalElements);
+    }
 }

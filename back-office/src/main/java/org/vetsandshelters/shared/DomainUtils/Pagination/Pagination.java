@@ -4,18 +4,18 @@ public class Pagination {
     /**
      * SortCollection can be empty
      */
-    private int offset;
+    private int pageNumber;
     private int size;
     private SortCollection sort;
 
     public Pagination(int offset, int size, SortCollection sort) {
-        this.offset = offset;
+        this.pageNumber = offset;
         this.size = size;
         this.sort = sort;
     }
 
-    public int getOffset() {
-        return offset;
+    public int getPageNumber() {
+        return pageNumber;
     }
 
     public int getSize() {

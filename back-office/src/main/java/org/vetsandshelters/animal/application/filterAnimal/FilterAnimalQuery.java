@@ -1,7 +1,7 @@
 package org.vetsandshelters.animal.application.filterAnimal;
 
 public class FilterAnimalQuery {
-    private Integer offset;
+    private Integer pageNumber;
     private Integer size;
     private String order;
     private String sort;
@@ -14,7 +14,7 @@ public class FilterAnimalQuery {
 
     public FilterAnimalQuery(Integer offset, Integer size, String order, String sort, String name, String color,
             Integer sexId, Integer breedId, Integer procedenceTypeId, Integer animalStatusId) {
-        this.offset = offset;
+        this.pageNumber = offset;
         this.size = size;
         this.order = order;
         this.sort = sort;
@@ -26,8 +26,8 @@ public class FilterAnimalQuery {
         this.animalStatusId = animalStatusId;
     }
 
-    public Integer getOffset() {
-        return offset;
+    public Integer getPageNumber() {
+        return pageNumber;
     }
 
     public Integer getSize() {

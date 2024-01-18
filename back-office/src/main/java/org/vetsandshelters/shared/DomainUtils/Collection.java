@@ -9,9 +9,16 @@ package org.vetsandshelters.shared.DomainUtils;
  */
 public abstract class Collection<T> {
     private T[] collection;
+    private int totalElements;
+
+    public Collection(T[] collection, int totalElements) {
+        this.collection = collection;
+        this.totalElements = totalElements;
+    }
 
     public Collection(T[] collection) {
         this.collection = collection;
+        this.totalElements = collection.length;
     }
 
     public T[] getCollection() {
@@ -20,6 +27,10 @@ public abstract class Collection<T> {
 
     public int size() {
         return collection.length;
+    }
+
+    public int getTotalElements() {
+        return totalElements;
     }
 
     // TODO: Implement method to detect the type of the object

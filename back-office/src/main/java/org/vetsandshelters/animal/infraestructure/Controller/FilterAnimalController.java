@@ -22,7 +22,7 @@ public class FilterAnimalController {
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
     public Response filterAnimal(
-            @QueryParam("offset") Integer offset,
+            @QueryParam("pageNum") Integer pageNumber,
             @QueryParam("size") Integer size,
             @QueryParam("order") String order, // Ignore by now
             @QueryParam("sort") String sort, // Ignore by now
@@ -33,7 +33,7 @@ public class FilterAnimalController {
             @QueryParam("procedenceTypeId") Integer procedenceTypeId,
             @QueryParam("animalStatusId") Integer animalStatusId) {
         FilterAnimalQuery query = new FilterAnimalQuery(
-                offset,
+                pageNumber,
                 size,
                 order,
                 sort,
@@ -45,6 +45,8 @@ public class FilterAnimalController {
                 animalStatusId);
         FilterAnimalResponse response = this.handler.handle(query);
 
-        return Response.ok(response.getAnimals()).build();
+
+
+        return Response.ok(response).build();
     }
 }
