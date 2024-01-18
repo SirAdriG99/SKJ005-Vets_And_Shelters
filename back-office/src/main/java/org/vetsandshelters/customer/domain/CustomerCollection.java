@@ -8,4 +8,8 @@ public class CustomerCollection extends Collection<Customer> {
         super(collection);
     }
 
+    public CustomerCollection(Customer[] collection, int totalElements) {
+        super(collection, totalElements);
+    }
+
 }

@@ -61,3 +61,8 @@ DELETE FROM skj005_vets_and_shelters.animal_status;
 - https://stackoverflow.com/questions/43618517/docker-postgres-clear-all-data
 - https://docs.docker.com/get-started/02_our_app/
 - https://stackoverflow.com/questions/36799718/why-removing-docker-containers-and-images-does-not-free-up-storage-space-on-wind
+
+
+implementing X_office_front-end into proyects:
+    copy X_office_front-end on project root (/back-office or /front-office)
+    execute compile_front.sh script

@@ -1,3 +1,0 @@
-ValueObjects are objects that we require to have some specific characteristics (for example, dates in a specific format or Strings that are urls or emails)
-This value objects must make some comprobation of the data that is passed to the constructor and throw exceptions in case this data doesn't fit 
-with what we defined

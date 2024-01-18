@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class GetAnimalResponse {
-    public Animal animal;
+    private Animal animal;
 
     public GetAnimalResponse(Animal animal) {
         this.animal = animal;

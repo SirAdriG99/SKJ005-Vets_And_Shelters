@@ -1,7 +1,7 @@
 package org.vetsandshelters.customer.application.filterCustomer;
 
 public class FilterCustomerQuery {
-    private Integer offset;
+    private Integer pageNumber;
     private Integer size;
     private String order;
     private String sort;
@@ -23,7 +23,7 @@ public class FilterCustomerQuery {
             String docNumber,
             String email,
             String phone1) {
-        this.offset = offset;
+        this.pageNumber = offset;
         this.size = size;
         this.order = order;
         this.sort = sort;
@@ -39,8 +39,8 @@ public class FilterCustomerQuery {
         super();
     }
 
-    public Integer getOffset() {
-        return offset;
+    public Integer getPageNumber() {
+        return pageNumber;
     }
 
     public Integer getSize() {
