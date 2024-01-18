@@ -2,3 +2,4 @@ psycopg2-binary==2.9.9
 torch==2.1.2
 transformers==4.36.2
 datasets==2.16.1
+pandas==2.1.1

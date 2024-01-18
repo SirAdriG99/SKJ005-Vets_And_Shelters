@@ -1,9 +1,10 @@
 import socket
 import psycopg2
-import torch
-from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments
-from datasets import Dataset
+from transformers import AutoTokenizer, BertForSequenceClassification, Trainer, TrainingArguments
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import torch
+from sklearn.model_selection import train_test_split
+import pandas as pd
 import json
 
 # CONSTANTS
@@ -31,7 +32,6 @@ QUERY_GET_TRAINING_DATA = """
                           FROM animal AS a
                           INNER JOIN breed AS b ON a.breed_id = b.id                           
                           """
-QUERY_GET_VALIDATION_DATA = ""
 
 DB_PARAMETERS = {
     "host": DB_IP,
@@ -41,8 +41,8 @@ DB_PARAMETERS = {
     "database": NAME_DB
 }
 MODEL_NAME = "distilbert-base-uncased"
-MODEL_PATH = "./model"
-NUM_LABELS = 2
+MODEL_PATH = "./model-volume"
+NUM_LABELS = 665  # It's the number of animals in the database.
 BATCH_SIZE = 10
 NUM_EPOCHS = 2
 OUTPUT_DIR = "."
@@ -97,9 +97,9 @@ def load_the_model():
     # If there is no model saved, it loads the original one.
     try:
         model = BertForSequenceClassification.from_pretrained(MODEL_PATH)
-        tokenizer = BertTokenizer.from_pretrained(MODEL_PATH)
+        tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
     except OSError:
-        tokenizer = BertTokenizer.from_pretrained(MODEL_NAME)
+        tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         model = BertForSequenceClassification.from_pretrained(MODEL_NAME, num_labels=NUM_LABELS)
 
     return model, tokenizer
@@ -112,17 +112,35 @@ def save_the_model(model, tokenizer):
 
 
 def get_suggestion(model, tokenizer, input_suggestion):
-    # input_suggestion = read_socket(back_socket)
-    if input_suggestion is None:
-        result = "Error: No data received"
-    else:
-        tokens = tokenizer(input_suggestion)
-        with torch.no_grad():
-            logits = model(**tokens).logits
-        result = str(torch.argmax(logits, dim=1).item())
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    message = f"Input received: ->'{input_suggestion}'<-.\nResult: {result}"
-    return message
+    def tokenize_data(data, max_length=512):
+        input_ids = []
+        attention_masks = []
+
+        for index, row in data.iterrows():
+            text = f"Color: {row['color']}. Space Need: {row['space_need']}. Activity Need: {row['activity_need']}. Time Dedication Need: {row['time_dedication_need']}"
+            encoded_text = tokenizer(text, padding='max_length', truncation=True, return_tensors='pt',
+                                     max_length=max_length)
+
+            input_ids.append(encoded_text['input_ids'].to(device))
+            attention_masks.append(encoded_text['attention_mask'].to(device))
+
+        return torch.cat(input_ids, dim=0), torch.cat(attention_masks, dim=0)
+
+    input_ids, attention_masks = tokenize_data(input_suggestion)
+    input_ids = input_ids.to(device)
+    attention_masks = attention_masks.to(device)
+
+    model = model.to(device)
+    model.eval()
+
+    with torch.no_grad():
+        outputs = model(input_ids, attention_mask=attention_masks)
+
+    logits = outputs.logits
+    predictions = torch.argmax(logits, dim=1).cpu().numpy()
+    return predictions
 
 
 # Function where the suggestion is done
@@ -134,69 +152,107 @@ def suggestion_action(socket_rw, model, tokenizer):
 
 # Function to encapsulate the query to get the training data
 def get_train_data(db_cursor):
-    train_data = do_query(db_cursor, QUERY_GET_TRAINING_DATA)
+    db_cursor.execute(QUERY_GET_TRAINING_DATA)
 
-    return train_data
+    # Fetch all rows and convert to a list of dictionaries
+    rows = db_cursor.fetchall()
+    result = []
+    for row in rows:
+        d = {}
+        for i, col in enumerate(db_cursor.description):
+            d[col[0]] = row[i]
+            result.append(d)
 
+    # Convert the list of dictionaries to JSON and print it
+    json_result = json.dumps(result)
 
-# Function to encapsulate the query to get the validation data
-def get_validation_data(db_cursor):
-    validation_data = do_query(db_cursor, QUERY_GET_VALIDATION_DATA)
-    return validation_data
+    df = pd.DataFrame(json_result)
+    X_test, X_temp = train_test_split(df, test_size=0.4, random_state=42)
+    X_train, X_val = train_test_split(X_temp, test_size=0.5, random_state=42)
 
-def train_model(model, tokenizer, train, validation):
-    def tokenize(batch):
-        return tokenizer(batch["text"], padding=True, truncation=True, max_length=512)
+    return X_train, X_test, X_val
 
+def train_model(model, tokenizer, test, train, validation):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = model.to(device)
 
-    train_encoded = Dataset.from_pandas(train).map(tokenize, batched=True, batch_size=None)
-    # valid_encoded = Dataset.from_pandas(validation).map(tokenize, batched=True, batch_size=None)
+    def tokenize_data(data, max_length=512):
+        input_ids = []
+        attention_masks = []
 
-    train_encoded.set_format("torch", columns=["input_ids", "attention_mask", "label"])
-    # valid_encoded.set_format("torch", columns=["input_ids", "attention_mask", "label"])
+        for index, row in data.iterrows():
+            text = f"Color: {row['color']}. Space Need: {row['space_need']}. Activity Need: {row['activity_need']}. Time Dedication Need: {row['time_dedication_need']}"
+            encoded_text = tokenizer(text, padding='max_length', truncation=True, return_tensors='pt',
+                                     max_length=max_length)
+            input_ids.append(encoded_text['input_ids'])
+            attention_masks.append(encoded_text['attention_mask'])
 
-    if len(train) != 0:  # and len(validation) != 0:
-        logging_steps = len(train) // BATCH_SIZE
-        training_args = TrainingArguments(
-            output_dir="OUTPUT_DIR",
-            num_train_epochs=3,  # No pongo 10 porque a la hora o así se me desconecta.
-            learning_rate=2e-5,
-            per_device_train_batch_size=BATCH_SIZE,
-            per_device_eval_batch_size=BATCH_SIZE,
-            load_best_model_at_end=True,
-            metric_for_best_model="f1",
-            weight_decay=0.01,
-            evaluation_strategy="epoch",
-            logging_steps=logging_steps,
-            fp16=True,
-            save_strategy="epoch",
-            disable_tqdm=False)
-        trainer = Trainer(
-            model=model,
-            args=training_args,
-            train_dataset=train,
-            # eval_dataset=validation,
-        )
-        trainer.train()
+        return torch.cat(input_ids, dim=0), torch.cat(attention_masks, dim=0)
 
-        results = trainer.evaluate()
-        message = f"Training results: {results}"
+    if len(train) != 0 and len(validation) != 0:
 
+        train_input_ids, train_attention_masks = tokenize_data(train)
+        test_input_ids, test_attention_masks = tokenize_data(test)
+
+        train_input_ids = train_input_ids.to(device)
+        train_attention_masks = train_attention_masks.to(device)
+        test_input_ids = test_input_ids.to(device)
+        test_attention_masks = test_attention_masks.to(device)
+
+        train_labels = torch.tensor(train['dangerous_race'].astype(int).values)
+        test_labels = torch.tensor(test['dangerous_race'].astype(int).values)
+
+        train_dataset = TensorDataset(train_input_ids, train_attention_masks, train_labels)
+        test_dataset = TensorDataset(test_input_ids, test_attention_masks, test_labels)
+
+        train_dataloader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
+        test_dataloader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
+
+        model = model.to(device)
+        optimizer = torch.optim.AdamW(model.parameters(), lr=2e-5)
+
+        for epoch in range(NUM_EPOCHS):
+            model.train()
+            total_loss = 0
+            for batch in tqdm(train_dataloader, desc=f'Epoch {epoch + 1}/{NUM_EPOCHS}', unit='batch'):
+                input_ids, attention_mask, labels = batch
+                input_ids, attention_mask, labels = input_ids.to(device), attention_mask.to(device), labels.to(device)
+                optimizer.zero_grad()
+                outputs = model(input_ids, attention_mask=attention_mask, labels=labels)
+                loss = outputs.loss
+                loss.backward()
+                optimizer.step()
+                total_loss += loss.item()
+
+        predictions = []
+        true_labels = []
+
+        for batch in test_dataloader:
+            input_ids, attention_mask, labels = batch
+            with torch.no_grad():
+                outputs = model(input_ids, attention_mask=attention_mask)
+            logits = outputs.logits
+            predictions.extend(logits.argmax(dim=1).cpu().numpy())
+            true_labels.extend(labels.cpu().numpy())
+
+        accuracy = accuracy_score(true_labels, predictions)
+
+        message = f"Training results: {accuracy}"
         save_the_model(model, tokenizer)
+        # Liberamos memoria de la gpu
+        if device == "cuda":
+            torch.cuda.empty_cache()
+
     else:
         message = "There is no: "
         message += "\n\t-> training data" if len(train) == 0 else ""
-        # message += "\n\t-> validation data" if len(validation) == 0 else ""
+        message += "\n\t-> validation data" if len(validation) == 0 else ""
     return message
 
 # Function where the training is done
 def train_model_action(back_socket, db_cursor, model, tokenizer):
-    train = get_train_data(db_cursor)
+    test, train, val = get_train_data(db_cursor)
     # validation = get_validation_data(db_cursor)
-    validation = list()
-    training_result = train_model(model, tokenizer, train, validation)
+    training_result = train_model(model, tokenizer, test, train, val)
     write_socket(back_socket, training_result)
 
 
