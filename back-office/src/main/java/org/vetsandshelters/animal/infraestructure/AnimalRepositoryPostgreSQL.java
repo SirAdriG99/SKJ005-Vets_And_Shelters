@@ -1,6 +1,5 @@
 package org.vetsandshelters.animal.infraestructure;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,9 +45,7 @@ public class AnimalRepositoryPostgreSQL implements AnimalRepository {
         List<Animal> animalList = getAnimalListPaginated(criteria);
         int totalElements = getAnimalListCount(criteria).intValue();
 
-        return new AnimalCollection(animalList.toArray(new Animal[animalList.size()])
-                ,totalElements
-        );
+        return new AnimalCollection(animalList.toArray(new Animal[animalList.size()]), totalElements);
     }
 
     @Override
@@ -72,35 +69,42 @@ public class AnimalRepositoryPostgreSQL implements AnimalRepository {
         CriteriaQuery<Animal> cq = cb.createQuery(Animal.class);
         Root<Animal> animal = cq.from(Animal.class);
 
-        Map<String,Predicate> predicates = new HashMap<>();
-        for(Filter filter :criteria.getFilterCollection().getFilters()) {
+        Map<String, Predicate> predicates = new HashMap<>();
+        for (Filter filter : criteria.getFilterCollection().getFilters()) {
             switch (filter.getOperator()) {
                 case EQUALS:
-                    predicates.put(filter.getField(),cb.equal(animal.get(filter.getField()), filter.getValue()));
+                    predicates.put(filter.getField(), cb.equal(animal.get(filter.getField()), filter.getValue()));
                     break;
                 case GREATER_THAN:
-                    predicates.put(filter.getField(),cb.greaterThan(animal.get(filter.getField()), (Comparable) filter.getValue()));
+                    predicates.put(filter.getField(),
+                            cb.greaterThan(animal.get(filter.getField()), (Comparable) filter.getValue()));
                     break;
                 case GREATER_THAN_OR_EQUAL_TO:
-                    predicates.put(filter.getField(),cb.greaterThanOrEqualTo(animal.get(filter.getField()), (Comparable) filter.getValue()));
+                    predicates.put(filter.getField(),
+                            cb.greaterThanOrEqualTo(animal.get(filter.getField()), (Comparable) filter.getValue()));
                     break;
                 case LESS_THAN:
-                    predicates.put(filter.getField(),cb.lessThan(animal.get(filter.getField()), (Comparable) filter.getValue()));
+                    predicates.put(filter.getField(),
+                            cb.lessThan(animal.get(filter.getField()), (Comparable) filter.getValue()));
                     break;
                 case LESS_THAN_OR_EQUAL_TO:
-                    predicates.put(filter.getField(),cb.lessThanOrEqualTo(animal.get(filter.getField()), (Comparable) filter.getValue()));
+                    predicates.put(filter.getField(),
+                            cb.lessThanOrEqualTo(animal.get(filter.getField()), (Comparable) filter.getValue()));
                     break;
                 case NOT_EQUALS:
-                    predicates.put(filter.getField(),cb.notEqual(animal.get(filter.getField()), filter.getValue()));
+                    predicates.put(filter.getField(), cb.notEqual(animal.get(filter.getField()), filter.getValue()));
                     break;
-                case LIKE:
-                    predicates.put(filter.getField(),cb.like(cb.upper(animal.get(filter.getField())),"%" + filter.getValue().toString().toUpperCase() + "%"));
+                case LIKE, CONTAINS:
+                    predicates.put(filter.getField(), cb.like(cb.upper(animal.get(filter.getField())),
+                            "%" + filter.getValue().toString().toUpperCase() + "%"));
                     break;
                 case IN:
-                    predicates.put(filter.getField(),animal.get(filter.getField()).in(filter.getValue()));
+                    predicates.put(filter.getField(), animal.get(filter.getField()).in(filter.getValue()));
                     break;
                 case NOT_IN:
-                    predicates.put(filter.getField(),cb.not(animal.get(filter.getField()).in(filter.getValue())));
+                    predicates.put(filter.getField(), cb.not(animal.get(filter.getField()).in(filter.getValue())));
+                    break;
+                default:
                     break;
             }
         }
@@ -109,7 +113,7 @@ public class AnimalRepositoryPostgreSQL implements AnimalRepository {
 
         TypedQuery<Animal> query = em.createQuery(cq);
         if (criteria.getPagination() != null) {
-            query.setFirstResult((criteria.getPagination().getPageNumber()-1)*criteria.getPagination().getSize());
+            query.setFirstResult((criteria.getPagination().getPageNumber() - 1) * criteria.getPagination().getSize());
             query.setMaxResults(criteria.getPagination().getSize());
         }
 
@@ -123,35 +127,42 @@ public class AnimalRepositoryPostgreSQL implements AnimalRepository {
         CriteriaQuery<Long> cq = cb.createQuery(Long.class);
         Root<Animal> animal = cq.from(Animal.class);
 
-        Map<String,Predicate> predicates = new HashMap<>();
-        for(Filter filter :criteria.getFilterCollection().getFilters()) {
+        Map<String, Predicate> predicates = new HashMap<>();
+        for (Filter filter : criteria.getFilterCollection().getFilters()) {
             switch (filter.getOperator()) {
                 case EQUALS:
-                    predicates.put(filter.getField(),cb.equal(animal.get(filter.getField()), filter.getValue()));
+                    predicates.put(filter.getField(), cb.equal(animal.get(filter.getField()), filter.getValue()));
                     break;
                 case GREATER_THAN:
-                    predicates.put(filter.getField(),cb.greaterThan(animal.get(filter.getField()), (Comparable) filter.getValue()));
+                    predicates.put(filter.getField(),
+                            cb.greaterThan(animal.get(filter.getField()), (Comparable) filter.getValue()));
                     break;
                 case GREATER_THAN_OR_EQUAL_TO:
-                    predicates.put(filter.getField(),cb.greaterThanOrEqualTo(animal.get(filter.getField()), (Comparable) filter.getValue()));
+                    predicates.put(filter.getField(),
+                            cb.greaterThanOrEqualTo(animal.get(filter.getField()), (Comparable) filter.getValue()));
                     break;
                 case LESS_THAN:
-                    predicates.put(filter.getField(),cb.lessThan(animal.get(filter.getField()), (Comparable) filter.getValue()));
+                    predicates.put(filter.getField(),
+                            cb.lessThan(animal.get(filter.getField()), (Comparable) filter.getValue()));
                     break;
                 case LESS_THAN_OR_EQUAL_TO:
-                    predicates.put(filter.getField(),cb.lessThanOrEqualTo(animal.get(filter.getField()), (Comparable) filter.getValue()));
+                    predicates.put(filter.getField(),
+                            cb.lessThanOrEqualTo(animal.get(filter.getField()), (Comparable) filter.getValue()));
                     break;
                 case NOT_EQUALS:
-                    predicates.put(filter.getField(),cb.notEqual(animal.get(filter.getField()), filter.getValue()));
+                    predicates.put(filter.getField(), cb.notEqual(animal.get(filter.getField()), filter.getValue()));
                     break;
                 case LIKE:
-                    predicates.put(filter.getField(),cb.like(cb.upper(animal.get(filter.getField())),"%" + filter.getValue().toString().toUpperCase() + "%"));
+                    predicates.put(filter.getField(), cb.like(cb.upper(animal.get(filter.getField())),
+                            "%" + filter.getValue().toString().toUpperCase() + "%"));
                     break;
                 case IN:
-                    predicates.put(filter.getField(),animal.get(filter.getField()).in(filter.getValue()));
+                    predicates.put(filter.getField(), animal.get(filter.getField()).in(filter.getValue()));
                     break;
                 case NOT_IN:
-                    predicates.put(filter.getField(),cb.not(animal.get(filter.getField()).in(filter.getValue())));
+                    predicates.put(filter.getField(), cb.not(animal.get(filter.getField()).in(filter.getValue())));
+                    break;
+                default:
                     break;
             }
         }

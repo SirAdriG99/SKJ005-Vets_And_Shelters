@@ -1,5 +1,8 @@
 package org.vetsandshelters.animal.application.storeAnimal;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class StoreAnimalCommand {
     private String name;
     private String color;

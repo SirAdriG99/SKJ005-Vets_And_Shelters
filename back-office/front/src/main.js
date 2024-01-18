@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 
+import axios from 'axios';
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
 import Accordion from 'primevue/accordion';
@@ -210,3 +211,23 @@ app.component('TriStateCheckbox', TriStateCheckbox);
 app.component('VirtualScroller', VirtualScroller);
 
 app.mount('#app');
+
+// Test code so you can see how to use the petitions
+
+async function test() {
+    const ANIMAL_STORE = '/animal/store';
+    // use axios
+    let storeAnimalCommand = {
+        name: 'Rascachu',
+        color: 'yellow',
+        sexId: 1,
+        breedId: 1,
+        procedenceTypeId: 1,
+        animalStatusId: 1
+    };
+    await axios.post(ANIMAL_STORE, storeAnimalCommand)
+        .then((response) => { console.log(response.data) })
+        .catch((error) => { console.log(error.response.data) });
+}
+
+test();

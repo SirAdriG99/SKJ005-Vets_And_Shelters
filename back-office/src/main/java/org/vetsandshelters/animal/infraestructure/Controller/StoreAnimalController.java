@@ -5,6 +5,7 @@ import org.vetsandshelters.animal.application.storeAnimal.StoreAnimalCommandHand
 import org.vetsandshelters.animal.application.storeAnimal.StoreAnimalResponse;
 
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -20,16 +21,13 @@ public class StoreAnimalController {
 
     @POST
     @Path("/store")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response storeAnimal(
-            @QueryParam("name") String name,
-            @QueryParam("color") String color,
-            @QueryParam("sexId") int sexId,
-            @QueryParam("breedId") int breedId,
-            @QueryParam("procedenceTypeId") int procedenceTypeId,
-            @QueryParam("animalStatusId") int animalStatusId) {
-        StoreAnimalCommand command = new StoreAnimalCommand(name, color, sexId, breedId, procedenceTypeId,
-                animalStatusId);
+            StoreAnimalCommand command) {
+        // StoreAnimalCommand command = new StoreAnimalCommand(name, color, sexId,
+        // breedId, procedenceTypeId,
+        // animalStatusId);
         // System.out.println("Generated command: " + command.getName());
         StoreAnimalResponse response = this.handler.handle(command);
 
