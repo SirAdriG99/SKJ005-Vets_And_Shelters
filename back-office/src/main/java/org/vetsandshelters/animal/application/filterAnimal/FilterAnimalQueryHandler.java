@@ -26,7 +26,7 @@ public class FilterAnimalQueryHandler {
 
     private AnimalCriteria setCriteria(FilterAnimalQuery query) {
         /**
-         * TODO: Sort and order. Not for MVP
+         * TODO.todo: Sort and order. Not for MVP
          */
         /**
          * If at least exists the pagination size,

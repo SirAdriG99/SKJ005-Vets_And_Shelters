@@ -13,7 +13,6 @@ public class AnimalCriteria extends Criteria {
     /**
      * Returns the allowed fields for filtering
      * 
-     * @return
      */
     public String[] getAllowedFields() {
         return new String[] {

@@ -31,7 +31,7 @@ public class AnimalRepositoryPostgreSQL implements AnimalRepository {
 
     @Override
     public Animal getById(Integer id) {
-        // // TODO Auto-generated method stub
+        // // TODO.todo Auto-generated method stub
         // throw new UnsupportedOperationException("Unimplemented method 'getById'");
         Animal animal = em.find(Animal.class, id);
         if (animal == null) {
@@ -42,6 +42,7 @@ public class AnimalRepositoryPostgreSQL implements AnimalRepository {
 
     @Override
     public AnimalCollection getBy(AnimalCriteria criteria) {
+        // TODO.todo: Temporal solution, when I tried to do it in one way, a exception was thrown
         List<Animal> animalList = getAnimalListPaginated(criteria);
         int totalElements = getAnimalListCount(criteria).intValue();
 

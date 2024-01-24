@@ -1,4 +1,4 @@
-package org.vetsandshelters.front_office.customer.domain;
+package org.vetsandshelters.customer.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.vetsandshelters.front_office.customer.infraestructurre.Session;

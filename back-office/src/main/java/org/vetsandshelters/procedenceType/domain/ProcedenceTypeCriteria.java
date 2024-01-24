@@ -8,7 +8,7 @@ public class ProcedenceTypeCriteria extends Criteria {
 
     public ProcedenceTypeCriteria(FilterCollection filters, Pagination pagination) {
         super(filters, pagination);
-        // TODO Auto-generated constructor stub
+        // TODO.todo Auto-generated constructor stub
     }
 
 }

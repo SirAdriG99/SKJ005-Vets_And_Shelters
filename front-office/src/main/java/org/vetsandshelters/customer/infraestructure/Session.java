@@ -1,4 +1,4 @@
-package org.vetsandshelters.front_office.customer.infraestructurre;
+package org.vetsandshelters.customer.infraestructure;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

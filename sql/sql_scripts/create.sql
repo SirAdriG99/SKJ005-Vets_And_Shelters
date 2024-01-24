@@ -83,8 +83,9 @@ CREATE  TABLE animal_status_hist (
  );
 
 CREATE  TABLE appointment ( 
-	customer_id          integer  NOT NULL  ,
+	customer_id          bigint  NOT NULL  ,
 	appointment_date     timestamp  NOT NULL  ,
-	animal_id            integer    ,
-	CONSTRAINT pk_appointment PRIMARY KEY ( customer_id, appointment_date )
+	animal_id            bigint    ,
+	id                   serial  NOT NULL  ,
+	CONSTRAINT pk_appointment PRIMARY KEY ( id )
  );

@@ -1,6 +1,6 @@
 package org.vetsandshelters.shared.DomainUtils.Criteria;
 
-// TODO: Change implementation so it uses Collection
+// TODO.todo: Change implementation so it uses Collection
 public class FilterCollection {
     private Filter[] filters;
 

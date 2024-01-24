@@ -8,7 +8,7 @@ public class SexCriteria extends Criteria {
 
     public SexCriteria(FilterCollection filters, Pagination pagination) {
         super(filters, pagination);
-        // TODO Auto-generated constructor stub
+        // TODO.todo Auto-generated constructor stub
     }
 
 }

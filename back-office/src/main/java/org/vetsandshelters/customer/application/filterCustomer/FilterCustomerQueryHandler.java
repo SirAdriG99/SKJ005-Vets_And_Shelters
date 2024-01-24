@@ -25,7 +25,7 @@ public class FilterCustomerQueryHandler {
 
     private CustomerCriteria setCriteria(FilterCustomerQuery query) {
         /**
-         * TODO: Sort and order. Not for MVP
+         * TODO.todo: Sort and order. Not for MVP
          */
         Pagination pagination = query.getSize() != null ? new Pagination(
                 query.getSize(),

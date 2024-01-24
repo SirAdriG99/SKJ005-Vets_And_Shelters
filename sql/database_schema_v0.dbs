@@ -63,9 +63,9 @@
 			<column name="customer_id" type="bigint" jt="-5" mandatory="y" />
 			<column name="appointment_date" type="timestamp" jt="93" mandatory="y" />
 			<column name="animal_id" type="bigint" jt="-5" />
+			<column name="id" type="serial" jt="4" mandatory="y" />
 			<index name="pk_appointment" unique="PRIMARY_KEY" >
-				<column name="customer_id" />
-				<column name="appointment_date" />
+				<column name="id" />
 			</index>
 			<fk name="fk_appointment_customer" to_schema="skj005_vets_and_shelters" to_table="customer" >
 				<fk_column name="customer_id" pk="id" />
@@ -150,24 +150,24 @@
 		<entity schema="skj005_vets_and_shelters" name="animal_photos" color="C1D8EE" x="85" y="102" />
 		<entity schema="skj005_vets_and_shelters" name="animal_status" color="BED3F4" x="816" y="255" />
 		<entity schema="skj005_vets_and_shelters" name="animal_status_hist" color="BED3F4" x="646" y="85" />
-		<entity schema="skj005_vets_and_shelters" name="appointment" color="BEBEF4" x="1785" y="391" />
+		<entity schema="skj005_vets_and_shelters" name="appointment" color="BEBEF4" x="1105" y="153" />
 		<entity schema="skj005_vets_and_shelters" name="breed" color="BED3F4" x="306" y="408" />
-		<entity schema="skj005_vets_and_shelters" name="customer" color="BEBEF4" x="1462" y="391" />
-		<entity schema="skj005_vets_and_shelters" name="customer_pwd" color="BEBEF4" x="1479" y="731" />
+		<entity schema="skj005_vets_and_shelters" name="customer" color="BEBEF4" x="1360" y="289" />
+		<entity schema="skj005_vets_and_shelters" name="customer_pwd" color="BEBEF4" x="1122" y="476" />
 		<entity schema="skj005_vets_and_shelters" name="procedence_type" color="BED3F4" x="51" y="459" />
-		<entity schema="skj005_vets_and_shelters" name="sex" color="BED3F4" x="765" y="714" />
+		<entity schema="skj005_vets_and_shelters" name="sex" color="BED3F4" x="765" y="459" />
 		<group name="customer" color="ECECF7" >
+			<entity schema="skj005_vets_and_shelters" name="customer_pwd" />
 			<entity schema="skj005_vets_and_shelters" name="customer" />
 			<entity schema="skj005_vets_and_shelters" name="appointment" />
-			<entity schema="skj005_vets_and_shelters" name="customer_pwd" />
 		</group>
 		<group name="animal" color="ECF0F7" >
 			<entity schema="skj005_vets_and_shelters" name="animal_status_hist" />
-			<entity schema="skj005_vets_and_shelters" name="animal_photos" />
 			<entity schema="skj005_vets_and_shelters" name="breed" />
 			<entity schema="skj005_vets_and_shelters" name="animal_status" />
 			<entity schema="skj005_vets_and_shelters" name="animal" />
 			<entity schema="skj005_vets_and_shelters" name="procedence_type" />
+			<entity schema="skj005_vets_and_shelters" name="animal_photos" />
 		</group>
 		<script name="SQL_Editor" id="Editor-e01" language="SQL" >
 			<string><![CDATA[CREATE SCHEMA IF NOT EXISTS skj005_vets_and_shelters;
@@ -461,14 +461,5 @@ FROM
 FROM
 	procedence_type e;]]></string>
 		</script>
-		<query id="Query-1553" name="animal_status_hist" >
-			<query_table schema="skj005_vets_and_shelters" name="animal_status_hist" alias="ash" x="51" y="51" >
-				<column name="animal_id" />
-				<column name="status_id" />
-				<column name="date_from" />
-				<column name="date_to" />
-				<column name="date_to" filter=":c is NULL" />
-			</query_table>
-		</query>
 	</layout>
 </project>

@@ -147,27 +147,27 @@
 	<layout name="Default Layout" id="Layout-8ee" show_column_type="y" show_relation="columns" >
 		<comment><![CDATA[design_draft_v0_1]]></comment>
 		<entity schema="skj005_vets_and_shelters" name="animal" color="BED3F4" x="323" y="187" />
-		<entity schema="skj005_vets_and_shelters" name="animal_photos" color="C1D8EE" x="323" y="459" />
-		<entity schema="skj005_vets_and_shelters" name="animal_status" color="BED3F4" x="918" y="238" />
+		<entity schema="skj005_vets_and_shelters" name="animal_photos" color="C1D8EE" x="85" y="102" />
+		<entity schema="skj005_vets_and_shelters" name="animal_status" color="BED3F4" x="816" y="255" />
 		<entity schema="skj005_vets_and_shelters" name="animal_status_hist" color="BED3F4" x="646" y="85" />
-		<entity schema="skj005_vets_and_shelters" name="appointment" color="BEBEF4" x="1785" y="391" />
-		<entity schema="skj005_vets_and_shelters" name="breed" color="BED3F4" x="663" y="459" />
-		<entity schema="skj005_vets_and_shelters" name="customer" color="BEBEF4" x="1462" y="391" />
-		<entity schema="skj005_vets_and_shelters" name="customer_pwd" color="BEBEF4" x="1479" y="731" />
+		<entity schema="skj005_vets_and_shelters" name="appointment" color="BEBEF4" x="1105" y="153" />
+		<entity schema="skj005_vets_and_shelters" name="breed" color="BED3F4" x="306" y="408" />
+		<entity schema="skj005_vets_and_shelters" name="customer" color="BEBEF4" x="1360" y="289" />
+		<entity schema="skj005_vets_and_shelters" name="customer_pwd" color="BEBEF4" x="1122" y="476" />
 		<entity schema="skj005_vets_and_shelters" name="procedence_type" color="BED3F4" x="51" y="459" />
-		<entity schema="skj005_vets_and_shelters" name="sex" color="BED3F4" x="765" y="714" />
+		<entity schema="skj005_vets_and_shelters" name="sex" color="BED3F4" x="765" y="459" />
 		<group name="customer" color="ECECF7" >
-			<entity schema="skj005_vets_and_shelters" name="customer" />
 			<entity schema="skj005_vets_and_shelters" name="customer_pwd" />
 			<entity schema="skj005_vets_and_shelters" name="appointment" />
+			<entity schema="skj005_vets_and_shelters" name="customer" />
 		</group>
 		<group name="animal" color="ECF0F7" >
-			<entity schema="skj005_vets_and_shelters" name="animal_photos" />
-			<entity schema="skj005_vets_and_shelters" name="procedence_type" />
-			<entity schema="skj005_vets_and_shelters" name="breed" />
 			<entity schema="skj005_vets_and_shelters" name="animal_status_hist" />
+			<entity schema="skj005_vets_and_shelters" name="animal_photos" />
+			<entity schema="skj005_vets_and_shelters" name="breed" />
 			<entity schema="skj005_vets_and_shelters" name="animal_status" />
 			<entity schema="skj005_vets_and_shelters" name="animal" />
+			<entity schema="skj005_vets_and_shelters" name="procedence_type" />
 		</group>
 		<script name="SQL_Editor" id="Editor-e01" language="SQL" >
 			<string><![CDATA[CREATE SCHEMA IF NOT EXISTS skj005_vets_and_shelters;
@@ -421,6 +421,13 @@ FROM
 FROM
 	animal l;]]></string>
 		</script>
+		<script name="animal_002" id="Editor-18fc" language="SQL" >
+			<string><![CDATA[SELECT
+	*
+FROM
+	animal l
+WHERE UPPER(l.name) LIKE UPPER('%big%') ]]></string>
+		</script>
 		<script name="animal_003" id="Editor-201" language="SQL" >
 			<string><![CDATA[UPDATE animal 
 SET animal_status_id=1 ;]]></string>
@@ -448,14 +455,11 @@ FROM
 FROM
 	breed d;]]></string>
 		</script>
-		<query id="Query-1553" name="animal_status_hist" >
-			<query_table schema="skj005_vets_and_shelters" name="animal_status_hist" alias="ash" x="51" y="51" >
-				<column name="animal_id" />
-				<column name="status_id" />
-				<column name="date_from" />
-				<column name="date_to" />
-				<column name="date_to" filter=":c is NULL" />
-			</query_table>
-		</query>
+		<script name="procedence_type" id="Editor-183" language="SQL" >
+			<string><![CDATA[SELECT
+	id, name
+FROM
+	procedence_type e;]]></string>
+		</script>
 	</layout>
 </project>

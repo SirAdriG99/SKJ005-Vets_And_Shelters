@@ -1,6 +1,6 @@
 package org.vetsandshelters.shared.DomainUtils.Pagination;
 
-// TODO: Change implementation so it uses Collection
+// TODO.todo: Change implementation so it uses Collection
 public class SortCollection {
     private Sort[] sorts;
 

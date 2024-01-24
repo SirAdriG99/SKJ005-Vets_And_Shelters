@@ -8,7 +8,13 @@ public class AnimalStatusCriteria extends Criteria {
 
     public AnimalStatusCriteria(FilterCollection filters, Pagination pagination) {
         super(filters, pagination);
-        // TODO Auto-generated constructor stub
+    }
+
+    public String[] getAllowedFields() {
+        return new String[] {
+                "id",
+                "name"
+        };
     }
 
 }
