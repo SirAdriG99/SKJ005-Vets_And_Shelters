@@ -71,6 +71,11 @@ const model = ref([
                         label: 'Access Denied',
                         icon: 'pi pi-fw pi-lock',
                         to: '/auth/access'
+                    },
+                    {
+                        label: 'New Account',
+                        icon: 'pi pi-fw pi-sign-in',
+                        to: '/auth/newaccount'
                     }
                 ]
             },
@@ -88,6 +93,11 @@ const model = ref([
                 label: 'Not Found',
                 icon: 'pi pi-fw pi-exclamation-circle',
                 to: '/pages/notfound'
+            },
+            {
+                label: 'Preference Form',
+                icon: 'pi pi-fw pi-circle-on',
+                to: '/pages/preferenceform'
             },
             {
                 label: 'Empty',

@@ -163,6 +163,11 @@ const router = createRouter({
             name: 'notfound',
             component: () => import('@/views/pages/NotFound.vue')
         },
+        {
+            path: '/pages/preferenceform',
+            name: 'preferenceform',
+            component: () => import('@/views/pages/PreferenceForm.vue')
+        },
 
         {
             path: '/auth/login',
