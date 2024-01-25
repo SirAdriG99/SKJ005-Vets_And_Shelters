@@ -24,6 +24,7 @@ import java.util.Map;
 
 @ApplicationScoped
 public class RepositoryHelperPostgres {
+//    TODO: Don't use, it needs to be refactored
     public static List<Object> getCollectionFilteredAndPaginated(EntityManager em, Criteria criteria) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Object> cq = cb.createQuery(Object.class);

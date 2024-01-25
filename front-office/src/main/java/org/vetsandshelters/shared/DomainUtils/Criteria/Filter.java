@@ -3,7 +3,7 @@ package org.vetsandshelters.shared.DomainUtils.Criteria;
 public class Filter {
     private String field;
     private FilterOperator operator;
-    private Object value; // TODO: We should test this, but it should only contain primitive types,
+    private Object value; // TODO.todo: We should test this, but it should only contain primitive types,
     // String, Date (or similar) or arrays of those types and the FilterCollection
     // should contain filters with different data types
     // e.g. a filter with field "name" and value "pepe" and another filter with

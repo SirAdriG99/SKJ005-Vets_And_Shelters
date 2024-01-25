@@ -33,5 +33,5 @@ public abstract class Collection<T> {
         return totalElements;
     }
 
-    // TODO: Implement method to detect the type of the object
+    // TODO.todo: Implement method to detect the type of the object
 }

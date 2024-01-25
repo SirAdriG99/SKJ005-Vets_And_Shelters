@@ -1,5 +1,6 @@
 package org.vetsandshelters.customer_pwd.domain;
 
+
 import org.vetsandshelters.shared.DomainUtils.Collection;
 
 /*
@@ -10,5 +11,9 @@ import org.vetsandshelters.shared.DomainUtils.Collection;
 public class CustomerPwdCollection extends Collection<CustomerPwd> {
     public CustomerPwdCollection(CustomerPwd[] customerPwds) {
         super(customerPwds);
+    }
+
+    public CustomerPwdCollection(CustomerPwd[] customerPwds, int total) {
+        super(customerPwds, total);
     }
 }

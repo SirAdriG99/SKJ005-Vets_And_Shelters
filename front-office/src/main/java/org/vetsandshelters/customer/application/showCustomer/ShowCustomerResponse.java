@@ -1,6 +1,6 @@
-package org.vetsandshelters.front_office.customer.application.showCustomer;
+package org.vetsandshelters.customer.application.showCustomer;
 
-import org.vetsandshelters.front_office.customer.domain.Customer;
+import org.vetsandshelters.customer.domain.Customer;
 
 public class ShowCustomerResponse {
     public Customer customer;

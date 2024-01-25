@@ -1,7 +1,10 @@
-package org.vetsandshelters.front_office.customer.domain;
+package org.vetsandshelters.customer_pwd.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import org.vetsandshelters.front_office.customer.infraestructurre.Session;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import java.time.LocalDate;
 
@@ -14,14 +17,36 @@ import java.time.LocalDate;
  */
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Entity
+@Table(name = "customer_pwd")
 public class CustomerPwd {
-    private int id;
+    @Id
+    private Integer id;
     private int customer_id;
     private String pwd;
-    public CustomerPwd(final int id, final int customer_id, final String pwd){
+    public CustomerPwd(final Integer id, final int customer_id, final String pwd){
         this.id = id;
         this.customer_id = customer_id;
         this.pwd = pwd;
+    }
+
+    public CustomerPwd() {
+        super();
+    }
+
+    @Transient
+    public static final CustomerPwd NOT_FOUND = new CustomerPwd(-1, -1, "Not found");
+
+    public Integer getId() {
+        return id;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
+    }
+
+    public String getPwd() {
+        return pwd;
     }
 }
 

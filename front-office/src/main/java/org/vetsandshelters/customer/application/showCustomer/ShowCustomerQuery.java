@@ -1,4 +1,4 @@
-package org.vetsandshelters.front_office.customer.application.showCustomer;
+package org.vetsandshelters.customer.application.showCustomer;
 
 public class ShowCustomerQuery {
     private Integer id;

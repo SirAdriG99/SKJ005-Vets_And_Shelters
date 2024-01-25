@@ -17,6 +17,10 @@ public class Criteria {
         this.pagination = pagination;
     }
 
+    public Criteria() {
+        super();
+    }
+
     public FilterCollection getFilterCollection() {
         return filters;
     }

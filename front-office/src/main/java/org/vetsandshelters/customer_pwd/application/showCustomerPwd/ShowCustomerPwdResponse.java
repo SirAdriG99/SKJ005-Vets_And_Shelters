@@ -1,6 +1,7 @@
-package org.vetsandshelters.front_office.customer.application.showCustomer;
+package org.vetsandshelters.customer_pwd.application.showCustomerPwd;
 
-import org.vetsandshelters.front_office.customer.domain.Customer;
+
+import org.vetsandshelters.customer_pwd.domain.CustomerPwd;
 
 public class ShowCustomerPwdResponse {
     public CustomerPwd customerPwd;

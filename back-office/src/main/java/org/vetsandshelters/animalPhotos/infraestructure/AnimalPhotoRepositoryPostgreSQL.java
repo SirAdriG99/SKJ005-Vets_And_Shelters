@@ -9,6 +9,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import org.vetsandshelters.animalPhotos.domain.AnimalPhoto;
 import org.vetsandshelters.animalPhotos.domain.AnimalPhotoCollection;
 import org.vetsandshelters.animalPhotos.domain.AnimalPhotoCriteria;
@@ -34,25 +35,28 @@ public class AnimalPhotoRepositoryPostgreSQL implements AnimalPhotoRepository {
     }
 
     @Override
-    public AnimalPhotoCollection getByCriteria(AnimalPhotoCriteria criteria) {
+    public AnimalPhotoCollection getBy(AnimalPhotoCriteria criteria) {
         List<AnimalPhoto> animalList = getAnimalPhotoListPaginated(criteria);
         int totalElements = getAnimalPhotoListCount(criteria).intValue();
 
         return new AnimalPhotoCollection(animalList.toArray(new AnimalPhoto[animalList.size()]), totalElements);
     }
 
+    @Transactional
     @Override
     public int store(AnimalPhoto animalPhoto) {
+//        TODO: Se how to handle the images locally or maybe create another service to handle the images
         em.persist(animalPhoto);
         return animalPhoto.getId();
     }
 
-    @Override
-    public boolean storeAll(AnimalPhotoCollection animalPhotoCollection) {
-        // Store multiple photos using entity manager
-
-        return false;
-    }
+//    @Transactional
+//    @Override
+//    public boolean storeAll(AnimalPhotoCollection animalPhotoCollection) {
+//        // Store multiple photos using entity manager
+//
+//        return false;
+//    }
 
     private List<AnimalPhoto> getAnimalPhotoListPaginated(AnimalPhotoCriteria criteria) {
         CriteriaBuilder cb = em.getCriteriaBuilder();

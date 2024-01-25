@@ -11,4 +11,8 @@ public class CustomerCollection extends Collection<Customer> {
     public CustomerCollection(Customer[] customers) {
         super(customers);
     }
+
+    public CustomerCollection(Customer[] customers, int total) {
+        super(customers, total);
+    }
 }

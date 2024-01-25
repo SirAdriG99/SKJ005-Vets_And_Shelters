@@ -10,9 +10,8 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
-import org.vetsandshelters.animal.domain.Animal;
-import org.vetsandshelters.animal.domain.AnimalCollection;
-import org.vetsandshelters.animal.domain.AnimalCriteria;
+import org.vetsandshelters.animalStatus.domain.AnimalStatus;
+import org.vetsandshelters.animalStatus.domain.AnimalStatusCollection;
 import org.vetsandshelters.breed.domain.Breed;
 import org.vetsandshelters.breed.domain.BreedCollection;
 import org.vetsandshelters.breed.domain.BreedCriteria;
@@ -39,10 +38,18 @@ public class BreedRepositoryPostgreSQL implements BreedRepository {
     }
 
     @Override
-    public BreedCollection getByCriteria(BreedCriteria criteria) {
+    public BreedCollection getBy(BreedCriteria criteria) {
         List<Breed> breedList = getBreedListPaginated(criteria);
         int totalElements = getBreedListCount(criteria).intValue();
         return new BreedCollection(breedList.toArray(new Breed[breedList.size()]), totalElements);
+    }
+
+    @Override
+    public BreedCollection getAll() {
+        String query = "FROM Breed";
+        List<Breed> list = em.createQuery(query, Breed.class).getResultList();
+        return new BreedCollection(list.toArray(new Breed[list.size()]), list.size());
+
     }
 
     @Override

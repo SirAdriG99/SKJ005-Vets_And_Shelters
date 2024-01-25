@@ -1,9 +1,11 @@
 package org.vetsandshelters.customer.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import org.vetsandshelters.front_office.customer.infraestructurre.Session;
+import jakarta.persistence.*;
+import org.vetsandshelters.customer.infraestructure.Session;
 
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.Date;
 
 /*
  * In the domain we should only have the data that is relevant for the business logic and the UI.
@@ -14,13 +16,16 @@ import java.time.LocalDate;
  */
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Entity
 public class Customer {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_seq")
+    private Integer id;
     private String doc_number;
     private String name;
     private String surname;
     private String user_alias;
-    private LocalDate date_birth;
+    private Date date_birth;
     private boolean banned;
     private String email;
     private String phone1;
@@ -28,12 +33,13 @@ public class Customer {
     private String address;
     // private String password; // It make no sense to save it after the check.
 
-    private Session session;
+//    private Session session;
+    @Transient
+    public static final Customer NOT_FOUND = new Customer(-1, "Not found", "", "", "", Date.from(Instant.now()), false, "", "", "", "");
 
-    public Customer(final int id, final String doc_number, final String name,
-                    final String surname, final String user_alias, final LocalDate date_birth, final boolean banned,
-                    final String email, final String phone1, final String phone2, final String address)
-    {
+    public Customer(Integer id, final String doc_number, final String name,
+                    final String surname, final String user_alias, final Date date_birth, final boolean banned,
+                    final String email, final String phone1, final String phone2, final String address) {
         this.id = id;
         this.doc_number = doc_number;
         this.name = name;
@@ -45,14 +51,15 @@ public class Customer {
         this.phone1 = phone1;
         this.phone2 = phone2;
         this.address = address;
-        this.session = new Session();
+//        this.session = new Session();
     }
 
-    public int getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -88,11 +95,11 @@ public class Customer {
         this.user_alias = user_alias;
     }
 
-    public LocalDate getDate_birth() {
+    public Date getDate_birth() {
         return date_birth;
     }
 
-    public void setDate_birth(final LocalDate date_birth) {
+    public void setDate_birth(final Date date_birth) {
         this.date_birth = date_birth;
     }
 
@@ -140,16 +147,19 @@ public class Customer {
         return banned;
     }
 
-    public Session getSession() {
-        return session;
-    }
+//    public Session getSession() {
+//        return session;
+//    }
+//
+//    public void updateSessionLastAction() {
+//        this.session.setDateTimeLastAction();
+//    }
+//
+//    public boolean isSessionActive() {
+//        return this.session.isSessionActive();
+//    }
 
-    public void updateSessionLastAction(){
-        this.session.setDateTimeLastAction();
-    }
-
-    public boolean isSessionActive(){
-        return this.session.isSessionActive();
+    public Customer() {
+        super();
     }
 }
-
