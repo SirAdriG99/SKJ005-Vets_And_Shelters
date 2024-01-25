@@ -64,9 +64,11 @@ const logoUrl = computed(() => {
                 <div class="mx-4 md:mx-8 mt-0 md:mt-4">
                     <h1 class="text-6xl font-bold text-gray-900 line-height-2"><span class="font-light block">Welcome to</span>Vets&Shelters</h1>
                     <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">An app developed with love for dog lovers</p>
-                    <Button label="Join the family" class="p-button-rounded text-xl border-none mt-5 bg-blue-500 font-normal text-white line-height-3 px-3"><router-link to="/auth/newaccount" class="p-button-rounded text-xl border-none bg-blue-500 font-normal text-white">Sign up</router-link></Button>
+                    <!-- <Button label="Sign up" class="p-button-rounded text-xl border-none mt-5 bg-blue-500 font-normal text-white line-height-3 px-3"><router-link to="/auth/newaccount" class="p-button-rounded text-xl border-none bg-blue-500 font-normal text-white">Sign up</router-link></Button>
                     &nbsp;
                     <Button label="Log in" class="p-button-rounded text-xl border-none mt-5 bg-blue-500 font-normal text-white line-height-3 px-3"><router-link to="/auth/login" class="p-button-rounded text-xl border-none bg-blue-500 font-normal text-white">Log in</router-link></Button>
+                    &nbsp; -->
+                    <Button label="getstarted" class="p-button-rounded text-xl border-none mt-5 bg-blue-500 font-normal text-white line-height-3 px-3"><router-link to="/pages/preferenceform" class="p-button-rounded text-xl border-none bg-blue-500 font-normal text-white">Get started!</router-link></Button>
                 </div>
                 <p></p>
                 <div class="flex justify-content-center md:justify-content-end">
