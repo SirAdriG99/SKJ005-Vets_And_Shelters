@@ -13,10 +13,15 @@ public class GetSelectListQueryHandler {
     public GetSelectListResponse handle() {
         BreedCollection collection = this.repository.getAll();
 
-        String[] breeds = new String[collection.getCollection().length];
+        String breeds = "[";
         for (int i = 0; i < collection.getCollection().length; i++) {
-            breeds[i] = "{\"id\": " + collection.getCollection()[i].getId() + ", \"name\": \"" + collection.getCollection()[i].getName() + "\"}";
+            breeds += "{\"id\": " + collection.getCollection()[i].getId() + ", \"name\": \"" + collection.getCollection()[i].getName() + "\"}";
+            if (i < collection.getCollection().length - 1) {
+                breeds += ", ";
+            }
         }
+        breeds += "]";
+
 
         return new GetSelectListResponse(breeds);
     }

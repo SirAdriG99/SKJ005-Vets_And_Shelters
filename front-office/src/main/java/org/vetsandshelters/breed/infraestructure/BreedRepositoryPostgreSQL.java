@@ -10,6 +10,8 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
+import org.vetsandshelters.animalStatus.domain.AnimalStatus;
+import org.vetsandshelters.animalStatus.domain.AnimalStatusCollection;
 import org.vetsandshelters.breed.domain.Breed;
 import org.vetsandshelters.breed.domain.BreedCollection;
 import org.vetsandshelters.breed.domain.BreedCriteria;

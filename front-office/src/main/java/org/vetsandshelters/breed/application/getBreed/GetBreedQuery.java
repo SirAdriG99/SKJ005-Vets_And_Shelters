@@ -1,5 +1,7 @@
 package org.vetsandshelters.breed.application.getBreed;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+
 public class GetBreedQuery {
     private Integer id;
 

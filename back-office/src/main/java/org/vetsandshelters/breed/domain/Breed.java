@@ -1,6 +1,7 @@
 package org.vetsandshelters.breed.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import jakarta.persistence.*;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

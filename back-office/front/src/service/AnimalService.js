@@ -55,7 +55,7 @@ export default class AnimalService {
         };
     }
 
-    async storeAnimal(animal) {
+    storeAnimal(animal) {
         console.log(animal)
         let url = '/animal';
         axios.post(url, animal)
