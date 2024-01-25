@@ -11,9 +11,15 @@ export default class AnimalService {
             })
             .catch((error) => {
                 console.log(error);
-                return error
+                return {
+                    status: "ERROR",
+                    response: error
+                }
             });
-        return animalData;
+        return {
+            status: "OK",
+            response: animalData
+        };
     }
 
     // TODO: put specific parameters
@@ -23,13 +29,19 @@ export default class AnimalService {
         axios.get(url, { params: { filter: filter, pagination: pagination } })
             .then((response) => {
                 console.log(response.data)
-                animalData = response.data.animal;
+                animalData = response.data;
             })
             .catch((error) => {
                 console.log(error);
-                return error
+                return {
+                    status: "ERROR",
+                    response: error
+                }
             });
-        return animalData
+        return {
+            status: "OK",
+            response: animalData
+        };
     }
 
     async storeAnimal(animal) {
@@ -57,11 +69,17 @@ export default class AnimalService {
         axios.put(url, animal)
             .then((response) => {
                 console.log(response.data)
-                return response.data.id;
+                return {
+                    status: "OK",
+                    response: response.data.id
+                };
             })
             .catch((error) => {
                 console.log(error);
-                return error
+                return {
+                    status: "ERROR",
+                    response: error
+                }
             });
     }
 
