@@ -134,14 +134,15 @@ const initFilters = () => {
                     <template v-slot:start>
                         <div class="my-2">
                             <Button label="New" icon="pi pi-plus" class="p-button-success mr-2" @click="openNew" />
-                            <Button label="Delete" icon="pi pi-trash" class="p-button-danger" @click="confirmDeleteSelected" :disabled="!selectedProducts || !selectedProducts.length" />
+<!--                          TODO: We're not going to delete nothing-->
+<!--                            <Button label="Delete" icon="pi pi-trash" class="p-button-danger" @click="confirmDeleteSelected" :disabled="!selectedProducts || !selectedProducts.length" />-->
                         </div>
                     </template>
-
-                    <template v-slot:end>
-                        <FileUpload mode="basic" accept="image/*" :maxFileSize="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block" />
-                        <Button label="Export" icon="pi pi-upload" class="p-button-help" @click="exportCSV($event)" />
-                    </template>
+<!--TODO: These could be more use cases-->
+<!--                    <template v-slot:end>-->
+<!--                        <FileUpload mode="basic" accept="image/*" :maxFileSize="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block" />-->
+<!--                        <Button label="Export" icon="pi pi-upload" class="p-button-help" @click="exportCSV($event)" />-->
+<!--                    </template>-->
                 </Toolbar>
 
                 <DataTable
@@ -167,8 +168,15 @@ const initFilters = () => {
                         </div>
                     </template>
 
-                    <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-                    <Column field="code" header="DNI" :sortable="true" headerStyle="width:14%; min-width:10rem;">
+<!--                    <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>-->
+<!--TODO: Right now using id, we don't have any other identifier for the animals-->
+                  <!--                    <Column field="code" header="DNI" :sortable="true" headerStyle="width:14%; min-width:10rem;">-->
+<!--                        <template #body="slotProps">-->
+<!--                            <span class="p-column-title">Code</span>-->
+<!--                            {{ slotProps.data.code }}-->
+<!--                        </template>-->
+<!--                    </Column>-->
+                  <Column field="code" header="DNI" :sortable="true" headerStyle="width:14%; min-width:10rem;">
                         <template #body="slotProps">
                             <span class="p-column-title">Code</span>
                             {{ slotProps.data.code }}
@@ -180,13 +188,14 @@ const initFilters = () => {
                             {{ slotProps.data.name }}
                         </template>
                     </Column>
-                    <Column header="Image" headerStyle="width:14%; min-width:10rem;">
-                        <template #body="slotProps">
-                            <span class="p-column-title">Image</span>
-                            <img :src="'demo/images/product/' + slotProps.data.image" :alt="slotProps.data.image" class="shadow-2" width="100" />
-                        </template>
-                    </Column>
-                    <Column field="price" header="Animal breed" :sortable="true" headerStyle="width:14%; min-width:8rem;">
+<!--                  TODO: First, focus on what works. The image management isn't working right now-->
+<!--                    <Column header="Image" headerStyle="width:14%; min-width:10rem;">-->
+<!--                        <template #body="slotProps">-->
+<!--                            <span class="p-column-title">Image</span>-->
+<!--                            <img :src="'demo/images/product/' + slotProps.data.image" :alt="slotProps.data.image" class="shadow-2" width="100" />-->
+<!--                        </template>-->
+<!--                    </Column>-->
+                    <Column field="price" header="Breed" :sortable="true" headerStyle="width:14%; min-width:8rem;">
                         <template #body="slotProps">
                             <span class="p-column-title">Price</span>
                             {{ formatCurrency(slotProps.data.price) }}
@@ -201,10 +210,11 @@ const initFilters = () => {
                     <Column field="rating" header="Color" :sortable="true" headerStyle="width:14%; min-width:10rem;">
                         <template #body="slotProps">
                             <span class="p-column-title">Rating</span>
-                            <Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false" />
+<!--                            <Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false" />-->
+                          <span :class="'product-badge status-' + (slotProps.data.inventoryStatus ? slotProps.data.inventoryStatus.toLowerCase() : '')">{{ slotProps.data.inventoryStatus }}</span>
                         </template>
                     </Column>
-                    <Column field="inventoryStatus" header="Sexo" :sortable="true" headerStyle="width:14%; min-width:10rem;">
+                    <Column field="inventoryStatus" header="Sex" :sortable="true" headerStyle="width:14%; min-width:10rem;">
                         <template #body="slotProps">
                             <span class="p-column-title">Status</span>
                             <span :class="'product-badge status-' + (slotProps.data.inventoryStatus ? slotProps.data.inventoryStatus.toLowerCase() : '')">{{ slotProps.data.inventoryStatus }}</span>
@@ -213,7 +223,8 @@ const initFilters = () => {
                     <Column headerStyle="min-width:10rem;">
                         <template #body="slotProps">
                             <Button icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" @click="editProduct(slotProps.data)" />
-                            <Button icon="pi pi-trash" class="p-button-rounded p-button-warning mt-2" @click="confirmDeleteProduct(slotProps.data)" />
+<!--                          TODO: We're not going to delete data-->
+                          <!--                            <Button icon="pi pi-trash" class="p-button-rounded p-button-warning mt-2" @click="confirmDeleteProduct(slotProps.data)" />-->
                         </template>
                     </Column>
                 </DataTable>

@@ -4,10 +4,10 @@ import { ref } from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
 
 const model = ref([
-    {
-        label: 'Home',
-        items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }]
-    },
+    // {
+    //     label: 'Home',
+    //     items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }]
+    // },
     /*{
         label: 'UI Components',
         items: [
@@ -53,7 +53,7 @@ const model = ref([
                 icon: 'pi pi-fw pi-globe',
                 to: '/landing'
             },*/
-            
+
             /*{
                 label: 'Auth',
                 icon: 'pi pi-fw pi-user',
@@ -182,7 +182,7 @@ const model = ref([
         </template>
         <li>
             <!--<a href="https://www.primefaces.org/primeblocks-vue/#/" target="_blank">-->
-                <img src="/layout/images/logo-VS.png" alt="Prime Blocks" class="w-full mt-3" />
+            <img src="/layout/images/logo-VS.png" alt="Prime Blocks" class="w-full mt-3" />
             <!--</a>-->
         </li>
     </ul>

@@ -103,7 +103,7 @@ import VirtualScroller from 'primevue/virtualscroller';
 import BlockViewer from '@/components/BlockViewer.vue';
 
 import '@/assets/styles.scss';
-
+const axios = require('axios').default;
 const app = createApp(App);
 
 app.use(router);
