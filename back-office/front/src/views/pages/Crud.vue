@@ -16,9 +16,11 @@ const dt = ref(null);
 const filters = ref({});
 const submitted = ref(false);
 const statuses = ref([
-    { label: 'INSTOCK', value: 'instock' },
-    { label: 'LOWSTOCK', value: 'lowstock' },
-    { label: 'OUTOFSTOCK', value: 'outofstock' }
+    //{ label: 'INSTOCK', value: 'instock' },
+    //{ label: 'LOWSTOCK', value: 'lowstock' },
+    //{ label: 'OUTOFSTOCK', value: 'outofstock' }
+    { label: 'MACHO', value: 'macho' },
+    { label: 'HEMBRA', value: 'hembra' }
 ]);
 
 const productService = new ProductService();
@@ -157,7 +159,7 @@ const initFilters = () => {
                 >
                     <template #header>
                         <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                            <h5 class="m-0">Manage Products</h5>
+                            <h5 class="m-0">Manage Animals</h5>
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search" />
                                 <InputText v-model="filters['global'].value" placeholder="Search..." />
@@ -166,7 +168,7 @@ const initFilters = () => {
                     </template>
 
                     <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-                    <Column field="code" header="Code" :sortable="true" headerStyle="width:14%; min-width:10rem;">
+                    <Column field="code" header="DNI" :sortable="true" headerStyle="width:14%; min-width:10rem;">
                         <template #body="slotProps">
                             <span class="p-column-title">Code</span>
                             {{ slotProps.data.code }}
@@ -184,25 +186,25 @@ const initFilters = () => {
                             <img :src="'demo/images/product/' + slotProps.data.image" :alt="slotProps.data.image" class="shadow-2" width="100" />
                         </template>
                     </Column>
-                    <Column field="price" header="Price" :sortable="true" headerStyle="width:14%; min-width:8rem;">
+                    <Column field="price" header="Animal breed" :sortable="true" headerStyle="width:14%; min-width:8rem;">
                         <template #body="slotProps">
                             <span class="p-column-title">Price</span>
                             {{ formatCurrency(slotProps.data.price) }}
                         </template>
                     </Column>
-                    <Column field="category" header="Category" :sortable="true" headerStyle="width:14%; min-width:10rem;">
+                    <Column field="category" header="Procedence" :sortable="true" headerStyle="width:14%; min-width:10rem;">
                         <template #body="slotProps">
                             <span class="p-column-title">Category</span>
                             {{ slotProps.data.category }}
                         </template>
                     </Column>
-                    <Column field="rating" header="Reviews" :sortable="true" headerStyle="width:14%; min-width:10rem;">
+                    <Column field="rating" header="Color" :sortable="true" headerStyle="width:14%; min-width:10rem;">
                         <template #body="slotProps">
                             <span class="p-column-title">Rating</span>
                             <Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false" />
                         </template>
                     </Column>
-                    <Column field="inventoryStatus" header="Status" :sortable="true" headerStyle="width:14%; min-width:10rem;">
+                    <Column field="inventoryStatus" header="Sexo" :sortable="true" headerStyle="width:14%; min-width:10rem;">
                         <template #body="slotProps">
                             <span class="p-column-title">Status</span>
                             <span :class="'product-badge status-' + (slotProps.data.inventoryStatus ? slotProps.data.inventoryStatus.toLowerCase() : '')">{{ slotProps.data.inventoryStatus }}</span>
@@ -216,38 +218,33 @@ const initFilters = () => {
                     </Column>
                 </DataTable>
 
-                <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Product Details" :modal="true" class="p-fluid">
+                <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Animals" :modal="true" class="p-fluid">
                     <img :src="'demo/images/product/' + product.image" :alt="product.image" v-if="product.image" width="150" class="mt-0 mx-auto mb-5 block shadow-2" />
+                    <div class="field">
+                        <label for="DNI">DNI</label>
+                        <InputText id="DNI" v-model.trim="product.name" required="true" autofocus :class="{ 'p-invalid': submitted && !product.name }" />
+                        <small class="p-invalid" v-if="submitted && !product.name">Name is required.</small>
+                    </div>
+                    
                     <div class="field">
                         <label for="name">Name</label>
                         <InputText id="name" v-model.trim="product.name" required="true" autofocus :class="{ 'p-invalid': submitted && !product.name }" />
                         <small class="p-invalid" v-if="submitted && !product.name">Name is required.</small>
                     </div>
                     <div class="field">
-                        <label for="description">Description</label>
-                        <Textarea id="description" v-model="product.description" required="true" rows="3" cols="20" />
+                        <label for="description">Animal breed</label>
+                        <InputText id="name" v-model.trim="product.name" required="true" autofocus :class="{ 'p-invalid': submitted && !product.name }" />
+                        
                     </div>
 
+                    
+                    
                     <div class="field">
-                        <label for="inventoryStatus" class="mb-3">Inventory Status</label>
-                        <Dropdown id="inventoryStatus" v-model="product.inventoryStatus" :options="statuses" optionLabel="label" placeholder="Select a Status">
-                            <template #value="slotProps">
-                                <div v-if="slotProps.value && slotProps.value.value">
-                                    <span :class="'product-badge status-' + slotProps.value.value">{{ slotProps.value.label }}</span>
-                                </div>
-                                <div v-else-if="slotProps.value && !slotProps.value.value">
-                                    <span :class="'product-badge status-' + slotProps.value.toLowerCase()">{{ slotProps.value }}</span>
-                                </div>
-                                <span v-else>
-                                    {{ slotProps.placeholder }}
-                                </span>
-                            </template>
-                        </Dropdown>
-                    </div>
+                        <label class="mb-3">Procedence</label>
+                        <InputText id="name" v-model.trim="product.name" required="true" autofocus :class="{ 'p-invalid': submitted && !product.name }" />
+                        <small class="p-invalid" v-if="submitted && !product.name">Name is required.</small>
 
-                    <div class="field">
-                        <label class="mb-3">Category</label>
-                        <div class="formgrid grid">
+                        <!-- <div class="formgrid grid">
                             <div class="field-radiobutton col-6">
                                 <RadioButton id="category1" name="category" value="Accessories" v-model="product.category" />
                                 <label for="category1">Accessories</label>
@@ -264,29 +261,49 @@ const initFilters = () => {
                                 <RadioButton id="category4" name="category" value="Fitness" v-model="product.category" />
                                 <label for="category4">Fitness</label>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
-
+                    <div class="field">
+                        <label for="color">Color</label>
+                        <InputText id="color" v-model.trim="product.name" required="true" autofocus :class="{ 'p-invalid': submitted && !product.name }" />
+                        
+                    </div>
+                    <div class="field">
+                        <label for="inventoryStatus" class="mb-3">Sexo</label>
+                        <Dropdown id="inventoryStatus" v-model="product.inventoryStatus" :options="statuses" optionLabel="label" placeholder="Select a Status">
+                            <template #value="slotProps">
+                                <div v-if="slotProps.value && slotProps.value.value">
+                                    <span :class="'product-badge status-' + slotProps.value.value">{{ slotProps.value.label }}</span>
+                                </div>
+                                <div v-else-if="slotProps.value && !slotProps.value.value">
+                                    <span :class="'product-badge status-' + slotProps.value.toLowerCase()">{{ slotProps.value }}</span>
+                                </div>
+                                <span v-else>
+                                    {{ slotProps.placeholder }}
+                                </span>
+                            </template>
+                        </Dropdown>
+                    </div>
                     <div class="formgrid grid">
-                        <div class="field col">
+                        <!-- <div class="field col">
                             <label for="price">Price</label>
                             <InputNumber id="price" v-model="product.price" mode="currency" currency="USD" locale="en-US" :class="{ 'p-invalid': submitted && !product.price }" :required="true" />
                             <small class="p-invalid" v-if="submitted && !product.price">Price is required.</small>
-                        </div>
-                        <div class="field col">
+                        </div>-->
+                        <!--<div class="field col">
                             <label for="quantity">Quantity</label>
                             <InputNumber id="quantity" v-model="product.quantity" integeronly />
-                        </div>
+                        </div>-->
                     </div>
                     <template #footer>
-                        <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="hideDialog" />
-                        <Button label="Save" icon="pi pi-check" class="p-button-text" @click="saveProduct" />
+                       <!-- <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="hideDialog" /> 
+                        <Button label="Save" icon="pi pi-check" class="p-button-text" @click="saveProduct" /> -->
                     </template>
                 </Dialog>
 
                 <Dialog v-model:visible="deleteProductDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
                     <div class="flex align-items-center justify-content-center">
-                        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                       <!-- <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" /> -->
                         <span v-if="product"
                             >Are you sure you want to delete <b>{{ product.name }}</b
                             >?</span

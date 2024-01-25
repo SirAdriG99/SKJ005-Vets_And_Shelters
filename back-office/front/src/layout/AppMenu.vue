@@ -8,7 +8,7 @@ const model = ref([
         label: 'Home',
         items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }]
     },
-    {
+    /*{
         label: 'UI Components',
         items: [
             { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: '/uikit/formlayout' },
@@ -29,31 +29,32 @@ const model = ref([
             { label: 'Misc', icon: 'pi pi-fw pi-circle', to: '/uikit/misc' }
         ]
     },
-    {
+    /*{
         label: 'Prime Blocks',
         items: [
             { label: 'Free Blocks', icon: 'pi pi-fw pi-eye', to: '/blocks', badge: 'NEW' },
             { label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: 'https://www.primefaces.org/primeblocks-vue', target: '_blank' }
         ]
-    },
-    {
+    },*/
+    /*{
         label: 'Utilities',
         items: [
             { label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', to: '/utilities/icons' },
             { label: 'PrimeFlex', icon: 'pi pi-fw pi-desktop', url: 'https://www.primefaces.org/primeflex/', target: '_blank' }
         ]
-    },
+    },*/
     {
         label: 'Pages',
         icon: 'pi pi-fw pi-briefcase',
         to: '/pages',
         items: [
-            {
+            /*{
                 label: 'Landing',
                 icon: 'pi pi-fw pi-globe',
                 to: '/landing'
-            },
-            {
+            },*/
+            
+            /*{
                 label: 'Auth',
                 icon: 'pi pi-fw pi-user',
                 items: [
@@ -73,13 +74,16 @@ const model = ref([
                         to: '/auth/access'
                     }
                 ]
-            },
+            },*/
             {
-                label: 'Crud',
+                label: 'Animals',
                 icon: 'pi pi-fw pi-pencil',
                 to: '/pages/crud'
             },
-            {
+            { label: 'Customer', icon: 'pi pi-users', to: '/uikit/table' },
+            { label: 'Appointment', icon: 'pi pi-calendar-plus', to: '/uikit/tableappointment' },
+            { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: '/uikit/charts' },
+            /*{
                 label: 'Timeline',
                 icon: 'pi pi-fw pi-calendar',
                 to: '/pages/timeline'
@@ -93,10 +97,10 @@ const model = ref([
                 label: 'Empty',
                 icon: 'pi pi-fw pi-circle-off',
                 to: '/pages/empty'
-            }
+            }*/
         ]
     },
-    {
+    /*{
         label: 'Hierarchy',
         items: [
             {
@@ -139,8 +143,8 @@ const model = ref([
                 ]
             }
         ]
-    },
-    {
+    },*/
+    /*{
         label: 'Get Started',
         items: [
             {
@@ -166,7 +170,7 @@ const model = ref([
                 icon: 'pi pi-fw pi-star'
             }
         ]
-    }
+    }*/
 ]);
 </script>
 
@@ -177,9 +181,9 @@ const model = ref([
             <li v-if="item.separator" class="menu-separator"></li>
         </template>
         <li>
-            <a href="https://www.primefaces.org/primeblocks-vue/#/" target="_blank">
-                <img src="/layout/images/banner-primeblocks.png" alt="Prime Blocks" class="w-full mt-3" />
-            </a>
+            <!--<a href="https://www.primefaces.org/primeblocks-vue/#/" target="_blank">-->
+                <img src="/layout/images/logo-VS.png" alt="Prime Blocks" class="w-full mt-3" />
+            <!--</a>-->
         </li>
     </ul>
 </template>

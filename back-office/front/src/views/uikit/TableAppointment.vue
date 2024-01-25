@@ -122,7 +122,7 @@ const calculateCustomerTotal = (name) => {
                     </template>
                     <template #empty> No customers found. </template>
                     <template #loading> Loading customers data. Please wait. </template>
-                    <Column field="name" header="DNI" style="min-width: 12rem">
+                    <Column field="name" header="Animal DNI" style="min-width: 12rem">
                         <template #body="{ data }">
                             {{ data.name }}
                         </template>
@@ -130,7 +130,7 @@ const calculateCustomerTotal = (name) => {
                             <InputText type="text" v-model="filterModel.value" class="p-column-filter" placeholder="Search by name" />
                         </template>
                     </Column>
-                    <Column header="Alias" filterField="country.name" style="min-width: 12rem">
+                    <Column header="Animal name" filterField="country.name" style="min-width: 12rem">
                         <template #body="{ data }">
                             <img src="/demo/images/flag/flag_placeholder.png" :alt="data.country.name" :class="'flag flag-' + data.country.code" width="30" />
                             <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ data.country.name }}</span>
@@ -145,7 +145,7 @@ const calculateCustomerTotal = (name) => {
                             <Button type="button" icon="pi pi-check" @click="filterCallback()" class="p-button-success"></Button>
                         </template>
                     </Column>
-                    <Column header="Name and surname" filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="min-width: 14rem">
+                    <Column header="State" filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="min-width: 14rem">
                         <template #body="{ data }">
                             <img :alt="data.representative.name" :src="'demo/images/avatar/' + data.representative.image" width="32" style="vertical-align: middle" />
                             <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ data.representative.name }}</span>
@@ -162,7 +162,7 @@ const calculateCustomerTotal = (name) => {
                             </MultiSelect>
                         </template>
                     </Column>
-                    <Column header="Email" filterField="date" dataType="date" style="min-width: 10rem">
+                    <Column header="DNI User" filterField="date" dataType="date" style="min-width: 10rem">
                         <template #body="{ data }">
                             {{ formatDate(data.date) }}
                         </template>
@@ -170,15 +170,15 @@ const calculateCustomerTotal = (name) => {
                             <Calendar v-model="filterModel.value" dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" />
                         </template>
                     </Column>
-                   <!-- <Column header="Balance" filterField="balance" dataType="numeric" style="min-width: 10rem">
+                    <Column header="Name and surname" filterField="balance" dataType="numeric" style="min-width: 10rem">
                         <template #body="{ data }">
                             {{ formatCurrency(data.balance) }}
                         </template>
                         <template #filter="{ filterModel }">
                             <InputNumber v-model="filterModel.value" mode="currency" currency="USD" locale="en-US" />
                         </template>
-                    </Column> -->
-                    <!--<Column field="status" header="Status" :filterMenuStyle="{ width: '14rem' }" style="min-width: 12rem">
+                    </Column>
+                    <Column field="status" header="Date" :filterMenuStyle="{ width: '14rem' }" style="min-width: 12rem">
                         <template #body="{ data }">
                             <span :class="'customer-badge status-' + data.status">{{ data.status }}</span>
                         </template>
@@ -193,7 +193,7 @@ const calculateCustomerTotal = (name) => {
                                 </template>
                             </Dropdown>
                         </template>
-                    </Column>-->
+                    </Column>
                     <!--<Column field="activity" header="Activity" :showFilterMatchModes="false" style="min-width: 12rem">
                         <template #body="{ data }">
                             <ProgressBar :value="data.activity" :showValue="false" style="height: 0.5rem"></ProgressBar>
@@ -205,15 +205,15 @@ const calculateCustomerTotal = (name) => {
                                 <span>{{ filterModel.value ? filterModel.value[1] : 100 }}</span>
                             </div>
                         </template>
-                    </Column>-->    
-                   <!-- <Column field="verified" header="Verified" dataType="boolean" bodyClass="text-center" style="min-width: 8rem">
+                    </Column>-->
+                  <!--  <Column field="verified" header="Verified" dataType="boolean" bodyClass="text-center" style="min-width: 8rem">
                         <template #body="{ data }">
                             <i class="pi" :class="{ 'text-green-500 pi-check-circle': data.verified, 'text-pink-500 pi-times-circle': !data.verified }"></i>
                         </template>
                         <template #filter="{ filterModel }">
                             <TriStateCheckbox v-model="filterModel.value" />
                         </template>
-                    </Column>--> 
+                    </Column>-->
                 </DataTable>
             </div>
         </div>

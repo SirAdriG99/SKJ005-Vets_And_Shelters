@@ -44,6 +44,11 @@ const router = createRouter({
                     component: () => import('@/views/uikit/Table.vue')
                 },
                 {
+                    path: '/uikit/tableappointment',
+                    name: 'TableAppointment',
+                    component: () => import('@/views/uikit/TableAppointment.vue')
+                },
+                {
                     path: '/uikit/list',
                     name: 'list',
                     component: () => import('@/views/uikit/List.vue')
