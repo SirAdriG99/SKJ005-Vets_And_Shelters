@@ -1,5 +1,6 @@
 package org.vetsandshelters.breed.infraestructure.Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -17,7 +18,7 @@ public class GetSelectListController {
     @GET
     @Path("/selectList")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSelectList() {
+    public Response getSelectList() throws JsonProcessingException {
         GetSelectListResponse response = this.getSelectListQueryHandler.handle();
         return Response.ok(response.getBreeds()).build();
     }
