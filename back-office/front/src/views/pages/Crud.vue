@@ -3,14 +3,15 @@ import { FilterMatchMode } from 'primevue/api';
 import { ref, onMounted, onBeforeMount } from 'vue';
 import ProductService from '@/service/ProductService';
 import { useToast } from 'primevue/usetoast';
+import AnimalService from '@/service/AnimalService';
 
 const toast = useToast();
 
-const products = ref(null);
+const animals = ref(null);
 const productDialog = ref(false);
 const deleteProductDialog = ref(false);
 const deleteProductsDialog = ref(false);
-const product = ref({});
+const animal = ref({});
 const selectedProducts = ref(null);
 const dt = ref(null);
 const filters = ref({});
@@ -29,7 +30,7 @@ onBeforeMount(() => {
     initFilters();
 });
 onMounted(() => {
-    productService.getProducts().then((data) => (products.value = data));
+    productService.getProducts().then((data) => (animals.value = data));
 });
 const formatCurrency = (value) => {
     return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
@@ -51,20 +52,25 @@ const saveProduct = () => {
     if (product.value.name && product.value.name.trim() && product.value.price) {
         if (product.value.id) {
             product.value.inventoryStatus = product.value.inventoryStatus.value ? product.value.inventoryStatus.value : product.value.inventoryStatus;
-            products.value[findIndexById(product.value.id)] = product.value;
+            animals.value[findIndexById(product.value.id)] = product.value;
             toast.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
         } else {
             product.value.id = createId();
             product.value.code = createId();
             product.value.image = 'product-placeholder.svg';
             product.value.inventoryStatus = product.value.inventoryStatus ? product.value.inventoryStatus.value : 'INSTOCK';
-            products.value.push(product.value);
+            animals.value.push(product.value);
             toast.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
         }
         productDialog.value = false;
         product.value = {};
     }
 };
+
+const saveAnimal = () => {
+    let res = AnimalService.storeAnimal(product.value)
+
+}
 
 const editProduct = (editProduct) => {
     product.value = { ...editProduct };
@@ -78,7 +84,7 @@ const confirmDeleteProduct = (editProduct) => {
 };
 
 const deleteProduct = () => {
-    products.value = products.value.filter((val) => val.id !== product.value.id);
+    animals.value = animals.value.filter((val) => val.id !== product.value.id);
     deleteProductDialog.value = false;
     product.value = {};
     toast.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
@@ -86,8 +92,8 @@ const deleteProduct = () => {
 
 const findIndexById = (id) => {
     let index = -1;
-    for (let i = 0; i < products.value.length; i++) {
-        if (products.value[i].id === id) {
+    for (let i = 0; i < animals.value.length; i++) {
+        if (animals.value[i].id === id) {
             index = i;
             break;
         }
@@ -112,7 +118,7 @@ const confirmDeleteSelected = () => {
     deleteProductsDialog.value = true;
 };
 const deleteSelectedProducts = () => {
-    products.value = products.value.filter((val) => !selectedProducts.value.includes(val));
+    animals.value = animals.value.filter((val) => !selectedProducts.value.includes(val));
     deleteProductsDialog.value = false;
     selectedProducts.value = null;
     toast.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
@@ -147,7 +153,7 @@ const initFilters = () => {
 
                 <DataTable
                     ref="dt"
-                    :value="products"
+                    :value="animals"
                     v-model:selection="selectedProducts"
                     dataKey="id"
                     :paginator="true"

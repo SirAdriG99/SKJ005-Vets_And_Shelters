@@ -23,16 +23,16 @@ CREATE  TABLE breed (
 
 CREATE  TABLE customer ( 
 	id                   serial  NOT NULL  ,
-	doc_number           varchar(100)  NOT NULL  ,
-	name                 varchar(100)  NOT NULL  ,
-	surname              varchar(100)  NOT NULL  ,
-	user_alias           varchar(100)  NOT NULL  ,
-	date_birth           date  NOT NULL  ,
-	banned               boolean DEFAULT FALSE NOT NULL  ,
+	doc_number           varchar(100)  ,
+	name                 varchar(100)  ,
+	surname              varchar(100)  ,
+	user_alias           varchar(100)  ,
+	date_birth           date    ,
+	banned               boolean DEFAULT FALSE  ,
 	email                varchar(255)  NOT NULL  ,
-	phone1               varchar(20)  NOT NULL  ,
+	phone1               varchar(20)  ,
 	phone2               varchar(20)    ,
-	address              varchar(100)  NOT NULL  ,
+	address              varchar(100)    ,
 	CONSTRAINT pk_customer PRIMARY KEY ( id ),
 	CONSTRAINT unq_customer UNIQUE ( doc_number ) 
  );
