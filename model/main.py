@@ -8,8 +8,8 @@ import pandas as pd
 import json
 
 # CONSTANTS
-BACK_PORT = 9876        # TODO: Set the correct one
-FRONT_PORT = 1425
+#BACK_PORT = 8080        # TODO: Set the correct one
+FRONT_PORT = 8090
 DB_PORT = 5432
 BACK_IP = "0.0.0.0"
 FRONT_IP = "0.0.0.0"
