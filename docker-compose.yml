@@ -19,14 +19,14 @@ services:
       dockerfile: Dockerfile-back-office
     container_name: "container-backoffice"
     ports:
-      - "8085:8080"
+      - "8080:8080"
   frontoffice:
     build:
       context: .
       dockerfile: Dockerfile-front-office
     container_name: "container-frontoffice"
     ports:
-      - "8090:8080"
+      - "8090:8090"
   model:
     build:
       context: .
