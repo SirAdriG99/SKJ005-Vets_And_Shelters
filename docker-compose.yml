@@ -15,14 +15,14 @@ services:
       - ./sql/db-volume:/var/lib/postgresql/data
   backoffice:
     build:
-      context: ./back-office
+      context: .
       dockerfile: Dockerfile-back-office
     container_name: "container-backoffice"
     ports:
       - "8085:8080"
   frontoffice:
     build:
-      context: ./front-office
+      context: .
       dockerfile: Dockerfile-front-office
     container_name: "container-frontoffice"
     ports:
