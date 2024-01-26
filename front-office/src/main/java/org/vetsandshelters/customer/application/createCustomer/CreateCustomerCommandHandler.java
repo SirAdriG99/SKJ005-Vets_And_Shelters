@@ -31,13 +31,15 @@ public class CreateCustomerCommandHandler {
 
         int result = this.repository.store(customer);
 
-        // The next code should be calling a event and the customerPwd should hava a eventListener in the application layer to do this action
-        CustomerPwd customerPwd = new CustomerPwd(
-                null,
-                result,
-                command.getPassword()
-        );
-        int result2 = this.customerPwdRepository.store(customerPwd);
+        if(command.getPassword() != null && !command.getPassword().isEmpty()) {
+            // The next code should be calling a event and the customerPwd should hava a eventListener in the application layer to do this action
+            CustomerPwd customerPwd = new CustomerPwd(
+                    null,
+                    result,
+                    command.getPassword()
+            );
+            int result2 = this.customerPwdRepository.store(customerPwd);
+        }
 
         return new CreateCustomerResponse(result);
     }

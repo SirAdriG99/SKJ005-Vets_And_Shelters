@@ -11,7 +11,7 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appointment_id_seq")
-    private int id;
+    private Integer id;
 //    TODO.todo: We could recover all the object, but right now we will use it as a bridge to know what animal and customer has to recover the front
     @Column(name = "customer_id")
     private int customerId;
@@ -21,7 +21,7 @@ public class Appointment {
     @Column(name = "appointment_date")
     private Date appointmentDate;
 
-    public Appointment(int id, int customerId, int animalId, Date appointmentDate) {
+    public Appointment(Integer id, int customerId, int animalId, Date appointmentDate) {
         this.id = id;
         this.customerId = customerId;
         this.animalId = animalId;

@@ -55,6 +55,27 @@ export default class AnimalService {
         };
     }
 
+    getAllAnimals() {
+        let url = '/animal/filter';
+        let animalData = {};
+        axios.get(url)
+            .then((response) => {
+                console.log(response.data)
+                animalData = response.data.animals;
+            })
+            .catch((error) => {
+                console.log(error);
+                return {
+                    status: "ERROR",
+                    response: error
+                }
+            });
+        return {
+            status: "OK",
+            response: animalData
+        };
+    }
+
     storeAnimal(animal) {
         console.log(animal)
         let url = '/animal';

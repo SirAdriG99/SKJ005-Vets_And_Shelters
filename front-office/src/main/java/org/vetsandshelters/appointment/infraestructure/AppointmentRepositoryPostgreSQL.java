@@ -4,11 +4,13 @@ import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Transient;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import org.vetsandshelters.appointment.domain.Appointment;
 import org.vetsandshelters.appointment.domain.AppointmentCollection;
 import org.vetsandshelters.appointment.domain.AppointmentCriteria;
@@ -38,6 +40,13 @@ public class AppointmentRepositoryPostgreSQL implements AppointmentRepository {
     @Override
     public AppointmentCollection getBy(AppointmentCriteria criteria) {
         return null;
+    }
+
+    @Override
+    @Transactional
+    public int store(Appointment appointment) {
+        em.persist(appointment);
+        return appointment.getId();
     }
 
     private List<Appointment> getAppointmentListPaginated(AppointmentCriteria criteria) {
