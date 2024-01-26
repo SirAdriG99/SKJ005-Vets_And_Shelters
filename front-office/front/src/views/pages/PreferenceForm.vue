@@ -20,8 +20,8 @@ const dropdownAvailabilities = ref([
 ]);
 
 const dropdowndangers = ref([
-    { name: 'I do not care about the breed', code: 'dangerous' },
-    { name: 'I do not want a dangerous breed', code: 'notdangerous' }
+    { name: 'I do not care about the breed', code: true },
+    { name: 'I do not want a dangerous breed', code: false }
 ]);
 
 // const dropdownItem = ref(null);
@@ -29,6 +29,18 @@ const dropdownSpace = ref(null);
 const radioGarden = ref(null);
 const dropdownAvailability = ref(null);
 const dropdowndangerous = ref(null);
+const formData = ref({
+    name: '',
+    email: '',
+    space: '',
+    withGarden: '',
+    availability: null,
+    dangerous: null
+})
+
+const sendForm = () => {
+    console.log(formData.value);
+}
 
 // import { useLayout } from '@/layout/composables/layout';
 // import { computed } from 'vue';
@@ -50,19 +62,19 @@ const dropdowndangerous = ref(null);
                     <p>Please fill the following form so we can evaluate which dogs can match with your availability.</p>
                 </div>
                 <div class="card p-fluid">
-                    <!-- <h5>Horizontal</h5>
+                    <h5>Horizontal</h5>
                     <div class="field grid">
                         <label for="name3" class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
                         <div class="col-12 md:col-10">
-                            <InputText id="name3" type="text" />
+                            <InputText id="name3" type="text" v-model="formData.name"/>
                         </div>
                     </div>
                     <div class="field grid">
                         <label for="email3" class="col-12 mb-2 md:col-2 md:mb-0">Email</label>
                         <div class="col-12 md:col-10">
-                            <InputText id="email3" type="text" />
+                            <InputText id="email3" type="text" v-model="formData.email"/>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- <div class="field grid">
                         <label for="state" class="col-12 mb-2 md:col-2 md:mb-0">State</label>
                         <div class="col-12 md:col-10">
@@ -72,19 +84,19 @@ const dropdowndangerous = ref(null);
                     <div class="field grid">
                         <label for="space" class="col-12 mb-2 md:col-2 md:mb-0">Space</label>
                         <div class="col-12 md:col-10">
-                            <Dropdown id="space" v-model="dropdownSpace" :options="dropdownSpaces" optionLabel="name" placeholder="Select One"></Dropdown>
+                            <Dropdown id="space" v-model="formData.space" :options="dropdownSpaces" optionLabel="name" placeholder="Select One"></Dropdown>
                         </div>
                     </div>
                     <div class="grid">
                         <div class="col-12 md:col-5">
                             <div class="field-radiobutton mb-0">
-                                <RadioButton id="option1" name="garden" value="withgarden" v-model="radioGarden" />
+                                <RadioButton id="option1" name="garden" value="withgarden" v-model="formData.withGarden" />
                                 <label for="option1">With garden</label>
                             </div>
                         </div>
                         <div class="col-12 md:col-5">
                             <div class="field-radiobutton mb-0">
-                                <RadioButton id="option2" name="garden" value="withoutgarden" v-model="radioGarden" />
+                                <RadioButton id="option2" name="garden" value="withoutgarden" v-model="formData.withGarden" />
                                 <label for="option2">Without garden</label>
                             </div>
                         </div>
@@ -92,20 +104,20 @@ const dropdowndangerous = ref(null);
                     <div class="field grid">
                         <label for="availability" class="col-12 mb-2 md:col-2 md:mb-0">Availability</label>
                         <div class="col-12 md:col-10">
-                            <Dropdown id="availability" v-model="dropdownAvailability" :options="dropdownAvailabilities" optionLabel="name" placeholder="Select One"></Dropdown>
+                            <Dropdown id="availability" v-model="formData.availability" :options="dropdownAvailabilities" optionLabel="name" placeholder="Select One"></Dropdown>
                         </div>
                     </div>
                     <div class="field grid">
                         <label for="dangerous" class="col-12 mb-2 md:col-2 md:mb-0">Dangerous</label>
                         <div class="col-12 md:col-10">
-                            <Dropdown id="dangerous" v-model="dropdowndangerous" :options="dropdowndangers" optionLabel="name" placeholder="Select One"></Dropdown>
+                            <Dropdown id="dangerous" v-model="formData.dangerous" :options="dropdowndangers" optionLabel="name" placeholder="Select One"></Dropdown>
                         </div>
                     </div>
                     <div class="card">
                         <span class="p-buttonset">
-                            <Button label="Send" icon="pi pi-check" />
+                            <Button label="Send" icon="pi pi-check" @click="sendForm"/>
                             &nbsp;
-                            <Button label="Cancel" icon="pi pi-times" />
+                            <Button label="Cancel" icon="pi pi-times" @click="returnToHome"/>
                         </span>
                     </div>
                     <div class="col-12 mt-5 text-center">
