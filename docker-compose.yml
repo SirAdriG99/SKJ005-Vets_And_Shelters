@@ -13,33 +13,26 @@ services:
       - "5432:5432"
     volumes:
       - ./sql/db-volume:/var/lib/postgresql/data
-      #  falta hacer mvn package -DskipTests
-      # backoffice:
-      #   build:
-      #     context: .
-      #     dockerfile: ./back-office/src/main/docker/Dockerfile.jvm
-      #   container_name: "container-backoffice"
-      #   ports:
-      #     - "8080:8080"
-      # depends_on:
-      # - db
-      # volumes:
-      #   - ./backoffice:/usr/src/app
-      #     # command: ["npm", "run", "dev"]
-      # frontoffice:
-      #   build:
-      #     context: .
-      #     dockerfile: ./front-office/src/main/docker/Dockerfile.jvm
-      #   container_name: "container-frontoffice"
-      #   ports:
-      #     - "8080:8081"
+  backoffice:
+    build:
+      context: ./back-office
+      dockerfile: Dockerfile-back-office
+    container_name: "container-backoffice"
+    ports:
+      - "8085:8080"
+  frontoffice:
+    build:
+      context: ./front-office
+      dockerfile: Dockerfile-front-office
+    container_name: "container-frontoffice"
+    ports:
+      - "8090:8080"
   model:
-   build:
-     context: .
-     dockerfile: Dockerfile-model
-   container_name: "container-model-python"
-   ports: 
-     - "4321:4321"
-   volumes:
-     - ./model/model-volume:/var/model
-
+    build:
+      context: .
+      dockerfile: Dockerfile-model
+    container_name: "container-model-python"
+    ports:
+      - "4321:4321"
+    volumes:
+      - ./model/model-volume:/var/model
