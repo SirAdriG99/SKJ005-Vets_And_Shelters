@@ -1,32 +1,28 @@
+import axios from 'axios';
 export default class CustomerService {
-    getCustomersSmall() {
-        return fetch('demo/data/customers-small.json')
-            .then((res) => res.json())
-            .then((d) => d.data);
+    storeCustomer(customer) {
+        console.log(customer)
+        let toReturn = {
+            status: "ERROR",
+            response: -1
+        }
+        let url = '/customer';
+        axios.post(url, customer)
+            .then((response) => {
+                console.log(response.data)
+                toReturn = {
+                    status: "OK",
+                    response: response.data.id
+                };
+            })
+            .catch((error) => {
+                console.log(error);
+                toReturn= {
+                    status: "ERROR",
+                    response: error
+                }
+            });
+        return toReturn;
     }
 
-    getCustomersMedium() {
-        return fetch('demo/data/customers-medium.json')
-            .then((res) => res.json())
-            .then((d) => d.data);
-    }
-
-    getCustomersLarge() {
-        return fetch('demo/data/customers-large.json')
-            .then((res) => res.json())
-            .then((d) => d.data);
-    }
-
-    getCustomersXLarge() {
-        return fetch('demo/data/customers-xlarge.json')
-            .then((res) => res.json())
-            .then((d) => d.data);
-    }
-
-    getCustomers(params) {
-        const queryParams = Object.keys(params)
-            .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-            .join('&');
-        return fetch('https://www.primefaces.org//demo/data/customers?' + queryParams).then((res) => res.json());
-    }
 }

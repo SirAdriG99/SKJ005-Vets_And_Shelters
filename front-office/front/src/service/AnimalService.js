@@ -4,22 +4,24 @@ export default class AnimalService {
     getAnimalById(id) {
         let url = '/animal/' + id;
         let animalData = {};
+        let toreturn = {}
         axios.get(url)
             .then((response) => {
                 console.log(response.data)
                 animalData = response.data.animal;
+                toreturn = {
+                    status: "OK",
+                    response: animalData
+                };
             })
             .catch((error) => {
                 console.log(error);
-                return {
+                toreturn ={
                     status: "ERROR",
                     response: error
                 }
             });
-        return {
-            status: "OK",
-            response: animalData
-        };
+        return toreturn;
     }
 
     // TODO: put specific parameters
